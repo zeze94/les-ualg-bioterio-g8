@@ -1,0 +1,49 @@
+﻿@model LesGrupo8Bioterio.Models.Tanque
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tanque</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NroAnimais)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroAnimais)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sala)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sala)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdTanque">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

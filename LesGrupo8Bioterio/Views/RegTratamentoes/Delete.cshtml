@@ -1,0 +1,65 @@
+﻿@model LesGrupo8Bioterio.Models.RegTratamento
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RegTratamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tempo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tempo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Concentracao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Concentracao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConcAgenTra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConcAgenTra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgenteTratIdAgenTraNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgenteTratIdAgenTraNavigation.NomeAgenTra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FinalidadeIdFinalidadeNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FinalidadeIdFinalidadeNavigation.IdFinalidade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdRegTra" />
+        <input type="hidden" asp-for="TanqueIdTanque" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

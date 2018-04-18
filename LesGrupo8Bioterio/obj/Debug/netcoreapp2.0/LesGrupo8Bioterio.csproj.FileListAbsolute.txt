@@ -1,0 +1,11 @@
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.deps.json
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.runtimeconfig.json
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.runtimeconfig.dev.json
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.dll
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.csprojResolveAssemblyReference.cache
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.csproj.CoreCompileInputs.cache
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.AssemblyInfoInputs.cache
+c:\users\josé ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.AssemblyInfo.cs
+C:\Users\José Ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.pdb
+C:\Users\José Ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.dll
+C:\Users\José Ribeiro\source\repos\LesGrupo8Bioterio\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.pdb

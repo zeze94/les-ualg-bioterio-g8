@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LesGrupo8Bioterio.Models.CircuitoTanque>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodigoCircuito)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCriacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataFinal)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoCircuito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCircuito">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCircuito">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCircuito">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

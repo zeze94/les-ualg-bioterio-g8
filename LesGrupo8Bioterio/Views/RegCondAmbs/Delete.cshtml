@@ -1,0 +1,59 @@
+﻿@model LesGrupo8Bioterio.Models.RegCondAmb
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RegCondAmb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Temperatura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Temperatura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolAgua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolAgua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalinidadeAgua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalinidadeAgua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NivelO2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NivelO2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdRegCondAmb" />
+        <input type="hidden" asp-for="CircuitoTanqueIdCircuito" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

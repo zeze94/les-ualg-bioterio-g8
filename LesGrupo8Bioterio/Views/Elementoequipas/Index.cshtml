@@ -1,0 +1,48 @@
+﻿@model IEnumerable<LesGrupo8Bioterio.Models.Elementoequipa>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Função)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuncionarioIdFuncionarioNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Função)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuncionarioIdFuncionarioNavigation.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProjetoIdProjeto">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProjetoIdProjeto">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProjetoIdProjeto">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

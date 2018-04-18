@@ -1,0 +1,58 @@
+﻿@model LesGrupo8Bioterio.Models.RegCondAmb
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>RegCondAmb</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Temperatura" class="control-label"></label>
+                <input asp-for="Temperatura" class="form-control" />
+                <span asp-validation-for="Temperatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolAgua" class="control-label"></label>
+                <input asp-for="VolAgua" class="form-control" />
+                <span asp-validation-for="VolAgua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalinidadeAgua" class="control-label"></label>
+                <input asp-for="SalinidadeAgua" class="form-control" />
+                <span asp-validation-for="SalinidadeAgua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NivelO2" class="control-label"></label>
+                <input asp-for="NivelO2" class="form-control" />
+                <span asp-validation-for="NivelO2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CircuitoTanqueIdCircuito" class="control-label"></label>
+                <select asp-for="CircuitoTanqueIdCircuito" class ="form-control" asp-items="ViewBag.CircuitoTanqueIdCircuito"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

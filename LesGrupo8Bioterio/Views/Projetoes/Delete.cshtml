@@ -1,0 +1,64 @@
+﻿@model LesGrupo8Bioterio.Models.Projeto
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Projeto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AutorizacaoDgva)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AutorizacaoDgva)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RefOrbea)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RefOrbea)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmisInsEurop)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubmisInsEurop)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroAnimaisAutoriz)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdProjeto" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

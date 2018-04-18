@@ -1,0 +1,232 @@
+﻿@model LesGrupo8Bioterio.Models.RegNovosAnimais
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RegNovosAnimais</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NroExemplares)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroExemplares)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroMachos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroMachos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroFemeas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroFemeas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Imaturos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Imaturos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Juvenis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Juvenis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Larvas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Larvas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ovos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ovos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNasc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataNasc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Idade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Idade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoMedio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PesoMedio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CompMedio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompMedio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DuracaoViagem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DuracaoViagem)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TempPartida)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TempPartida)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TempChegada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TempChegada)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroContentores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroContentores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoContentor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoContentor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolContentor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolContentor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolAgua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolAgua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroCaixasIsoter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroCaixasIsoter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroMortosCheg)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroMortosCheg)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SatO2transp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SatO2transp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Anestesico)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Anestesico)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gelo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gelo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AdicaoO2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AdicaoO2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Arejamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Arejamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Refrigeracao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Refrigeracao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sedação)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sedação)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RespTransporte)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RespTransporte)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EspecieIdEspecie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EspecieIdEspecie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalCapturaIdLocalCaptura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LocalCapturaIdLocalCaptura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FornecedorIdFornColectNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FornecedorIdFornColectNavigation.Tipo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuncionarioIdFuncionario1Navigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuncionarioIdFuncionario1Navigation.NomeCompleto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuncionarioIdFuncionarioNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuncionarioIdFuncionarioNavigation.NomeCompleto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TOrigemIdTOrigemNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TOrigemIdTOrigemNavigation.IdTOrigem)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstatutoGeneticoIdTipoEstatutoGeneticoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstatutoGeneticoIdTipoEstatutoGeneticoNavigation.IdTipoEstatutoGenetico)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdRegAnimal" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

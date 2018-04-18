@@ -1,0 +1,55 @@
+﻿@model LesGrupo8Bioterio.Models.PlanoAlimentar
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlanoAlimentar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MarcaAlim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MarcaAlim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Temperatura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Temperatura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Racao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Racao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RacaoDia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RacaoDia)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdPlanAlim">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

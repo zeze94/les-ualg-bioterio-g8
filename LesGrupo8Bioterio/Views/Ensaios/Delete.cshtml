@@ -1,0 +1,65 @@
+﻿@model LesGrupo8Bioterio.Models.Ensaio
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Ensaio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DescTratamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DescTratamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GrauSeveridade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GrauSeveridade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MembroEquipaIdEquipa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MembroEquipaIdEquipa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdEnsaio" />
+        <input type="hidden" asp-for="ProjetoIdProjeto" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

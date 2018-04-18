@@ -1,0 +1,72 @@
+﻿@model IEnumerable<LesGrupo8Bioterio.Models.Projeto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataFim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AutorizacaoDgva)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RefOrbea)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubmisInsEurop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefOrbea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmisInsEurop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdProjeto">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdProjeto">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProjeto">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

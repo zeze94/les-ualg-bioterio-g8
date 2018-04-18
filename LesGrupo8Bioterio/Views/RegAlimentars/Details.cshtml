@@ -1,0 +1,49 @@
+﻿@model LesGrupo8Bioterio.Models.RegAlimentar
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RegAlimentar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Peso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Peso)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sobras)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sobras)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanoAlimentarIdPlanAlimNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlanoAlimentarIdPlanAlimNavigation.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

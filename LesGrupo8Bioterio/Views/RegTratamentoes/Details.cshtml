@@ -1,0 +1,61 @@
+﻿@model LesGrupo8Bioterio.Models.RegTratamento
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RegTratamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tempo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tempo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Concentracao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Concentracao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConcAgenTra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConcAgenTra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgenteTratIdAgenTraNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgenteTratIdAgenTraNavigation.NomeAgenTra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FinalidadeIdFinalidadeNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FinalidadeIdFinalidadeNavigation.IdFinalidade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

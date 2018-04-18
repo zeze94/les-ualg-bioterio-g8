@@ -1,0 +1,43 @@
+﻿@model LesGrupo8Bioterio.Models.CircuitoTanque
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CircuitoTanque</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoCircuito)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodigoCircuito)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFinal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFinal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdCircuito">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

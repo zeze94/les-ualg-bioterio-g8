@@ -1,0 +1,25 @@
+﻿@model LesGrupo8Bioterio.Models.Grupo
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Grupo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeGrupo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomeGrupo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdGrupo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

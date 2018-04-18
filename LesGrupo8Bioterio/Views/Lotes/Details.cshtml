@@ -1,0 +1,55 @@
+﻿@model LesGrupo8Bioterio.Models.Lote
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoLote)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodigoLote)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuncionarioIdFuncionarioNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuncionarioIdFuncionarioNavigation.NomeCompleto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNovosAnimaisIdRegAnimalNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegNovosAnimaisIdRegAnimalNavigation.IdRegAnimal)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdLote">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

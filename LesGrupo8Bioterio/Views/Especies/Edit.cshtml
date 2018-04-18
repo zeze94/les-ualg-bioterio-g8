@@ -1,0 +1,42 @@
+﻿@model LesGrupo8Bioterio.Models.Especie
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Especie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdEspecie" />
+            <div class="form-group">
+                <label asp-for="NomeCient" class="control-label"></label>
+                <input asp-for="NomeCient" class="form-control" />
+                <span asp-validation-for="NomeCient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeVulgar" class="control-label"></label>
+                <input asp-for="NomeVulgar" class="form-control" />
+                <span asp-validation-for="NomeVulgar" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="FamiliaIdFamilia" />
+            <input type="hidden" asp-for="FamiliaGrupoIdGrupo" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

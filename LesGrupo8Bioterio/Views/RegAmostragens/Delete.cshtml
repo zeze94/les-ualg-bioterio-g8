@@ -1,0 +1,53 @@
+﻿@model LesGrupo8Bioterio.Models.RegAmostragens
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RegAmostragens</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoMedio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PesoMedio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NroIndividuos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroIndividuos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PesoTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdRegAmo" />
+        <input type="hidden" asp-for="TanqueIdTanque" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
