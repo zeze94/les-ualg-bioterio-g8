@@ -394,9 +394,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Remocoes` (
   `Motivo_idMotivo` INT NOT NULL,
   `causaMorte` CHAR(1) NULL,
   `Tanque_idTanque` INT NOT NULL,
-  PRIMARY KEY (`idRegRemo`, `Tanque_idTanque`),
-  INDEX `fk_Reg_Remocoes_Motivo1_idx` (`Motivo_idMotivo` ASC),
-  INDEX `fk_Reg_Remocoes_Tanque1_idx` (`Tanque_idTanque` ASC),
+  PRIMARY KEY (`idRegRemo`),
   CONSTRAINT `fk_Reg_Remocoes_Motivo1`
     FOREIGN KEY (`Motivo_idMotivo`)
     REFERENCES `BD-LES`.`Motivo` (`idMotivo`)
@@ -422,8 +420,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Amostragens` (
   `nroIndividuos` INT NOT NULL,
   `pesoTotal` FLOAT NOT NULL,
   `Tanque_idTanque` INT NOT NULL,
-  PRIMARY KEY (`idRegAmo`, `Tanque_idTanque`),
-  INDEX `fk_Reg_Amostragens_Tanque1_idx` (`Tanque_idTanque` ASC),
+  PRIMARY KEY (`idRegAmo`),
   CONSTRAINT `fk_Reg_Amostragens_Tanque1`
     FOREIGN KEY (`Tanque_idTanque`)
     REFERENCES `BD-LES`.`Tanque` (`idTanque`)
@@ -445,8 +442,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Cond_Amb` (
   `salinidadeAgua` FLOAT NULL,
   `nivelO2` FLOAT NULL,
   `Circuito_Tanque_idCircuito` INT NOT NULL,
-  PRIMARY KEY (`idRegCondAmb`, `Circuito_Tanque_idCircuito`),
-  INDEX `fk_Reg_Cond_Amb_Circuito_Tanque1_idx` (`Circuito_Tanque_idCircuito` ASC),
+  PRIMARY KEY (`idRegCondAmb`),
   CONSTRAINT `fk_Reg_Cond_Amb_Circuito_Tanque1`
     FOREIGN KEY (`Circuito_Tanque_idCircuito`)
     REFERENCES `BD-LES`.`Circuito_Tanque` (`idCircuito`)
@@ -487,16 +483,13 @@ DROP TABLE IF EXISTS `BD-LES`.`Reg_Tratamento` ;
 CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Tratamento` (
   `idRegTra` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
-  `Tempo` TIME(6) NOT NULL,
+  `Tempo` INT NOT NULL,
   `Concentracao` FLOAT NOT NULL,
   `Finalidade_idFinalidade` INT NOT NULL,
   `agente_Trat_idAgenTra` INT NOT NULL,
   `concAgenTra` INT NULL,
   `Tanque_idTanque` INT NOT NULL,
-  PRIMARY KEY (`idRegTra`, `Tanque_idTanque`),
-  INDEX `fk_Reg_Tratamento_Finalidade1_idx` (`Finalidade_idFinalidade` ASC),
-  INDEX `fk_Reg_Tratamento_agente_Trat1_idx` (`agente_Trat_idAgenTra` ASC),
-  INDEX `fk_Reg_Tratamento_Tanque1_idx` (`Tanque_idTanque` ASC),
+  PRIMARY KEY (`idRegTra`),
   CONSTRAINT `fk_Reg_Tratamento_Finalidade1`
     FOREIGN KEY (`Finalidade_idFinalidade`)
     REFERENCES `BD-LES`.`Finalidade` (`idFinalidade`)
@@ -537,9 +530,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Manutencao` (
   `data` DATETIME NOT NULL,
   `Tipo_Manuntecao_idT_Manutencao` INT NOT NULL,
   `Tanque_idTanque` INT NOT NULL,
-  PRIMARY KEY (`idRegMan`, `Tanque_idTanque`),
-  INDEX `fk_Reg_Manutencao_Tipo_Manuntecao1_idx` (`Tipo_Manuntecao_idT_Manutencao` ASC),
-  INDEX `fk_Reg_Manutencao_Tanque1_idx` (`Tanque_idTanque` ASC),
+  PRIMARY KEY (`idRegMan`),
   CONSTRAINT `fk_Reg_Manutencao_Tipo_Manuntecao1`
     FOREIGN KEY (`Tipo_Manuntecao_idT_Manutencao`)
     REFERENCES `BD-LES`.`Tipo_Manuntecao` (`idT_Manutencao`)
@@ -582,9 +573,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Alimentar` (
   `Sobras` FLOAT NULL,
   `Plano_Alimentar_idPlanAlim` INT NOT NULL,
   `Tanque_idTanque` INT NOT NULL,
-  PRIMARY KEY (`idRegAlim`, `Tanque_idTanque`),
-  INDEX `fk_Reg_Alimentar_Plano_Alimentar1_idx` (`Plano_Alimentar_idPlanAlim` ASC),
-  INDEX `fk_Reg_Alimentar_Tanque1_idx` (`Tanque_idTanque` ASC),
+  PRIMARY KEY (`idRegAlim`),
   CONSTRAINT `fk_Reg_Alimentar_Plano_Alimentar1`
     FOREIGN KEY (`Plano_Alimentar_idPlanAlim`)
     REFERENCES `BD-LES`.`Plano_Alimentar` (`idPlanAlim`)
@@ -641,11 +630,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BD-LES`.`elementoEquipa` ;
 
 CREATE TABLE IF NOT EXISTS `BD-LES`.`elementoEquipa` (
-  `função` CHAR(1) NOT NULL,
+  `idElementoEquipa` INT NOT NULL AUTO_INCREMENT,
+  `função` VARCHAR(40) NOT NULL,
   `Projeto_idProjeto` INT NOT NULL,
   `Funcionario_idFuncionario` INT NOT NULL,
-  PRIMARY KEY (`Projeto_idProjeto`),
-  INDEX `fk_equipaProjeto_Funcionario1_idx` (`Funcionario_idFuncionario` ASC),
+  PRIMARY KEY (`idElementoEquipa`),
   CONSTRAINT `fk_equipaProjeto_Projeto1`
     FOREIGN KEY (`Projeto_idProjeto`)
     REFERENCES `BD-LES`.`Projeto` (`idProjeto`)
@@ -665,7 +654,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BD-LES`.`Ensaio` ;
 
 CREATE TABLE IF NOT EXISTS `BD-LES`.`Ensaio` (
-  `idEnsaio` INT NOT NULL,
+  `idEnsaio` INT NOT NULL AUTO_INCREMENT,
   `dataInicio` DATETIME NOT NULL,
   `dataFim` DATETIME NOT NULL,
   `descTratamento` VARCHAR(45) NOT NULL,
@@ -673,9 +662,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Ensaio` (
   `Projeto_idProjeto` INT NOT NULL,
   `Lote_idLote` INT NOT NULL,
   `membroEquipa_idEquipa` INT NOT NULL,
-  PRIMARY KEY (`idEnsaio`, `Projeto_idProjeto`),
-  INDEX `fk_Ensaio_Projeto1_idx` (`Projeto_idProjeto` ASC),
-  INDEX `fk_Ensaio_Lote1_idx` (`Lote_idLote` ASC),
+  PRIMARY KEY (`idEnsaio`),
   CONSTRAINT `fk_Ensaio_Projeto1`
     FOREIGN KEY (`Projeto_idProjeto`)
     REFERENCES `BD-LES`.`Projeto` (`idProjeto`)
