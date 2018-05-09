@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `BD-LES`.`Motivo` ;
 
 CREATE TABLE IF NOT EXISTS `BD-LES`.`Motivo` (
   `idMotivo` INT NOT NULL AUTO_INCREMENT,
-  `tipoMotivo` CHAR(1) CHARACTER SET 'big5' COLLATE 'big5_chinese_ci' NOT NULL,
+  `tipoMotivo` VARCHAR(45) NOT NULL,
   `nomeMotivo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idMotivo`))
 ENGINE = InnoDB;
@@ -278,15 +278,7 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Novos_Animais` (
   `LocalCaptura_idLocalCaptura` INT NULL,
   `TipoEstatutoGenetico_idTipoEstatutoGenetico` INT NOT NULL,
   `Funcionario_idFuncionario` INT NOT NULL,
-  `Funcionario_idFuncionario1` INT NOT NULL,
   PRIMARY KEY (`idRegAnimal`),
-  INDEX `fk_Reg_Novos_Animais_Especie1_idx` (`Especie_idEspecie` ASC),
-  INDEX `fk_Reg_Novos_Animais_Fornecedor1_idx` (`Fornecedor_idFornColect` ASC),
-  INDEX `fk_Reg_Novos_Animais_T_Origem1_idx` (`T_Origem_idT_Origem` ASC),
-  INDEX `fk_Reg_Novos_Animais_LocalCaptura1_idx` (`LocalCaptura_idLocalCaptura` ASC),
-  INDEX `fk_Reg_Novos_Animais_TipoEstatutoGenetico1_idx` (`TipoEstatutoGenetico_idTipoEstatutoGenetico` ASC),
-  INDEX `fk_Reg_Novos_Animais_Funcionario1_idx` (`Funcionario_idFuncionario` ASC),
-  INDEX `fk_Reg_Novos_Animais_Funcionario2_idx` (`Funcionario_idFuncionario1` ASC),
   CONSTRAINT `fk_Reg_Novos_Animais_Especie1`
     FOREIGN KEY (`Especie_idEspecie`)
     REFERENCES `BD-LES`.`Especie` (`idEspecie`)
@@ -314,11 +306,6 @@ CREATE TABLE IF NOT EXISTS `BD-LES`.`Reg_Novos_Animais` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Reg_Novos_Animais_Funcionario1`
     FOREIGN KEY (`Funcionario_idFuncionario`)
-    REFERENCES `BD-LES`.`Funcionario` (`idFuncionario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Reg_Novos_Animais_Funcionario2`
-    FOREIGN KEY (`Funcionario_idFuncionario1`)
     REFERENCES `BD-LES`.`Funcionario` (`idFuncionario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
