@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LesGrupo8Bioterio.Models
+namespace LesGrupo8Bioterio
 {
     public partial class RegTratamento
     {
         public int IdRegTra { get; set; }
         public DateTime Date { get; set; }
-        public TimeSpan Tempo { get; set; }
+        public int Tempo { get; set; }
         public float Concentracao { get; set; }
         public int FinalidadeIdFinalidade { get; set; }
         public int AgenteTratIdAgenTra { get; set; }

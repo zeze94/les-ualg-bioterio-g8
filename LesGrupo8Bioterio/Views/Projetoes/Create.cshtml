@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.Projeto
+﻿@model LesGrupo8Bioterio.Projeto
 
 @{
     ViewData["Title"] = "Create";
@@ -20,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
-                <input asp-for="DataInicio" class="form-control" />
+                <input type="date" asp-for="DataInicio" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataFim" class="control-label"></label>
-                <input asp-for="DataFim" class="form-control" />
+                <input type="date" asp-for="DataFim" class="form-control" />
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,8 +40,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="SubmisInsEurop" class="control-label"></label>
-                <input asp-for="SubmisInsEurop" class="form-control" />
+                <select required class="form-control" type="text" id="SubmisInsEurop" name="SubmisInsEurop">
+                    <option value="">Escolha uma opção</option>
+                    <option value="True">Sim</option>
+                    <option value="False">Não</option>
+                </select>
                 <span asp-validation-for="SubmisInsEurop" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="NroAnimaisAutoriz" class="control-label"></label>

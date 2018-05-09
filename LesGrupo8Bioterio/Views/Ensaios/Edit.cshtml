@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.Ensaio
+﻿@model LesGrupo8Bioterio.Ensaio
 
 @{
     ViewData["Title"] = "Edit";
@@ -34,7 +34,11 @@
                 <input asp-for="GrauSeveridade" class="form-control" />
                 <span asp-validation-for="GrauSeveridade" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="ProjetoIdProjeto" />
+            <div class="form-group">
+                <label asp-for="ProjetoIdProjeto" class="control-label"></label>
+                <select asp-for="ProjetoIdProjeto" class="form-control" asp-items="ViewBag.ProjetoIdProjeto"></select>
+                <span asp-validation-for="ProjetoIdProjeto" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="LoteIdLote" class="control-label"></label>
                 <select asp-for="LoteIdLote" class="form-control" asp-items="ViewBag.LoteIdLote"></select>

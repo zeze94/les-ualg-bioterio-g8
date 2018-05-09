@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using LesGrupo8Bioterio;
 using LesGrupo8Bioterio.Models;
 
 namespace LesGrupo8Bioterio.Controllers
@@ -36,7 +37,7 @@ namespace LesGrupo8Bioterio.Controllers
             var elementoequipa = await _context.Elementoequipa
                 .Include(e => e.FuncionarioIdFuncionarioNavigation)
                 .Include(e => e.ProjetoIdProjetoNavigation)
-                .SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+                .SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
             if (elementoequipa == null)
             {
                 return NotFound();
@@ -58,7 +59,7 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
+        public async Task<IActionResult> Create([Bind("IdElementoEquipa,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
-            var elementoequipa = await _context.Elementoequipa.SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+            var elementoequipa = await _context.Elementoequipa.SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
             if (elementoequipa == null)
             {
                 return NotFound();
@@ -94,9 +95,9 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
+        public async Task<IActionResult> Edit(int id, [Bind("IdElementoEquipa,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
         {
-            if (id != elementoequipa.ProjetoIdProjeto)
+            if (id != elementoequipa.IdElementoEquipa)
             {
                 return NotFound();
             }
@@ -110,7 +111,7 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ElementoequipaExists(elementoequipa.ProjetoIdProjeto))
+                    if (!ElementoequipaExists(elementoequipa.IdElementoEquipa))
                     {
                         return NotFound();
                     }
@@ -137,7 +138,7 @@ namespace LesGrupo8Bioterio.Controllers
             var elementoequipa = await _context.Elementoequipa
                 .Include(e => e.FuncionarioIdFuncionarioNavigation)
                 .Include(e => e.ProjetoIdProjetoNavigation)
-                .SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+                .SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
             if (elementoequipa == null)
             {
                 return NotFound();
@@ -151,7 +152,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var elementoequipa = await _context.Elementoequipa.SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+            var elementoequipa = await _context.Elementoequipa.SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
             _context.Elementoequipa.Remove(elementoequipa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -159,7 +160,7 @@ namespace LesGrupo8Bioterio.Controllers
 
         private bool ElementoequipaExists(int id)
         {
-            return _context.Elementoequipa.Any(e => e.ProjetoIdProjeto == id);
+            return _context.Elementoequipa.Any(e => e.IdElementoEquipa == id);
         }
     }
 }

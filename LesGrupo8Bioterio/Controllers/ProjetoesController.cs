@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using LesGrupo8Bioterio;
 using LesGrupo8Bioterio.Models;
 
 namespace LesGrupo8Bioterio.Controllers
@@ -55,12 +56,14 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdProjeto,Nome,DataInicio,DataFim,AutorizacaoDgva,RefOrbea,SubmisInsEurop,NroAnimaisAutoriz")] Projeto projeto)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Nome"] = "pedras U Da Man BOOOI";
             return View(projeto);
         }
 

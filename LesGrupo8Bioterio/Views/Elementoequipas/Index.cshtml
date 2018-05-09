@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LesGrupo8Bioterio.Models.Elementoequipa>
+﻿@model IEnumerable<LesGrupo8Bioterio.Elementoequipa>
 
 @{
     ViewData["Title"] = "Index";
@@ -38,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProjetoIdProjeto">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProjetoIdProjeto">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProjetoIdProjeto">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdElementoEquipa">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdElementoEquipa">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdElementoEquipa">Delete</a>
             </td>
         </tr>
 }

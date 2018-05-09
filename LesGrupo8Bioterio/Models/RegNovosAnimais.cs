@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LesGrupo8Bioterio.Models
+namespace LesGrupo8Bioterio
 {
     public partial class RegNovosAnimais
     {
@@ -45,10 +45,8 @@ namespace LesGrupo8Bioterio.Models
         public int? LocalCapturaIdLocalCaptura { get; set; }
         public int TipoEstatutoGeneticoIdTipoEstatutoGenetico { get; set; }
         public int FuncionarioIdFuncionario { get; set; }
-        public int FuncionarioIdFuncionario1 { get; set; }
 
         public Fornecedorcolector FornecedorIdFornColectNavigation { get; set; }
-        public Funcionario FuncionarioIdFuncionario1Navigation { get; set; }
         public Funcionario FuncionarioIdFuncionarioNavigation { get; set; }
         public TOrigem TOrigemIdTOrigemNavigation { get; set; }
         public Tipoestatutogenetico TipoEstatutoGeneticoIdTipoEstatutoGeneticoNavigation { get; set; }

@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.RegCondAmb
+﻿@model LesGrupo8Bioterio.RegCondAmb
 
 @{
     ViewData["Title"] = "Edit";
@@ -39,7 +39,11 @@
                 <input asp-for="NivelO2" class="form-control" />
                 <span asp-validation-for="NivelO2" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="CircuitoTanqueIdCircuito" />
+            <div class="form-group">
+                <label asp-for="CircuitoTanqueIdCircuito" class="control-label"></label>
+                <select asp-for="CircuitoTanqueIdCircuito" class="form-control" asp-items="ViewBag.CircuitoTanqueIdCircuito"></select>
+                <span asp-validation-for="CircuitoTanqueIdCircuito" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

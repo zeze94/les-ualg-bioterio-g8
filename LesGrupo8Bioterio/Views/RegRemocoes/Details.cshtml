@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.RegRemocoes
+﻿@model LesGrupo8Bioterio.RegRemocoes
 
 @{
     ViewData["Title"] = "Details";
@@ -44,6 +44,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Edit" asp-route-id="@Model.IdRegRemo">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

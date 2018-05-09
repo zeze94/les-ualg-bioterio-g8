@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LesGrupo8Bioterio.Models
+namespace LesGrupo8Bioterio
 {
     public partial class RegRemocoes
     {

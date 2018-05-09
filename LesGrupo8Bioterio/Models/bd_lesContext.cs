@@ -146,15 +146,18 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<Elementoequipa>(entity =>
             {
-                entity.HasKey(e => e.ProjetoIdProjeto);
+                entity.HasKey(e => e.IdElementoEquipa);
 
                 entity.ToTable("elementoequipa");
 
                 entity.HasIndex(e => e.FuncionarioIdFuncionario)
-                    .HasName("fk_equipaProjeto_Funcionario1_idx");
+                    .HasName("fk_equipaProjeto_Funcionario1");
 
-                entity.Property(e => e.ProjetoIdProjeto)
-                    .HasColumnName("Projeto_idProjeto")
+                entity.HasIndex(e => e.ProjetoIdProjeto)
+                    .HasName("fk_equipaProjeto_Projeto1");
+
+                entity.Property(e => e.IdElementoEquipa)
+                    .HasColumnName("idElementoEquipa")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.FuncionarioIdFuncionario)
@@ -164,7 +167,11 @@ namespace LesGrupo8Bioterio.Models
                 entity.Property(e => e.Função)
                     .IsRequired()
                     .HasColumnName("função")
-                    .HasColumnType("char(1)");
+                    .HasMaxLength(40);
+
+                entity.Property(e => e.ProjetoIdProjeto)
+                    .HasColumnName("Projeto_idProjeto")
+                    .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.FuncionarioIdFuncionarioNavigation)
                     .WithMany(p => p.Elementoequipa)
@@ -173,30 +180,26 @@ namespace LesGrupo8Bioterio.Models
                     .HasConstraintName("fk_equipaProjeto_Funcionario1");
 
                 entity.HasOne(d => d.ProjetoIdProjetoNavigation)
-                    .WithOne(p => p.Elementoequipa)
-                    .HasForeignKey<Elementoequipa>(d => d.ProjetoIdProjeto)
+                    .WithMany(p => p.Elementoequipa)
+                    .HasForeignKey(d => d.ProjetoIdProjeto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_equipaProjeto_Projeto1");
             });
 
             modelBuilder.Entity<Ensaio>(entity =>
             {
-                entity.HasKey(e => new { e.IdEnsaio, e.ProjetoIdProjeto });
+                entity.HasKey(e => e.IdEnsaio);
 
                 entity.ToTable("ensaio");
 
                 entity.HasIndex(e => e.LoteIdLote)
-                    .HasName("fk_Ensaio_Lote1_idx");
+                    .HasName("fk_Ensaio_Lote1");
 
                 entity.HasIndex(e => e.ProjetoIdProjeto)
-                    .HasName("fk_Ensaio_Projeto1_idx");
+                    .HasName("fk_Ensaio_Projeto1");
 
                 entity.Property(e => e.IdEnsaio)
                     .HasColumnName("idEnsaio")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.ProjetoIdProjeto)
-                    .HasColumnName("Projeto_idProjeto")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.DataFim)
@@ -222,6 +225,10 @@ namespace LesGrupo8Bioterio.Models
 
                 entity.Property(e => e.MembroEquipaIdEquipa)
                     .HasColumnName("membroEquipa_idEquipa")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.ProjetoIdProjeto)
+                    .HasColumnName("Projeto_idProjeto")
                     .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.LoteIdLoteNavigation)
@@ -526,7 +533,7 @@ namespace LesGrupo8Bioterio.Models
                 entity.Property(e => e.TipoMotivo)
                     .IsRequired()
                     .HasColumnName("tipoMotivo")
-                    .HasColumnType("char(1)");
+                    .HasMaxLength(45);
             });
 
             modelBuilder.Entity<Origem>(entity =>
@@ -600,23 +607,18 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegAlimentar>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegAlim, e.TanqueIdTanque });
+                entity.HasKey(e => e.IdRegAlim);
 
                 entity.ToTable("reg_alimentar");
 
                 entity.HasIndex(e => e.PlanoAlimentarIdPlanAlim)
-                    .HasName("fk_Reg_Alimentar_Plano_Alimentar1_idx");
+                    .HasName("fk_Reg_Alimentar_Plano_Alimentar1");
 
                 entity.HasIndex(e => e.TanqueIdTanque)
-                    .HasName("fk_Reg_Alimentar_Tanque1_idx");
+                    .HasName("fk_Reg_Alimentar_Tanque1");
 
                 entity.Property(e => e.IdRegAlim)
                     .HasColumnName("idRegAlim")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.TanqueIdTanque)
-                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Data)
@@ -625,6 +627,10 @@ namespace LesGrupo8Bioterio.Models
 
                 entity.Property(e => e.PlanoAlimentarIdPlanAlim)
                     .HasColumnName("Plano_Alimentar_idPlanAlim")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TanqueIdTanque)
+                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.PlanoAlimentarIdPlanAlimNavigation)
@@ -642,20 +648,15 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegAmostragens>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegAmo, e.TanqueIdTanque });
+                entity.HasKey(e => e.IdRegAmo);
 
                 entity.ToTable("reg_amostragens");
 
                 entity.HasIndex(e => e.TanqueIdTanque)
-                    .HasName("fk_Reg_Amostragens_Tanque1_idx");
+                    .HasName("fk_Reg_Amostragens_Tanque1");
 
                 entity.Property(e => e.IdRegAmo)
                     .HasColumnName("idRegAmo")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.TanqueIdTanque)
-                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Data)
@@ -670,6 +671,10 @@ namespace LesGrupo8Bioterio.Models
 
                 entity.Property(e => e.PesoTotal).HasColumnName("pesoTotal");
 
+                entity.Property(e => e.TanqueIdTanque)
+                    .HasColumnName("Tanque_idTanque")
+                    .HasColumnType("int(11)");
+
                 entity.HasOne(d => d.TanqueIdTanqueNavigation)
                     .WithMany(p => p.RegAmostragens)
                     .HasForeignKey(d => d.TanqueIdTanque)
@@ -679,17 +684,16 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegCondAmb>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegCondAmb, e.CircuitoTanqueIdCircuito });
+                entity.HasKey(e => e.IdRegCondAmb);
 
                 entity.ToTable("reg_cond_amb");
 
                 entity.HasIndex(e => e.CircuitoTanqueIdCircuito)
-                    .HasName("fk_Reg_Cond_Amb_Circuito_Tanque1_idx");
+                    .HasName("fk_Reg_Cond_Amb_Circuito_Tanque1");
 
                 entity.Property(e => e.IdRegCondAmb)
                     .HasColumnName("idRegCondAmb")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.CircuitoTanqueIdCircuito)
                     .HasColumnName("Circuito_Tanque_idCircuito")
@@ -716,28 +720,27 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegManutencao>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegMan, e.TanqueIdTanque });
+                entity.HasKey(e => e.IdRegMan);
 
                 entity.ToTable("reg_manutencao");
 
                 entity.HasIndex(e => e.TanqueIdTanque)
-                    .HasName("fk_Reg_Manutencao_Tanque1_idx");
+                    .HasName("fk_Reg_Manutencao_Tanque1");
 
                 entity.HasIndex(e => e.TipoManuntecaoIdTManutencao)
-                    .HasName("fk_Reg_Manutencao_Tipo_Manuntecao1_idx");
+                    .HasName("fk_Reg_Manutencao_Tipo_Manuntecao1");
 
                 entity.Property(e => e.IdRegMan)
                     .HasColumnName("idRegMan")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.TanqueIdTanque)
-                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Data)
                     .HasColumnName("data")
                     .HasColumnType("datetime");
+
+                entity.Property(e => e.TanqueIdTanque)
+                    .HasColumnName("Tanque_idTanque")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.TipoManuntecaoIdTManutencao)
                     .HasColumnName("Tipo_Manuntecao_idT_Manutencao")
@@ -763,25 +766,22 @@ namespace LesGrupo8Bioterio.Models
                 entity.ToTable("reg_novos_animais");
 
                 entity.HasIndex(e => e.EspecieIdEspecie)
-                    .HasName("fk_Reg_Novos_Animais_Especie1_idx");
+                    .HasName("fk_Reg_Novos_Animais_Especie1");
 
                 entity.HasIndex(e => e.FornecedorIdFornColect)
-                    .HasName("fk_Reg_Novos_Animais_Fornecedor1_idx");
+                    .HasName("fk_Reg_Novos_Animais_Fornecedor1");
 
                 entity.HasIndex(e => e.FuncionarioIdFuncionario)
-                    .HasName("fk_Reg_Novos_Animais_Funcionario1_idx");
-
-                entity.HasIndex(e => e.FuncionarioIdFuncionario1)
-                    .HasName("fk_Reg_Novos_Animais_Funcionario2_idx");
+                    .HasName("fk_Reg_Novos_Animais_Funcionario1");
 
                 entity.HasIndex(e => e.LocalCapturaIdLocalCaptura)
-                    .HasName("fk_Reg_Novos_Animais_LocalCaptura1_idx");
+                    .HasName("fk_Reg_Novos_Animais_LocalCaptura1");
 
                 entity.HasIndex(e => e.TOrigemIdTOrigem)
-                    .HasName("fk_Reg_Novos_Animais_T_Origem1_idx");
+                    .HasName("fk_Reg_Novos_Animais_T_Origem1");
 
                 entity.HasIndex(e => e.TipoEstatutoGeneticoIdTipoEstatutoGenetico)
-                    .HasName("fk_Reg_Novos_Animais_TipoEstatutoGenetico1_idx");
+                    .HasName("fk_Reg_Novos_Animais_TipoEstatutoGenetico1");
 
                 entity.Property(e => e.IdRegAnimal)
                     .HasColumnName("idRegAnimal")
@@ -813,10 +813,6 @@ namespace LesGrupo8Bioterio.Models
 
                 entity.Property(e => e.FuncionarioIdFuncionario)
                     .HasColumnName("Funcionario_idFuncionario")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.FuncionarioIdFuncionario1)
-                    .HasColumnName("Funcionario_idFuncionario1")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Gelo).HasColumnType("tinyint(1)");
@@ -908,16 +904,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasConstraintName("fk_Reg_Novos_Animais_Fornecedor1");
 
                 entity.HasOne(d => d.FuncionarioIdFuncionarioNavigation)
-                    .WithMany(p => p.RegNovosAnimaisFuncionarioIdFuncionarioNavigation)
+                    .WithMany(p => p.RegNovosAnimais)
                     .HasForeignKey(d => d.FuncionarioIdFuncionario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Novos_Animais_Funcionario1");
-
-                entity.HasOne(d => d.FuncionarioIdFuncionario1Navigation)
-                    .WithMany(p => p.RegNovosAnimaisFuncionarioIdFuncionario1Navigation)
-                    .HasForeignKey(d => d.FuncionarioIdFuncionario1)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_Reg_Novos_Animais_Funcionario2");
 
                 entity.HasOne(d => d.TOrigemIdTOrigemNavigation)
                     .WithMany(p => p.RegNovosAnimais)
@@ -934,23 +924,18 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegRemocoes>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegRemo, e.TanqueIdTanque });
+                entity.HasKey(e => e.IdRegRemo);
 
                 entity.ToTable("reg_remocoes");
 
                 entity.HasIndex(e => e.MotivoIdMotivo)
-                    .HasName("fk_Reg_Remocoes_Motivo1_idx");
+                    .HasName("fk_Reg_Remocoes_Motivo1");
 
                 entity.HasIndex(e => e.TanqueIdTanque)
-                    .HasName("fk_Reg_Remocoes_Tanque1_idx");
+                    .HasName("fk_Reg_Remocoes_Tanque1");
 
                 entity.Property(e => e.IdRegRemo)
                     .HasColumnName("idRegRemo")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.TanqueIdTanque)
-                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.CausaMorte)
@@ -969,6 +954,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasColumnName("nroRemoções")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.TanqueIdTanque)
+                    .HasColumnName("Tanque_idTanque")
+                    .HasColumnType("int(11)");
+
                 entity.HasOne(d => d.MotivoIdMotivoNavigation)
                     .WithMany(p => p.RegRemocoes)
                     .HasForeignKey(d => d.MotivoIdMotivo)
@@ -984,26 +973,21 @@ namespace LesGrupo8Bioterio.Models
 
             modelBuilder.Entity<RegTratamento>(entity =>
             {
-                entity.HasKey(e => new { e.IdRegTra, e.TanqueIdTanque });
+                entity.HasKey(e => e.IdRegTra);
 
                 entity.ToTable("reg_tratamento");
 
                 entity.HasIndex(e => e.AgenteTratIdAgenTra)
-                    .HasName("fk_Reg_Tratamento_agente_Trat1_idx");
+                    .HasName("fk_Reg_Tratamento_agente_Trat1");
 
                 entity.HasIndex(e => e.FinalidadeIdFinalidade)
-                    .HasName("fk_Reg_Tratamento_Finalidade1_idx");
+                    .HasName("fk_Reg_Tratamento_Finalidade1");
 
                 entity.HasIndex(e => e.TanqueIdTanque)
-                    .HasName("fk_Reg_Tratamento_Tanque1_idx");
+                    .HasName("fk_Reg_Tratamento_Tanque1");
 
                 entity.Property(e => e.IdRegTra)
                     .HasColumnName("idRegTra")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.TanqueIdTanque)
-                    .HasColumnName("Tanque_idTanque")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.AgenteTratIdAgenTra)
@@ -1021,6 +1005,12 @@ namespace LesGrupo8Bioterio.Models
                 entity.Property(e => e.FinalidadeIdFinalidade)
                     .HasColumnName("Finalidade_idFinalidade")
                     .HasColumnType("int(11)");
+
+                entity.Property(e => e.TanqueIdTanque)
+                    .HasColumnName("Tanque_idTanque")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Tempo).HasColumnType("int(11)");
 
                 entity.HasOne(d => d.AgenteTratIdAgenTraNavigation)
                     .WithMany(p => p.RegTratamento)

@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.RegRemocoes
+﻿@model LesGrupo8Bioterio.RegRemocoes
 
 @{
     ViewData["Title"] = "Edit";
@@ -34,7 +34,11 @@
                 <input asp-for="CausaMorte" class="form-control" />
                 <span asp-validation-for="CausaMorte" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="TanqueIdTanque" />
+            <div class="form-group">
+                <label asp-for="TanqueIdTanque" class="control-label"></label>
+                <select asp-for="TanqueIdTanque" class="form-control" asp-items="ViewBag.TanqueIdTanque"></select>
+                <span asp-validation-for="TanqueIdTanque" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

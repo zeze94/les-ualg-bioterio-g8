@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LesGrupo8Bioterio.Models.RegAmostragens>
+﻿@model IEnumerable<LesGrupo8Bioterio.RegAmostragens>
 
 @{
     ViewData["Title"] = "Index";
@@ -50,9 +50,9 @@
                 @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-action="Edit" asp-route-id="@item.IdRegAmo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdRegAmo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdRegAmo">Delete</a>
             </td>
         </tr>
 }

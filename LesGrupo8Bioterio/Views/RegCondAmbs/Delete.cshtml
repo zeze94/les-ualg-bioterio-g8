@@ -1,4 +1,4 @@
-﻿@model LesGrupo8Bioterio.Models.RegCondAmb
+﻿@model LesGrupo8Bioterio.RegCondAmb
 
 @{
     ViewData["Title"] = "Delete";
@@ -52,7 +52,6 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdRegCondAmb" />
-        <input type="hidden" asp-for="CircuitoTanqueIdCircuito" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>
