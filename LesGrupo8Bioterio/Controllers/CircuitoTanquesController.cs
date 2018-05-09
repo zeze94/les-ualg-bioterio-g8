@@ -17,7 +17,7 @@ namespace LesGrupo8Bioterio.Controllers
         public CircuitoTanquesController(bd_lesContext context)
         {
             _context = context;
-        }
+        } 
 
         // GET: CircuitoTanques
         public async Task<IActionResult> Index()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LesGrupo8Bioterio
 {
@@ -11,7 +12,9 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdMotivo { get; set; }
+        [Display(Name = "Tipo de Motivo")]
         public string TipoMotivo { get; set; }
+        [Display(Name = "Designação do Motivo")]
         public string NomeMotivo { get; set; }
 
         public ICollection<RegRemocoes> RegRemocoes { get; set; }

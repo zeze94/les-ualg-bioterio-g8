@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LesGrupo8Bioterio
 {
@@ -13,9 +14,13 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdFuncionario { get; set; }
+        [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
+        [Display(Name = "Nome de Utilizador")]
         public string NomeUtilizador { get; set; }
+        [Display(Name = "Password")]
         public string Password { get; set; }
+        [Display(Name = "Contacto")]
         public string Telefone { get; set; }
 
         public ICollection<Elementoequipa> Elementoequipa { get; set; }

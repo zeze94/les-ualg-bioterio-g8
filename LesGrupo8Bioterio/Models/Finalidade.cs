@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LesGrupo8Bioterio
 {
@@ -11,6 +12,7 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdFinalidade { get; set; }
+        [Display(Name = "Finalidade")]
         public string TFinalidade { get; set; }
 
         public ICollection<RegTratamento> RegTratamento { get; set; }
