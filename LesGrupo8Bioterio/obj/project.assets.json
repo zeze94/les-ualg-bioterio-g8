@@ -13847,11 +13847,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\José Ribeiro\\source\\repos\\LesGrupo8Bioterio\\LesGrupo8Bioterio\\LesGrupo8Bioterio.csproj",
+      "projectUniqueName": "C:\\Users\\José Ribeiro\\source\\repos\\les-ualg-bioterio-g8\\LesGrupo8Bioterio\\LesGrupo8Bioterio.csproj",
       "projectName": "LesGrupo8Bioterio",
-      "projectPath": "C:\\Users\\José Ribeiro\\source\\repos\\LesGrupo8Bioterio\\LesGrupo8Bioterio\\LesGrupo8Bioterio.csproj",
+      "projectPath": "C:\\Users\\José Ribeiro\\source\\repos\\les-ualg-bioterio-g8\\LesGrupo8Bioterio\\LesGrupo8Bioterio.csproj",
       "packagesPath": "C:\\Users\\José Ribeiro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\José Ribeiro\\source\\repos\\LesGrupo8Bioterio\\LesGrupo8Bioterio\\obj\\",
+      "outputPath": "C:\\Users\\José Ribeiro\\source\\repos\\les-ualg-bioterio-g8\\LesGrupo8Bioterio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

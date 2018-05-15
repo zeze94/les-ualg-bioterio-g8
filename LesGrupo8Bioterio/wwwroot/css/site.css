@@ -1,35 +1,153 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html,
+body {
+    height: 100%;
+}
+
+body {
+    padding-top: 80px;
 }
 
 /* Wrapping element */
+
 /* Set some basic padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 160px;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
 }
 
 /* Carousel */
+
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
+
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
 /* QR code generator */
+
 #qrCode {
     margin: 15px;
 }
 
 /* Hide/rearrange for smaller screens */
+
 @media screen and (max-width: 767px) {
     /* Hide captions */
     .carousel-caption {
         display: none;
     }
+}
+
+/*CCMAR header*/
+
+.navbar {
+    min-height: 80px;
+    background-color: #fff;
+    color: #333;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav>li>a {
+        /* (80px - line-height of 27px) / 2 = 26.5px */
+        padding-top: 26.5px;
+        padding-bottom: 26.5px;
+        line-height: 27px;
+    }
+}
+
+.logo {
+    width: 250px;
+    height: 80px;
+    background-image: url("https://static.wixstatic.com/media/16413d_54124a04be34478a94fa3917e2d07dfa~mv2.png/v1/fill/w_273,h_79,al_c,usm_0.66_1.00_0.01/16413d_54124a04be34478a94fa3917e2d07dfa~mv2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.navbar-nav {
+    position: relative;
+    left: 50px;
+}
+
+.navbar-form {
+    margin-top: 23px;
+}
+
+footer {
+    width: 1170px;
+    margin: auto;
+}
+
+.footer-container {
+    position: absolute;
+    bottom: 0px;
+    height: 160px;
+    left: 0;
+    width: 100%;
+    border: 1px solid #000;
+    background-color: #4fa8ae;
+}
+
+#tabs {
+    padding: 10px;
+    border: none;
+}
+
+.ui-widget-header {
+    font-size: 16px;
+    font-weight: 600;
+    transition: all linear 0.30s;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.del {
+    color: #dd0000;
+}
+
+.del.btn {
+    color: #fff;
+    background-color: #dd0000;
+    font-weight: bold;
+}
+
+.del.btn:hover {
+    background-color: red;
+}
+
+dt {
+    text-align: left !important;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    border: #c5c5c5 !important;
+    background-color: #4fa8ae !important;
 }
