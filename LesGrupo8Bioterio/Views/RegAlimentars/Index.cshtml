@@ -50,9 +50,9 @@
                 @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegAlim">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegAlim">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegAlim">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-pencil"></span></a> |
+                <a asp-action="Details" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                <a asp-action="Delete" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
 }

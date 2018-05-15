@@ -50,9 +50,9 @@
                 @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTanque">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTanque">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTanque">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-pencil"></span></a> |
+                <a asp-action="Details" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
 }

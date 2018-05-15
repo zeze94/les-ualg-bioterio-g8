@@ -38,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdElementoEquipa">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdElementoEquipa">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdElementoEquipa">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-pencil"></span></a> |
+                <a asp-action="Details" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                <a asp-action="Delete" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
 }
