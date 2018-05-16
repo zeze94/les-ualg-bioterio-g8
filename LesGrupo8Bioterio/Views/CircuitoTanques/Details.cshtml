@@ -1,15 +1,13 @@
-﻿@model LesGrupo8Bioterio.CircuitoTanque
+﻿    @model LesGrupo8Bioterio.CircuitoTanque
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Details de Circuito de Tanque</h2>
 
-<div>
-    <h4>CircuitoTanque</h4>
-    <hr />
+<div class="table-bordered">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CodigoCircuito)
@@ -21,13 +19,13 @@
             @Html.DisplayNameFor(model => model.DataCriacao)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataCriacao)
+            @Html.DisplayFor(model => model.dateCriacao)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DataFinal)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataFinal)
+            @Html.DisplayFor(model => model.dateFinal)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
@@ -36,8 +34,10 @@
             @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
         </dd>
     </dl>
+    <div class="form-group">
+        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdCircuito">Editar</a> 
+        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Eliminar</a> 
+        <a class="btn btn-info" asp-action="Index">Cancelar</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdCircuito">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

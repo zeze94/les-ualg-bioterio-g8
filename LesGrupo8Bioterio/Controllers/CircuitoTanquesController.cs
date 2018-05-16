@@ -37,6 +37,9 @@ namespace LesGrupo8Bioterio.Controllers
             var circuitoTanque = await _context.CircuitoTanque
                 .Include(c => c.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
+            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
+            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
+
             if (circuitoTanque == null)
             {
                 return NotFound();
@@ -78,6 +81,7 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var circuitoTanque = await _context.CircuitoTanque.SingleOrDefaultAsync(m => m.IdCircuito == id);
+
             if (circuitoTanque == null)
             {
                 return NotFound();
@@ -133,6 +137,9 @@ namespace LesGrupo8Bioterio.Controllers
             var circuitoTanque = await _context.CircuitoTanque
                 .Include(c => c.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
+            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
+            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
+
             if (circuitoTanque == null)
             {
                 return NotFound();
@@ -147,6 +154,42 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var circuitoTanque = await _context.CircuitoTanque.SingleOrDefaultAsync(m => m.IdCircuito == id);
+            var tanques = _context.Tanque.Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == id);
+            var regCondAmb = _context.RegCondAmb.Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == id);
+            foreach (var tanque in tanques)
+            {
+                var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regAmostragens = _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regManu = _context.RegManutencao.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regTrat = _context.RegTratamento.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regAli = _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                foreach (var regRemocao in regRemocoes)
+                {
+
+                    _context.RegRemocoes.Remove(regRemocao);
+                }
+                foreach (var regAmostragem in regAmostragens)
+                {
+                    _context.RegAmostragens.Remove(regAmostragem);
+                }
+                foreach (var regManutencao in regManu)
+                {
+                    _context.RegManutencao.Remove(regManutencao);
+                }
+                foreach (var regTratamento in regTrat)
+                {
+                    _context.RegTratamento.Remove(regTratamento);
+                }
+                foreach (var regAlimentacao in regAli)
+                {
+                    _context.RegAlimentar.Remove(regAlimentacao);
+                }
+                _context.Tanque.Remove(tanque);
+            }
+            foreach (var condAmb in regCondAmb)
+            {
+                _context.RegCondAmb.Remove(condAmb);
+            }
             _context.CircuitoTanque.Remove(circuitoTanque);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

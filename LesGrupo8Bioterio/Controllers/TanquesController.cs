@@ -49,7 +49,7 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: Tanques/Create
         public IActionResult Create()
         {
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito");
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito");
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote");
             return View();
         }
@@ -64,10 +64,11 @@ namespace LesGrupo8Bioterio.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(tanque);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", tanque.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
@@ -85,7 +86,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", tanque.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
@@ -122,7 +123,7 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", tanque.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
@@ -152,7 +153,37 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            
             var tanque = await _context.Tanque.SingleOrDefaultAsync(m => m.IdTanque == id);
+            var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regAmostragens =  _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regManu =  _context.RegManutencao.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regTrat =  _context.RegTratamento.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regAli =  _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            Console.WriteLine(tanque);
+            Console.WriteLine("########################################################################################################################################################################################################################");
+            foreach (var regRemocao in regRemocoes)
+            {
+               
+                _context.RegRemocoes.Remove(regRemocao);
+            }
+            foreach (var regAmostragem in regAmostragens)
+            {
+                _context.RegAmostragens.Remove(regAmostragem);
+            }
+            foreach (var regManutencao in regManu)
+            {
+                _context.RegManutencao.Remove(regManutencao);
+            }
+            foreach (var regTratamento in regTrat)
+            {
+                _context.RegTratamento.Remove(regTratamento);
+            }
+            foreach (var regAlimentacao in regAli)
+            {
+                _context.RegAlimentar.Remove(regAlimentacao);
+            }
+           
             _context.Tanque.Remove(tanque);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

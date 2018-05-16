@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listagem de Circuitos de tanque</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="form-group">
+    <a class="btn btn-info" asp-action="Create">Criar Circuito de Tanque</a>
+    <a  class="btn btn-info pull-right" asp-area="" asp-controller="Tanques" asp-action="Index">Tanques</a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -30,15 +31,17 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    item.dateFinal = item.DataFinal.Year + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
+    item.dateCriacao = item.DataCriacao.Year + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CodigoCircuito)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
+                @Html.DisplayFor(modelItem => item.dateCriacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataFinal)
+                @Html.DisplayFor(modelItem => item.dateFinal)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)

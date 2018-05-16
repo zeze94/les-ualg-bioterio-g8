@@ -15,6 +15,7 @@ namespace LesGrupo8Bioterio
         public int IdCircuito { get; set; }
         [Display(Name = "Projeto")]
         public int ProjetoIdProjeto { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Codigo do Circuito")]
         public string CodigoCircuito { get; set; }
         [Display(Name = "Data de Criação")]
@@ -27,5 +28,7 @@ namespace LesGrupo8Bioterio
         public ICollection<RegCondAmb> RegCondAmb { get; set; }
         [Display(Name = "Tanque")]
         public ICollection<Tanque> Tanque { get; set; }
+        public string dateFinal;
+        public string dateCriacao;
     }
 }

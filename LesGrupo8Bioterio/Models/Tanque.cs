@@ -16,19 +16,17 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdTanque { get; set; }
-
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Nº de Animais")]
         public int NroAnimais { get; set; }
-
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Sala")]
         public string Sala { get; set; }
 
         [Display(Name = "Observações")]
         public string Observacoes { get; set; }
-
         [Display(Name = "Lote")]
         public int LoteIdLote { get; set; }
-
         [Display(Name = "Circuito Tanque")]
         public int CircuitoTanqueIdCircuito { get; set; }
         [Display(Name = "Circuito Tanque")]
@@ -45,5 +43,7 @@ namespace LesGrupo8Bioterio
         public ICollection<RegRemocoes> RegRemocoes { get; set; }
         [Display(Name = "Registo Tratamento")]
         public ICollection<RegTratamento> RegTratamento { get; set; }
+
+  
     }
 }

@@ -5,12 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CircuitoTanque</h4>
-    <hr />
+<h3 class="alert alert-danger">
+    <ul>
+        <li> Tem a certeza que pretende Eliminar este Circuito de Tanque?</li>
+        <li>Ao Eliminar este Circuito estará a Eliminar todos os Tanques assim como todos os registos associados aos mesmos!</li>
+        <li>Estará ainda a eliminar tambem os Registos de Condições Ambientais associados ao Circuito!</li>
+    </ul>
+</h3>
+<div class="table-bordered">
+    <hr />  
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CodigoCircuito)
@@ -22,13 +25,13 @@
             @Html.DisplayNameFor(model => model.DataCriacao)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataCriacao)
+            @Html.DisplayFor(model => model.dateCriacao)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DataFinal)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataFinal)
+            @Html.DisplayFor(model => model.dateFinal)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
@@ -40,7 +43,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdCircuito" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
     </form>
 </div>
