@@ -25,7 +25,26 @@ namespace LesGrupo8Bioterio.Controllers
             var bd_lesContext = _context.Tanque.Include(t => t.CircuitoTanqueIdCircuitoNavigation).Include(t => t.LoteIdLoteNavigation);
             return View(await bd_lesContext.ToListAsync());
         }
+        private Tanque setRelations(Tanque tanque, int? id)
+        {
+            
+            var findTratamentos = _context.RegTratamento.Include(r => r.AgenteTratIdAgenTraNavigation).Include(r => r.FinalidadeIdFinalidadeNavigation).Include(r => r.TanqueIdTanqueNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regRemocoes = _context.RegRemocoes.Include(r => r.MotivoIdMotivoNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regAmostragens = _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regManu = _context.RegManutencao.Include(r => r.TipoManuntecaoIdTManutencaoNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+            var regAli = _context.RegAlimentar.Include(r => r.PlanoAlimentarIdPlanAlimNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
 
+            tanque.Tratamentos = findTratamentos;
+
+            tanque.regRemocoes = regRemocoes;
+
+            tanque.regAmostragem = regAmostragens;
+
+            tanque.regManutencao = regManu;
+
+            tanque.regAlimentar = regAli;
+            return tanque;
+        }
         // GET: Tanques/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -33,16 +52,32 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-
             var tanque = await _context.Tanque
-                .Include(t => t.CircuitoTanqueIdCircuitoNavigation)
-                .Include(t => t.LoteIdLoteNavigation)
-                .SingleOrDefaultAsync(m => m.IdTanque == id);
+               .Include(t => t.CircuitoTanqueIdCircuitoNavigation)
+               .Include(t => t.LoteIdLoteNavigation)
+               .SingleOrDefaultAsync(m => m.IdTanque == id);
             if (tanque == null)
             {
                 return NotFound();
             }
+            /* var findTratamentos = _context.RegTratamento.Include(r => r.AgenteTratIdAgenTraNavigation).Include(r => r.FinalidadeIdFinalidadeNavigation).Include(r => r.TanqueIdTanqueNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+             var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+             var regAmostragens = _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+             var regManu = _context.RegManutencao.Include(r => r.TipoManuntecaoIdTManutencaoNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
+             var regAli = _context.RegAlimentar.Include(r => r.PlanoAlimentarIdPlanAlimNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
 
+                 tanque.Tratamentos = findTratamentos;
+
+                 tanque.regRemocoes = regRemocoes;
+
+                 tanque.regAmostragem = regAmostragens;
+
+                 tanque.regManutencao = regManu;
+
+                 tanque.regAlimentar = regAli;*/
+
+            tanque = setRelations(tanque, id);
+            
             return View(tanque);
         }
 
@@ -160,8 +195,6 @@ namespace LesGrupo8Bioterio.Controllers
             var regManu =  _context.RegManutencao.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
             var regTrat =  _context.RegTratamento.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
             var regAli =  _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-            Console.WriteLine(tanque);
-            Console.WriteLine("########################################################################################################################################################################################################################");
             foreach (var regRemocao in regRemocoes)
             {
                

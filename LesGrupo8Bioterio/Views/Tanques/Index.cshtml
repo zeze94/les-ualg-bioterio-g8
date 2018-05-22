@@ -10,9 +10,10 @@
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar Tanque</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="col-md-10">
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.NroAnimais)
                 </th>
@@ -22,39 +23,52 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Observacoes)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroAnimais)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sala)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacoes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NroAnimais)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sala)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observacoes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdTanque"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-md-2">
+    
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Registos:</b></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegTratamentoes" asp-action="Index">Tratamentos</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegRemocoes" asp-action="Index">Remoções</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegManutencaos" asp-action="Index">Manutenções</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegAmostragens" asp-action="Index">Amostragens</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegAlimentars" asp-action="Index">Alimentares</a></li>
+    </ul>
+</div>

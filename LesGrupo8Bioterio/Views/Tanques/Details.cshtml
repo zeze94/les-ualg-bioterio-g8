@@ -1,49 +1,237 @@
-﻿@model LesGrupo8Bioterio.Tanque
-
+﻿@using LesGrupo8Bioterio.Models;
+@model LesGrupo8Bioterio.Tanque
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<h2>Detalhes do Tanque</h2>
-
-<div class="table-bordered" >
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NroAnimais)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NroAnimais)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sala)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sala)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Observacoes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Observacoes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
-        </dd>
-    </dl>
-    <div class="form-group">
-        <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdTanque">Editar</a>
-        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdTanque">Eliminar</a>
-        <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <h2>Detalhes do Tanque</h2>
+    </div>
+    <div class="col-md-8">
+        <h2>Registos Associados</h2>
+    </div>
+    <div class="col-md-9 col-md-push-3">
+        <ul class="nav nav-tabs" style="text-align: left;">
+            <li class="active"><a href="#tratamentos" data-toggle="tab" id="first_tab"><b>Tratamento</b></a></li>
+            <li><a href="#alimentar" data-toggle="tab" id="second_tab"><b>Alimentares</b></a></li>
+            <li><a href="#manutencao" data-toggle="tab" id="third_tab"><b>Manutenção</b></a></li>
+            <li><a href="#remocoes" data-toggle="tab" id="third_tab"><b>Remoções</b></a></li>
+            <li><a href="#amostragens" data-toggle="tab" id="third_tab"><b>Amostragens</b></a></li>
+        </ul>
     </div>
 </div>
+<div class="">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NroAnimais)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NroAnimais)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sala)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Sala)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Observacoes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Observacoes)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                <div id="tratamentos" class="tab-pane fade in active">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.Date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.Tempo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.Concentracao)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.ConcAgenTra)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.AgenteTratIdAgenTraNavigation)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTratamento.FinalidadeIdFinalidadeNavigation)
+                                </th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tratament in Model.Tratamentos)
+                            {
+                                tratament.data = tratament.Date.Year + "/" + tratament.Date.Month + "/" + tratament.Date.Year;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.Tempo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.Concentracao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.ConcAgenTra)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.AgenteTratIdAgenTraNavigation.NomeAgenTra)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tratament.FinalidadeIdFinalidadeNavigation.TFinalidade)
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="alimentar" class="tab-pane fade in">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAlimentar.Data)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAlimentar.Peso)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAlimentar.Sobras)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAlimentar.PlanoAlimentarIdPlanAlimNavigation)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var aliment in Model.regAlimentar)
+                            {
+                                aliment.data = aliment.Data.Year + "/" + aliment.Data.Month + "/" + aliment.Data.Year;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => aliment.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => aliment.Peso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => aliment.Sobras)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => aliment.PlanoAlimentarIdPlanAlimNavigation.Nome)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="manutencao" class="tab-pane fade in">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyManutencao.Data)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyManutencao.TipoManuntecaoIdTManutencaoNavigation)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var manutencao in Model.regManutencao)
+                            {
+                                manutencao.data = manutencao.Data.Year + "/" + manutencao.Data.Month + "/" + manutencao.Data.Year;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => manutencao.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => manutencao.TipoManuntecaoIdTManutencaoNavigation.TManutencao)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="remocoes" class="tab-pane fade in">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyRemocoes.Date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyRemocoes.NroRemoções)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyRemocoes.CausaMorte)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyRemocoes.MotivoIdMotivoNavigation)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var remocao in Model.regRemocoes)
+                            {
+                                remocao.data = remocao.Date.Year + "/" + remocao.Date.Month + "/" + remocao.Date.Year;
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => remocao.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => remocao.NroRemoções)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => remocao.CausaMorte)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => remocao.MotivoIdMotivoNavigation.NomeMotivo)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdTanque">Editar</a>
+        <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdTanque">Eliminar</a>
+        <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+    </div>
+
+</div>

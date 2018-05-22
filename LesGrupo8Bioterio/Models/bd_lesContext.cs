@@ -169,6 +169,11 @@ namespace LesGrupo8Bioterio.Models
                     .HasColumnName("função")
                     .HasMaxLength(40);
 
+                entity.Property(e => e.Nome)
+                    .IsRequired()
+                    .HasColumnName("Nome")
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.ProjetoIdProjeto)
                     .HasColumnName("Projeto_idProjeto")
                     .HasColumnType("int(11)");
@@ -940,7 +945,7 @@ namespace LesGrupo8Bioterio.Models
 
                 entity.Property(e => e.CausaMorte)
                     .HasColumnName("causaMorte")
-                    .HasColumnType("char(1)");
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Equipa(ElementoEquipa)</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,9 +13,12 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Função)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Função)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FuncionarioIdFuncionarioNavigation)
             </th>
@@ -28,6 +31,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <th>
+                @Html.DisplayFor(model => item.Nome)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Função)
             </td>

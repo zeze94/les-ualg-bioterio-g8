@@ -8,6 +8,8 @@ namespace LesGrupo8Bioterio
     public partial class Elementoequipa
     {
         public int IdElementoEquipa { get; set; }
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
         [Display(Name = "Função")]
         public string Função { get; set; }
         [Display(Name = "Projeto")]

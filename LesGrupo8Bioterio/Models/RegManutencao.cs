@@ -19,5 +19,6 @@ namespace LesGrupo8Bioterio
         public Tanque TanqueIdTanqueNavigation { get; set; }
         [Display(Name = "Tipo de Manutenção")]
         public TipoManuntecao TipoManuntecaoIdTManutencaoNavigation { get; set; }
+        public string data;
     }
 }

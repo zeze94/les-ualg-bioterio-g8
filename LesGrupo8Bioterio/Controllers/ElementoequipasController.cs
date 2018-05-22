@@ -59,7 +59,7 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdElementoEquipa,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
+        public async Task<IActionResult> Create([Bind("IdElementoEquipa,Nome,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdElementoEquipa,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
+        public async Task<IActionResult> Edit(int id, [Bind("IdElementoEquipa,Nome,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
         {
             if (id != elementoequipa.IdElementoEquipa)
             {

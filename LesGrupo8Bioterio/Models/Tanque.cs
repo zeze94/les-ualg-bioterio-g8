@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;  //needed for Display annotation
 using System.ComponentModel;  //needed for DisplayName annotation
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using LesGrupo8Bioterio;
+using LesGrupo8Bioterio.Models;
 namespace LesGrupo8Bioterio
 {
     public partial class Tanque
@@ -44,6 +51,21 @@ namespace LesGrupo8Bioterio
         [Display(Name = "Registo Tratamento")]
         public ICollection<RegTratamento> RegTratamento { get; set; }
 
-  
+        public IQueryable<RegTratamento> Tratamentos;
+        public RegTratamento dummyTratamento;
+        public IQueryable<RegAlimentar> regAlimentar;
+        public RegAlimentar dummyAlimentar;
+
+        public IQueryable<RegAmostragens> regAmostragem;
+        public RegAmostragens dummyAmostragem;
+
+        public IQueryable<RegManutencao> regManutencao;
+        public RegManutencao dummyManutencao;
+
+        public IQueryable<RegRemocoes> regRemocoes;
+        public RegRemocoes dummyRemocoes;
+
+
+
     }
 }

@@ -50,6 +50,7 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: RegTratamentoes/Create
         public IActionResult Create()
         {
+            
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra");
             ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "IdFinalidade");
             ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
