@@ -1,43 +1,158 @@
-﻿    @model LesGrupo8Bioterio.CircuitoTanque
-
+﻿@model LesGrupo8Bioterio.CircuitoTanque
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="col-md-12">
+    <div class="col-md-4">
+        <h2>Detalhes do Circuito</h2>
+    </div>
+    <div class="col-md-8">
+        <h2>Tanques e Registos Associados</h2>
+    </div>
+    <div class="col-md-9 col-md-push-4">
+        <ul class="nav nav-tabs" style="text-align: left;">
+            <li class="active"><a href="#tanques" data-toggle="tab" id="first_tab"><b>Tanques</b></a></li>
+            <li><a href="#condamb" data-toggle="tab" id="second_tab"><b>Condições Ambientais</b></a></li>
+        </ul>
+    </div>
+</div>
+<div class="">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CodigoCircuito)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CodigoCircuito)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataCriacao)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.dateCriacao)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataFinal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.dateFinal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <div class="tab-content">
+                <div id="tanques" class="tab-pane fade in active">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTanque.codidenttanque)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTanque.NroAnimais)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTanque.Sala)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTanque.Observacoes)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyTanque.LoteIdLoteNavigation)
+                                </th>
 
-<h2>Details de Circuito de Tanque</h2>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tanque in Model.tanquesCol)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => tanque.codidenttanque)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => tanque.NroAnimais)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => tanque.Sala)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => tanque.Observacoes)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => tanque.LoteIdLoteNavigation.CodigoLote)
+                                </td>
+                            </tr>
 
-<div class="table-bordered">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CodigoCircuito)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CodigoCircuito)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataCriacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.dateCriacao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DataFinal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.dateFinal)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
-        </dd>
-    </dl>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="condamb" class="tab-pane fade in">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyCondAmb.Data)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyCondAmb.Temperatura)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyCondAmb.VolAgua)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyCondAmb.SalinidadeAgua)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyCondAmb.NivelO2)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var regCond in Model.regCondAmb)
+                            {
+                                regCond.data = regCond.Data.Year + "/" + regCond.Data.Month + "/" + regCond.Data.Year;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => regCond.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => regCond.Temperatura)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => regCond.VolAgua)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => regCond.SalinidadeAgua)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => regCond.NivelO2)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="form-group">
-        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdCircuito">Editar</a> 
-        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Eliminar</a> 
+        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdCircuito">Editar</a>
+        @if (Model.isDeletable)
+        {
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Eliminar</a>
+        }
         <a class="btn btn-info" asp-action="Index">Cancelar</a>
     </div>
 </div>
-

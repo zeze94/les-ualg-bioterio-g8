@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;  //needed for Display annotation
-using System.ComponentModel;  //needed for DisplayName annotation
+using System.ComponentModel;
+using LesGrupo8Bioterio;
+using LesGrupo8Bioterio.Models;
+using System.Linq;
+//needed for DisplayName annotation
 
 
 namespace LesGrupo8Bioterio
@@ -30,7 +34,11 @@ namespace LesGrupo8Bioterio
         public Boolean? SubmisInsEurop { get; set; }
         [Display(Name = "Nº de Animais Autorizados")]
         public int? NroAnimaisAutoriz { get; set; }
-
+        public CircuitoTanque objetoCT;
+        public IQueryable<Ensaio> objetoEN;
+        public IQueryable<Elementoequipa> objetoEE;
+        public Elementoequipa dummyEE;
+        public Ensaio dummyEnsaio;
         public ICollection<CircuitoTanque> CircuitoTanque { get; set; }
         public ICollection<Elementoequipa> Elementoequipa { get; set; }
         public ICollection<Ensaio> Ensaio { get; set; }

@@ -33,9 +33,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    item.data = item.Data.Year + "/" + item.Data.Month + "/" + item.Data.Year;
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Data)
+                @Html.DisplayFor(modelItem => item.data)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Peso)
@@ -47,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.PlanoAlimentarIdPlanAlimNavigation.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
+                @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-pencil"></span></a> |

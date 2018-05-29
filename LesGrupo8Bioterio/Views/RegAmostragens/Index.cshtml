@@ -1,30 +1,27 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.RegAmostragens>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<h2>Registos de Amostragens</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a type="button" class="btn btn-info" asp-action="Create">Criar registo de amostragem</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Data)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PesoMedio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NroIndividuos)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PesoTotal)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PesoMedio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NroIndividuos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PesoTotal)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
             </th>
@@ -32,29 +29,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PesoMedio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroIndividuos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PesoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            item.data = item.Data.Year + "/" + item.Data.Month + "/" + item.Data.Year;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PesoMedio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NroIndividuos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PesoTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-pencil"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+
+
+        }
     </tbody>
 </table>
+<br />
+<div style="align-right">
+    <a class="btn btn-info pull-right" asp-area="" asp-controller="Tanques" asp-action="Index">Volta a Tanques</a>
+</div>

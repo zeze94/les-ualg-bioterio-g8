@@ -35,6 +35,25 @@ namespace LesGrupo8Bioterio.Controllers
 
             var projeto = await _context.Projeto
                 .SingleOrDefaultAsync(m => m.IdProjeto == id);
+            
+            var circuito = await _context.CircuitoTanque
+                .SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+
+            var ensaio = _context.Ensaio.Include(e => e.LoteIdLoteNavigation).Where(m => m.ProjetoIdProjeto == id);
+
+            var elementoequipa = _context.Elementoequipa.Where(m => m.ProjetoIdProjeto == id);
+            if(elementoequipa != null)
+            {
+                projeto.objetoEE = elementoequipa;
+            }
+            if (ensaio != null)
+            {
+                projeto.objetoEN = ensaio;
+            }
+            if (circuito != null)
+            {
+                projeto.objetoCT = circuito;
+            }
             if (projeto == null)
             {
                 return NotFound();
@@ -56,14 +75,19 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdProjeto,Nome,DataInicio,DataFim,AutorizacaoDgva,RefOrbea,SubmisInsEurop,NroAnimaisAutoriz")] Projeto projeto)
         {
-            
+            if(projeto.DataFim < projeto.DataInicio)
+            {
+                ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
+                ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
+            }
             if (ModelState.IsValid)
             {
+                
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Nome"] = "pedras U Da Man BOOOI";
+            
             return View(projeto);
         }
 
@@ -94,7 +118,11 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-
+            if (projeto.DataFim < projeto.DataInicio)
+            {
+                ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
+                ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -142,6 +170,24 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var projeto = await _context.Projeto.SingleOrDefaultAsync(m => m.IdProjeto == id);
+            var ensaios = _context.Ensaio.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+            var elementoequipa = _context.Elementoequipa.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+            var circuitotanque = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+           
+
+            foreach(var ensaio in ensaios)
+            {
+                _context.Ensaio.Remove(ensaio);
+            }
+            foreach(var elementos in elementoequipa)
+            {
+                _context.Elementoequipa.Remove(elementos);
+            }
+            foreach(var circuito in circuitotanque)
+            {
+                _context.CircuitoTanque.Remove(circuito);
+
+            }
             _context.Projeto.Remove(projeto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

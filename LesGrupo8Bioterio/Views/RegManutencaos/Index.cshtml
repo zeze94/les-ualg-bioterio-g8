@@ -27,9 +27,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    item.data = item.Data.Year + "/" + item.Data.Month + "/" + item.Data.Year;
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Data)
+                @Html.DisplayFor(modelItem => item.data)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)

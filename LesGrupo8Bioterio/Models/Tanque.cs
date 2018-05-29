@@ -50,6 +50,10 @@ namespace LesGrupo8Bioterio
         public ICollection<RegRemocoes> RegRemocoes { get; set; }
         [Display(Name = "Registo Tratamento")]
         public ICollection<RegTratamento> RegTratamento { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
+        [Display(Name = "Identificador")]
+        public string codidenttanque { get; set; }
+
 
         public IQueryable<RegTratamento> Tratamentos;
         public RegTratamento dummyTratamento;
@@ -65,7 +69,7 @@ namespace LesGrupo8Bioterio
         public IQueryable<RegRemocoes> regRemocoes;
         public RegRemocoes dummyRemocoes;
 
-
+        public Boolean isDeletable;
 
     }
 }

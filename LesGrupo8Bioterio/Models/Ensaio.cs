@@ -19,11 +19,10 @@ namespace LesGrupo8Bioterio
         public int ProjetoIdProjeto { get; set; }
         [Display(Name = "Lote")]
         public int LoteIdLote { get; set; }
-        [Display(Name = "Membro Equipa")]
-        public int MembroEquipaIdEquipa { get; set; }
         [Display(Name = "Lote")]
         public Lote LoteIdLoteNavigation { get; set; }
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
+        public Projeto Selected;
     }
 }

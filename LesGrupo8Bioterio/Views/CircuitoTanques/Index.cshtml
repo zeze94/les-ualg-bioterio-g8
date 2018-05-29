@@ -9,11 +9,11 @@
 
 <div class="form-group">
     <a class="btn btn-info" asp-action="Create">Criar Circuito de Tanque</a>
-    <a  class="btn btn-info pull-right" asp-area="" asp-controller="Tanques" asp-action="Index">Tanques</a>
 </div>
-<table class="table">
-    <thead>
-        <tr>
+<div class="col-md-9">
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.CodigoCircuito)
                 </th>
@@ -23,35 +23,44 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DataFinal)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-    item.dateFinal = item.DataFinal.Year + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
-    item.dateCriacao = item.DataCriacao.Year + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoCircuito)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                item.dateFinal = item.DataFinal.Year + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
+                item.dateCriacao = item.DataCriacao.Year + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoCircuito)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateCriacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateFinal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-md-3 col-md-push-1">
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Opções:</b></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="RegCondAmbs" asp-action="Index">Condições Ambientais</a></li>
+    </ul>
+</div>

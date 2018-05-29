@@ -1,15 +1,11 @@
 ﻿@model LesGrupo8Bioterio.RegCondAmb
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>Detalhes do Registo Condição Ambiental</h2>
+<div class="table-bordered">
 
-<h2>Details</h2>
-
-<div>
-    <h4>RegCondAmb</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Data)
@@ -45,11 +41,18 @@
             @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
         </dd>
     </dl>
+    <div class="form-group">
+        <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdRegCondAmb">Editar</a>
+        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdRegCondAmb">Eliminar</a>
+        <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdRegCondAmb">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+
+
+

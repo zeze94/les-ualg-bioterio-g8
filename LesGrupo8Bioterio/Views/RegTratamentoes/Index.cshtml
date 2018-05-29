@@ -1,30 +1,25 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.RegTratamento>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Listagem de Tratamentos</h2>
-
 <p>
     <a class="btn btn-info" asp-action="Create">Criar Registo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tempo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Concentracao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ConcAgenTra)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tempo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concentracao)
+            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.AgenteTratIdAgenTraNavigation)
             </th>
@@ -38,36 +33,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tempo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Concentracao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConcAgenTra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgenteTratIdAgenTraNavigation.NomeAgenTra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FinalidadeIdFinalidadeNavigation.IdFinalidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            item.data = item.Date.Year + "/" + item.Date.Month + "/" + item.Date.Year;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tempo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Concentracao)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgenteTratIdAgenTraNavigation.NomeAgenTra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinalidadeIdFinalidadeNavigation.TFinalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-pencil"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-<a type="button" class="btn btn-info pull-right" asp-controller="Tanques" asp-action="Index">Voltar Para Tanques</a>
+<div class="col-md-12 col-md-push-1">
+    <a type="button" class="btn btn-info pull-right" asp-controller="Tanques" asp-action="Index">Voltar Para Tanques</a>
+</div>

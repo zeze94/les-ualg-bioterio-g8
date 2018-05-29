@@ -1,42 +1,43 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.Motivo>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<h2>Motivos de remoções</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a type="button" class="btn btn-info" asp-action="Create">Adicionar motivo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TipoMotivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeMotivo)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoMotivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeMotivo)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoMotivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeMotivo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoMotivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeMotivo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-pencil"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdMotivo"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div style="align-right">
+    <a class="btn btn-info pull-right" asp-area="" asp-controller="RegRemocoes" asp-action="Index">Voltar aos registos de remoções</a>
+</div>

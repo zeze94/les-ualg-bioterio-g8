@@ -1,19 +1,18 @@
 ﻿@model LesGrupo8Bioterio.RegTratamento
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Detalhes do Tratamento</h2>
-
-<div class="table-bordered">
+<div class="col-md-12">
+    <h2>Detalhes do Tratamento</h2>
+</div>
+<div class="col-md-4">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Date)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Tempo)
@@ -27,12 +26,7 @@
         <dd>
             @Html.DisplayFor(model => model.Concentracao)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ConcAgenTra)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ConcAgenTra)
-        </dd>
+        
         <dt>
             @Html.DisplayNameFor(model => model.AgenteTratIdAgenTraNavigation)
         </dt>
@@ -43,18 +37,18 @@
             @Html.DisplayNameFor(model => model.FinalidadeIdFinalidadeNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FinalidadeIdFinalidadeNavigation.IdFinalidade)
+            @Html.DisplayFor(model => model.FinalidadeIdFinalidadeNavigation.TFinalidade)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.codidenttanque)
         </dd>
     </dl>
     <div class="form-group">
-        <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdRegTra">Editar</a>
-        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdRegTra">Eliminar</a>
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdRegTra">Editar</a>
+        <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdRegTra">Eliminar</a>
         <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
     </div>
 </div>

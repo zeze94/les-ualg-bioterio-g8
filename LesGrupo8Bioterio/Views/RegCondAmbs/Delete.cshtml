@@ -1,15 +1,15 @@
 ﻿@model LesGrupo8Bioterio.RegCondAmb
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>RegCondAmb</h4>
+<h3 class="alert alert-danger">
+    <ul>
+        <li> Tem a certeza que pretende Eliminar este Registo Condição Ambiental?</li>
+        <li>Ao Eliminar este Registo Alimentar Eliminará todos os dados associados ao mesmo!</li>
+    </ul>
+</h3>
+<div class="table-bordered">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -46,13 +46,13 @@
             @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdRegCondAmb" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
     </form>
 </div>

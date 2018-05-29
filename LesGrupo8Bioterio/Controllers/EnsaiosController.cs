@@ -49,8 +49,10 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: Ensaios/Create
         public IActionResult Create()
         {
-            ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote");
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome");
+           
+                ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote");
+                ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome");
+            
             return View();
         }
 
@@ -59,8 +61,13 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote,MembroEquipaIdEquipa")] Ensaio ensaio)
+        public async Task<IActionResult> Create([Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
         {
+            if (ensaio.DataFim < ensaio.DataInicio)
+            {
+                ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
+                ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(ensaio);
@@ -95,11 +102,17 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote,MembroEquipaIdEquipa")] Ensaio ensaio)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
         {
             if (id != ensaio.IdEnsaio)
             {
                 return NotFound();
+            }
+
+            if (ensaio.DataFim < ensaio.DataInicio)
+            {
+                ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
+                ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
             }
 
             if (ModelState.IsValid)

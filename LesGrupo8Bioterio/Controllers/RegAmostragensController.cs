@@ -41,6 +41,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
+            regAmostragens.data = regAmostragens.Data.Year + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
 
             return View(regAmostragens);
         }
@@ -48,8 +49,9 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: RegAmostragens/Create
         public IActionResult Create()
         {
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque");
             return View();
+  
         }
 
         // POST: RegAmostragens/Create
@@ -58,14 +60,14 @@ namespace LesGrupo8Bioterio.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdRegAmo,Data,PesoMedio,NroIndividuos,PesoTotal,TanqueIdTanque")] RegAmostragens regAmostragens)
-        {
+        {   
             if (ModelState.IsValid)
             {
                 _context.Add(regAmostragens);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAmostragens.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque", regAmostragens.TanqueIdTanque);
             return View(regAmostragens);
         }
 
@@ -82,7 +84,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAmostragens.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque", regAmostragens.TanqueIdTanque);
             return View(regAmostragens);
         }
 
@@ -118,7 +120,7 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAmostragens.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque", regAmostragens.TanqueIdTanque);
             return View(regAmostragens);
         }
 
@@ -133,11 +135,12 @@ namespace LesGrupo8Bioterio.Controllers
             var regAmostragens = await _context.RegAmostragens
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegAmo == id);
+            
             if (regAmostragens == null)
             {
                 return NotFound();
             }
-
+            regAmostragens.data = regAmostragens.Data.Year + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
             return View(regAmostragens);
         }
 

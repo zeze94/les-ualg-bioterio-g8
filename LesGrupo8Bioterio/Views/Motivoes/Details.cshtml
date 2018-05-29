@@ -25,7 +25,8 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdMotivo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="form-group">
+    <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdMotivo">Editar</a>
+    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdMotivo">Eliminar</a>
+    <a type="button" class="btn btn-info" asp-action="Index">Voltar à lista</a>
 </div>

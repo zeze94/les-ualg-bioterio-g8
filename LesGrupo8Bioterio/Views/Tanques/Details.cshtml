@@ -11,7 +11,7 @@
         <h2>Detalhes do Tanque</h2>
     </div>
     <div class="col-md-8">
-        <h2>Registos Associados</h2>
+        <h2>Histórico de Registos</h2>
     </div>
     <div class="col-md-9 col-md-push-3">
         <ul class="nav nav-tabs" style="text-align: left;">
@@ -27,6 +27,12 @@
     <div class="col-md-12">
         <div class="col-md-3">
             <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.codidenttanque)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.codidenttanque)
+                </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.NroAnimais)
                 </dt>
@@ -75,9 +81,6 @@
                                     @Html.DisplayNameFor(model => model.dummyTratamento.Concentracao)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.dummyTratamento.ConcAgenTra)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.dummyTratamento.AgenteTratIdAgenTraNavigation)
                                 </th>
                                 <th>
@@ -99,9 +102,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => tratament.Concentracao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => tratament.ConcAgenTra)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => tratament.AgenteTratIdAgenTraNavigation.NomeAgenTra)
@@ -225,12 +225,56 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="amostragens" class="tab-pane fade in">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAmostragem.Data)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAmostragem.PesoMedio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAmostragem.NroIndividuos)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyAmostragem.PesoTotal)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var amostragem in Model.regAmostragem)
+                            {
+                                amostragem.data = amostragem.Data.Year + "/" + amostragem.Data.Month + "/" + amostragem.Data.Year;
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => amostragem.data)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => amostragem.PesoMedio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => amostragem.NroIndividuos)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => amostragem.PesoTotal)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 form-group">
         <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdTanque">Editar</a>
-        <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdTanque">Eliminar</a>
+        @if (Model.isDeletable)
+        {
+            <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdTanque">Eliminar</a>
+        }
         <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
     </div>
 

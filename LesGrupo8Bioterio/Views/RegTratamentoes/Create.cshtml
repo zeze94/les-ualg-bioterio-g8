@@ -8,7 +8,7 @@
 <h2>Registar Tratamento</h2>
 
 <hr />
-<div class="row table-bordered">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -18,27 +18,26 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Tempo" data-content="Duração do tratamento em minutos"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Tempo" class="control-label"></label>
                 <input asp-for="Tempo" class="form-control" />
                 <span asp-validation-for="Tempo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Concentração" data-content="Concentração do Agente usado No Tratamento medido em ppm"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Concentracao" class="control-label"></label>
                 <input asp-for="Concentracao" class="form-control" />
                 <span asp-validation-for="Concentracao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Finalidade" data-content="Consiste na Finalidade do Tratamento"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="FinalidadeIdFinalidade" class="control-label"></label>
-                <select asp-for="FinalidadeIdFinalidade" class ="form-control" asp-items="ViewBag.FinalidadeIdFinalidade"></select>
+                <select asp-for="FinalidadeIdFinalidade" class="form-control" asp-items="ViewBag.FinalidadeIdFinalidade"></select>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Agente de Tratamento" data-content="O Agente utilizado no tratamento"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="AgenteTratIdAgenTra" class="control-label"></label>
-                <select asp-for="AgenteTratIdAgenTra" class ="form-control" asp-items="ViewBag.AgenteTratIdAgenTra"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConcAgenTra" class="control-label"></label>
-                <input asp-for="ConcAgenTra" class="form-control" />
-                <span asp-validation-for="ConcAgenTra" class="text-danger"></span>
+                <select asp-for="AgenteTratIdAgenTra" class="form-control" asp-items="ViewBag.AgenteTratIdAgenTra"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TanqueIdTanque" class="control-label"></label>
@@ -51,7 +50,11 @@
         </form>
     </div>
 </div>
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -228,9 +228,7 @@ namespace LesGrupo8Bioterio.Models
                     .HasColumnName("Lote_idLote")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.MembroEquipaIdEquipa)
-                    .HasColumnName("membroEquipa_idEquipa")
-                    .HasColumnType("int(11)");
+            
 
                 entity.Property(e => e.ProjetoIdProjeto)
                     .HasColumnName("Projeto_idProjeto")
@@ -1051,6 +1049,10 @@ namespace LesGrupo8Bioterio.Models
                 entity.Property(e => e.IdTanque)
                     .HasColumnName("idTanque")
                     .HasColumnType("int(11)");
+                //codidenttanque
+                entity.Property(e => e.codidenttanque)
+                   .HasColumnName("codidenttanque")
+                   .HasMaxLength(255);
 
                 entity.Property(e => e.CircuitoTanqueIdCircuito)
                     .HasColumnName("Circuito_Tanque_idCircuito")

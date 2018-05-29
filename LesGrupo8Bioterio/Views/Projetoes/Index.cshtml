@@ -10,9 +10,11 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="col-md-10" >
+    
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
                 </th>
@@ -34,39 +36,52 @@
                 <th>
                     @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
                 </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefOrbea)
-            </td>
-            <td>
-                @Html.LabelFor(modelItem => item.SubmisInsEurop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataFim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RefOrbea)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubmisInsEurop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-pencil"></span></a> 
+                        <a asp-action="Details" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-eye-open"></span></a> 
+                        <a asp-action="Delete" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div class="col-md-2">
+
+        <ul class="list-group">
+            <li class="list-group-item active"><b>Navegador</b></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Circuitos" asp-action="Index">CircuitosTanque</a></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Ensaios" asp-action="Index">Ensaios</a></li>
+
+        </ul>
+    </div>
+
+    

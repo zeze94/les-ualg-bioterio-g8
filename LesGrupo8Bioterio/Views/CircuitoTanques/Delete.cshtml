@@ -1,19 +1,29 @@
 ﻿@model LesGrupo8Bioterio.CircuitoTanque
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (Model.isDeletable)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Tem a certeza que pretende Eliminar este Circuito de Tanque?</li>
+            <li>Ao Eliminar este Circuito estará a Eliminar todos os Tanques assim como todos os registos associados aos mesmos!</li>
+            <li>Estará ainda a eliminar tambem os Registos de Condições Ambientais associados ao Circuito!</li>
+        </ul>
+    </h3>
+}
+else
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Não é possivel eliminar este circuito pois possui Tanques ou registos de Condições Ambientais associados</li>
+        </ul>
+    </h3>
 
-<h3 class="alert alert-danger">
-    <ul>
-        <li> Tem a certeza que pretende Eliminar este Circuito de Tanque?</li>
-        <li>Ao Eliminar este Circuito estará a Eliminar todos os Tanques assim como todos os registos associados aos mesmos!</li>
-        <li>Estará ainda a eliminar tambem os Registos de Condições Ambientais associados ao Circuito!</li>
-    </ul>
-</h3>
-<div class="table-bordered">
-    <hr />  
+}
+<div class="col-md-4">
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CodigoCircuito)
@@ -40,10 +50,14 @@
             @Html.DisplayFor(model => model.ProjetoIdProjetoNavigation.Nome)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdCircuito" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
-        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
-    </form>
+
+
+    @if (Model.isDeletable)
+    {
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdCircuito" />
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+        </form>
+    }
+    <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
 </div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LesGrupo8Bioterio;
 using LesGrupo8Bioterio.Models;
 
+
 namespace LesGrupo8Bioterio.Controllers
 {
     public class CircuitoTanquesController : Controller
@@ -17,13 +18,54 @@ namespace LesGrupo8Bioterio.Controllers
         public CircuitoTanquesController(bd_lesContext context)
         {
             _context = context;
-        } 
+        }
 
+        private CircuitoTanque setRelations(CircuitoTanque cirTanque, int? id)
+        {
+
+            var tanques = _context.Tanque.Include(t => t.LoteIdLoteNavigation).Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == id);
+            var regCondAmb = _context.RegCondAmb.Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == id);
+            cirTanque.tanquesCol = tanques;
+
+            cirTanque.regCondAmb = regCondAmb;
+
+            if (cirTanque.regCondAmb.Any() || cirTanque.tanquesCol.Any())
+            {
+                cirTanque.isDeletable = false;
+            }
+            else
+            {
+                cirTanque.isDeletable = true;
+            }
+
+            return cirTanque;
+        }
         // GET: CircuitoTanques
         public async Task<IActionResult> Index()
         {
             var bd_lesContext = _context.CircuitoTanque.Include(c => c.ProjetoIdProjetoNavigation);
             return View(await bd_lesContext.ToListAsync());
+        }
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyyMMddHHmmssffff");
+        }
+ 
+        public  Boolean validateCircuito(CircuitoTanque c)
+        {
+            double initTimestamp = Convert.ToDouble(GetTimestamp(c.DataCriacao));
+            double finalTimestamp = Convert.ToDouble(GetTimestamp(c.DataFinal));
+            if(initTimestamp > finalTimestamp)
+            {
+                return false;
+            }
+            var circuitoTanque = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == c.ProjetoIdProjeto);
+            if (circuitoTanque.Any())
+            {
+                return false;
+            }
+            return true;
+
         }
 
         // GET: CircuitoTanques/Details/5
@@ -37,6 +79,8 @@ namespace LesGrupo8Bioterio.Controllers
             var circuitoTanque = await _context.CircuitoTanque
                 .Include(c => c.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
+
+            circuitoTanque = setRelations(circuitoTanque, id);
             circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
             circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
 
@@ -62,6 +106,20 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCircuito,ProjetoIdProjeto,CodigoCircuito,DataCriacao,DataFinal")] CircuitoTanque circuitoTanque)
         {
+            if (circuitoTanque.DataCriacao > circuitoTanque.DataFinal)
+            {
+                ModelState.AddModelError("DataCriacao", string.Format("Data inicial não pode ser posterior á data inicial", circuitoTanque.DataCriacao));
+            }
+            var cTfindany = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == circuitoTanque.ProjetoIdProjeto);
+            if (cTfindany.Any())
+            {
+                ModelState.AddModelError("ProjetoIdProjeto", string.Format("Este Projecto ja possui um Circuito Tanque Associado", circuitoTanque.ProjetoIdProjeto));
+            }
+            var cTCodefindany = _context.CircuitoTanque.Where(b => EF.Property<string>(b, "CodigoCircuito").Equals( circuitoTanque.CodigoCircuito));
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("CodigoCircuito", string.Format("Já Existe um circuito com este Código", circuitoTanque.CodigoCircuito));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(circuitoTanque);
@@ -139,7 +197,9 @@ namespace LesGrupo8Bioterio.Controllers
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
             circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
             circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
-
+            circuitoTanque = setRelations(circuitoTanque, circuitoTanque.IdCircuito);
+           
+            
             if (circuitoTanque == null)
             {
                 return NotFound();

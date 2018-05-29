@@ -39,6 +39,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.FinalidadeIdFinalidadeNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegTra == id);
+            regTratamento.data = regTratamento.Date.Year + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
             if (regTratamento == null)
             {
                 return NotFound();
@@ -52,8 +53,8 @@ namespace LesGrupo8Bioterio.Controllers
         {
             
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra");
-            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "IdFinalidade");
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
+            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque");
             return View();
         }
 
@@ -71,8 +72,8 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra", regTratamento.AgenteTratIdAgenTra);
-            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "IdFinalidade", regTratamento.FinalidadeIdFinalidade);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regTratamento.TanqueIdTanque);
+            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade", regTratamento.FinalidadeIdFinalidade);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque", regTratamento.TanqueIdTanque);
             return View(regTratamento);
         }
 
@@ -90,7 +91,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra", regTratamento.AgenteTratIdAgenTra);
-            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "IdFinalidade", regTratamento.FinalidadeIdFinalidade);
+            ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade", regTratamento.FinalidadeIdFinalidade);
             ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regTratamento.TanqueIdTanque);
             return View(regTratamento);
         }
@@ -146,6 +147,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.FinalidadeIdFinalidadeNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegTra == id);
+            regTratamento.data = regTratamento.Date.Year + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
             if (regTratamento == null)
             {
                 return NotFound();

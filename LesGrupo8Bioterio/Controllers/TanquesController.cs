@@ -43,6 +43,15 @@ namespace LesGrupo8Bioterio.Controllers
             tanque.regManutencao = regManu;
 
             tanque.regAlimentar = regAli;
+
+            if (tanque.Tratamentos.Any() || tanque.regRemocoes.Any()|| tanque.regAmostragem.Any()|| tanque.regManutencao.Any()|| tanque.regAlimentar.Any())
+            {
+                tanque.isDeletable = false;
+            }
+            else
+            {
+                tanque.isDeletable = true;
+            }
             return tanque;
         }
         // GET: Tanques/Details/5
@@ -60,22 +69,6 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            /* var findTratamentos = _context.RegTratamento.Include(r => r.AgenteTratIdAgenTraNavigation).Include(r => r.FinalidadeIdFinalidadeNavigation).Include(r => r.TanqueIdTanqueNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-             var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-             var regAmostragens = _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-             var regManu = _context.RegManutencao.Include(r => r.TipoManuntecaoIdTManutencaoNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-             var regAli = _context.RegAlimentar.Include(r => r.PlanoAlimentarIdPlanAlimNavigation).Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
-
-                 tanque.Tratamentos = findTratamentos;
-
-                 tanque.regRemocoes = regRemocoes;
-
-                 tanque.regAmostragem = regAmostragens;
-
-                 tanque.regManutencao = regManu;
-
-                 tanque.regAlimentar = regAli;*/
-
             tanque = setRelations(tanque, id);
             
             return View(tanque);
@@ -94,8 +87,13 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
+        public async Task<IActionResult> Create([Bind("IdTanque,codidenttanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
         {
+            var tanqueCodefindany = _context.Tanque.Where(b => EF.Property<string>(b, "codidenttanque").Equals(tanque.codidenttanque));
+            if (tanqueCodefindany.Any())
+            {
+                ModelState.AddModelError("codidenttanque", string.Format("Já Existe um Tanque com este Identificador", tanque.codidenttanque));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(tanque);
@@ -131,7 +129,7 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTanque,codidenttanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
         {
             if (id != tanque.IdTanque)
             {
@@ -175,6 +173,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(t => t.CircuitoTanqueIdCircuitoNavigation)
                 .Include(t => t.LoteIdLoteNavigation)
                 .SingleOrDefaultAsync(m => m.IdTanque == id);
+            tanque = setRelations(tanque, tanque.IdTanque);
             if (tanque == null)
             {
                 return NotFound();

@@ -1,15 +1,11 @@
 ﻿@model LesGrupo8Bioterio.PlanoAlimentar
-
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
-<h4>PlanoAlimentar</h4>
+<h2>Editar Plano Alimentar</h2>
 <hr />
-<div class="row">
+<div class="row table-bordered">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -45,14 +41,11 @@
                 <span asp-validation-for="RacaoDia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Confirmar" class="btn btn-success" />
+                <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

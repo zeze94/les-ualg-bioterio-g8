@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using LesGrupo8Bioterio;
+using LesGrupo8Bioterio.Models;
 
 namespace LesGrupo8Bioterio
 {
@@ -16,7 +23,7 @@ namespace LesGrupo8Bioterio
         [Display(Name = "Projeto")]
         public int ProjetoIdProjeto { get; set; }
         [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
-        [Display(Name = "Codigo do Circuito")]
+        [Display(Name = "Identificador")]
         public string CodigoCircuito { get; set; }
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
@@ -30,5 +37,13 @@ namespace LesGrupo8Bioterio
         public ICollection<Tanque> Tanque { get; set; }
         public string dateFinal;
         public string dateCriacao;
+        public IQueryable<Tanque> tanquesCol;
+        public Tanque dummyTanque;
+
+        public IQueryable<RegCondAmb> regCondAmb;
+        public RegCondAmb dummyCondAmb;
+
+        public Boolean isDeletable;
+
     }
 }

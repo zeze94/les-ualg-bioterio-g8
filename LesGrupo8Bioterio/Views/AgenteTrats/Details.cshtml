@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>AgenteTrat</h4>
+    <h4>Agente de Tratamento</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,6 +20,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdAgenTra">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a type="button" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.IdAgenTra">Editar</a>
+    <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+    <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdAgenTra">Eliminar</a>
 </div>

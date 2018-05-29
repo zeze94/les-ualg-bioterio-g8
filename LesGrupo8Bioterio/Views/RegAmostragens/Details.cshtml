@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Data)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Data)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PesoMedio)
@@ -39,11 +39,14 @@
             @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.codidenttanque)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdRegAmo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <div class="form-group">
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdRegAmo">Editar</a>
+        <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdRegAmo">Eliminar</a>
+        <a type="button" class="btn btn-info" asp-action="Index">Voltar à lista</a>
+    </div>
 </div>

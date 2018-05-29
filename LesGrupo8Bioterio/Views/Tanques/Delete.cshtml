@@ -1,55 +1,72 @@
 ﻿@model LesGrupo8Bioterio.Tanque
-
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";//codidenttanque
 }
+@if (Model.isDeletable)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Tem a certeza que pretende Eliminar este Tanque?</li>
+            <li>Ao Eliminar este Tanque estará a Eliminar todos os registos associados ao mesmo!</li>
+        </ul>
+    </h3>
+}
+else
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Não é possivel eliminar este Tanque pois existem Registos Associados</li>
+        </ul>
+    </h3>
+}
+    <div class="col-md-4">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.codidenttanque)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.codidenttanque)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NroAnimais)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NroAnimais)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Sala)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Sala)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Observacoes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Observacoes)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
+            </dd>
+        </dl>
 
-<h3 class="alert alert-danger">
-    <ul>
-        <li> Tem a certeza que pretende Eliminar este Tanque?</li>
-        <li>Ao Eliminar este Tanque estará a Eliminar todos os registos associados ao mesmo!</li>
-    </ul> 
-</h3>
-<div class="table-bordered">
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NroAnimais)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NroAnimais)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sala)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sala)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Observacoes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Observacoes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LoteIdLoteNavigation.CodigoLote)
-        </dd>
-    </dl> 
-    
-    
-    <form  asp-action="Delete">
-        <input type="hidden" asp-for="IdTanque" />
-        <input type="submit"  value="Eliminar" class="btn btn-danger" /> 
-        <a type="button"  class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
-    </form>
-</div>
+        @if (Model.isDeletable)
+        {
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdTanque" />
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+        </form>
+        }
+        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
+    </div>
