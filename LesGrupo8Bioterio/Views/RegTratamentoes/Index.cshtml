@@ -35,7 +35,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            item.data = item.Date.Year + "/" + item.Date.Month + "/" + item.Date.Year;
+            item.data = item.Date.Day + "/" + item.Date.Month + "/" + item.Date.Year;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.data)

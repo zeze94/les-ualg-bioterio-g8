@@ -92,7 +92,7 @@
                         <tbody>
                             @foreach (var tratament in Model.Tratamentos)
                             {
-                                tratament.data = tratament.Date.Year + "/" + tratament.Date.Month + "/" + tratament.Date.Year;
+                                tratament.data = tratament.Date.Day + "/" + tratament.Date.Month + "/" + tratament.Date.Year;
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => tratament.data)

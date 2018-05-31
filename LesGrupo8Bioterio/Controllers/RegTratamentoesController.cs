@@ -39,7 +39,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.FinalidadeIdFinalidadeNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegTra == id);
-            regTratamento.data = regTratamento.Date.Year + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
+            regTratamento.data = regTratamento.Date.Day + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
             if (regTratamento == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.FinalidadeIdFinalidadeNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegTra == id);
-            regTratamento.data = regTratamento.Date.Year + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
+            regTratamento.data = regTratamento.Date.Day + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
             if (regTratamento == null)
             {
                 return NotFound();
