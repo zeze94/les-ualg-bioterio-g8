@@ -3,23 +3,15 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";//codidenttanque
 }
-@if (Model.isDeletable)
-{
+
     <h3 class="alert alert-danger">
         <ul>
-            <li> Tem a certeza que pretende Eliminar este Tanque?</li>
-            <li>Ao Eliminar este Tanque estará a Eliminar todos os registos associados ao mesmo!</li>
+            <li> Ao Arquivar este Tanque estará Tambem arquivar os registos associados ao mesmo</li>
+            <li> Poderá consultar os dados do Tanque e dos Registos associados ao mesmo posteriosrmente</li>
+            <li> <b>Não é Possivel Editar os dados após esta ação</b></li>
         </ul>
     </h3>
-}
-else
-{
-    <h3 class="alert alert-danger">
-        <ul>
-            <li> Não é possivel eliminar este Tanque pois existem Registos Associados</li>
-        </ul>
-    </h3>
-}
+
     <div class="col-md-4">
         <hr />
         <dl class="dl-horizontal">
@@ -61,12 +53,11 @@ else
             </dd>
         </dl>
 
-        @if (Model.isDeletable)
-        {
+       
         <form asp-action="Delete">
             <input type="hidden" asp-for="IdTanque" />
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            <input type="submit" value="Arquivar" class="btn btn-danger" />
+            <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
         </form>
-        }
-        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
+        
     </div>

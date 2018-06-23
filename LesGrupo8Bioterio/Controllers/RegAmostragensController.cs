@@ -41,7 +41,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            regAmostragens.data = regAmostragens.Data.Year + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
+            regAmostragens.data = regAmostragens.Data.Day + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
 
             return View(regAmostragens);
         }
@@ -140,7 +140,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            regAmostragens.data = regAmostragens.Data.Year + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
+            regAmostragens.data = regAmostragens.Data.Day + "/" + regAmostragens.Data.Month + "/" + regAmostragens.Data.Year;
             return View(regAmostragens);
         }
 

@@ -11,51 +11,112 @@
     <a class="btn btn-info" asp-action="Create">Criar Circuito de Tanque</a>
 </div>
 <div class="col-md-9">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CodigoCircuito)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataCriacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataFinal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                item.dateFinal = item.DataFinal.Year + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
-                item.dateCriacao = item.DataCriacao.Year + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CodigoCircuito)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.dateCriacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.dateFinal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-pencil"></span></a> |
-                        <a asp-action="Details" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-trash"></span></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <ul class="nav nav-tabs" style="text-align: left;">
+        <li class="active"><a href="#circuitos" data-toggle="tab" id="first_tab"><b>Circuitos em Curso</b></a></li>
+        <li><a href="#arquivo" data-toggle="tab" id="second_tab"><b>Circuitos arquivados</b></a></li>
+    </ul>
+</div>
+<div class="col-md-9">
+    <div class="tab-content">
+        <div id="circuitos" class="tab-pane fade in active">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CodigoCircuito)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataCriacao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFinal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        item.dateFinal = item.DataFinal.Day + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
+                        item.dateCriacao = item.DataCriacao.Day + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
+                        if (item.isarchived == 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CodigoCircuito)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateCriacao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateFinal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-pencil"></span></a> |
+                                    <a asp-action="Details" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="arquivo" class="tab-pane fade in">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CodigoCircuito)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataCriacao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFinal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        item.dateFinal = item.DataFinal.Day + "/" + item.DataFinal.Month + "/" + item.DataFinal.Year;
+                        item.dateCriacao = item.DataCriacao.Day + "/" + item.DataCriacao.Month + "/" + item.DataCriacao.Year;
+                        if (item.isarchived == 1)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CodigoCircuito)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateCriacao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateFinal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a> 
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div class="col-md-3 col-md-push-1">
     <ul class="list-group">

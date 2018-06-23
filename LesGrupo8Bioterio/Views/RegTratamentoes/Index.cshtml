@@ -7,6 +7,7 @@
 <p>
     <a class="btn btn-info" asp-action="Create">Criar Registo</a>
 </p>
+<div class="col-md-10">
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +20,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Concentracao)
             </th>
-          
+
             <th>
                 @Html.DisplayNameFor(model => model.AgenteTratIdAgenTraNavigation)
             </th>
@@ -36,35 +37,46 @@
         @foreach (var item in Model)
         {
             item.data = item.Date.Day + "/" + item.Date.Month + "/" + item.Date.Year;
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tempo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Concentracao)
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.AgenteTratIdAgenTraNavigation.NomeAgenTra)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FinalidadeIdFinalidadeNavigation.TFinalidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-pencil"></span></a> |
-                    <a asp-action="Details" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
+            if (item.isarchived == 0)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tempo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Concentracao)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgenteTratIdAgenTraNavigation.NomeAgenTra)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinalidadeIdFinalidadeNavigation.TFinalidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdRegTra"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
-<div class="col-md-12 col-md-push-1">
+</div>
+<div class="col-md-2">
+
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Opções:</b></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="AgenteTrats" asp-action="Index">Agentes</a></li>
+    </ul>
+</div>
+<div class="col-md-12">
     <a type="button" class="btn btn-info pull-right" asp-controller="Tanques" asp-action="Index">Voltar Para Tanques</a>
 </div>

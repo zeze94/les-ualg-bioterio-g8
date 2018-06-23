@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2018 at 11:55 PM
+-- Generation Time: Jun 23, 2018 at 04:41 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `bd-les`
 --
-DROP DATABASE IF EXISTS `bd-les`;
 CREATE DATABASE IF NOT EXISTS `bd-les` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `bd-les`;
 
@@ -54,16 +53,18 @@ CREATE TABLE `circuito_tanque` (
   `Projeto_idProjeto` int(11) NOT NULL,
   `codigoCircuito` varchar(15) DEFAULT NULL,
   `dataCriacao` datetime NOT NULL,
-  `dataFinal` datetime NOT NULL
+  `dataFinal` datetime NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `circuito_tanque`
 --
 
-INSERT INTO `circuito_tanque` (`idCircuito`, `Projeto_idProjeto`, `codigoCircuito`, `dataCriacao`, `dataFinal`) VALUES
-(1, 1, '234234', '2018-05-21 00:00:00', '2018-05-21 00:00:00'),
-(2, 2, 'rsdfgsdfg', '2018-05-29 00:00:00', '2018-05-29 00:00:00');
+INSERT INTO `circuito_tanque` (`idCircuito`, `Projeto_idProjeto`, `codigoCircuito`, `dataCriacao`, `dataFinal`, `isarchived`) VALUES
+(1, 1, '234234', '2018-05-21 00:00:00', '2018-05-21 00:00:00', 1),
+(2, 2, 'rsdfgsdfg', '2018-05-29 00:00:00', '2018-05-29 00:00:00', 1),
+(3, 1, 'teste CT', '2018-06-23 00:00:00', '2018-06-30 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -127,16 +128,17 @@ CREATE TABLE `ensaio` (
   `grauSeveridade` int(11) NOT NULL,
   `Projeto_idProjeto` int(11) NOT NULL,
   `Lote_idLote` int(11) NOT NULL,
-  `membroEquipa_idEquipa` int(11) NOT NULL
+  `membroEquipa_idEquipa` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ensaio`
 --
 
-INSERT INTO `ensaio` (`idEnsaio`, `dataInicio`, `dataFim`, `descTratamento`, `grauSeveridade`, `Projeto_idProjeto`, `Lote_idLote`, `membroEquipa_idEquipa`) VALUES
-(1, '2018-05-09 00:00:00', '2018-05-09 00:00:00', '23424', 234243, 1, 1, 23423),
-(2, '2018-05-29 00:00:00', '2018-05-29 00:00:00', 'gfhfgh', 56, 1, 1, 0);
+INSERT INTO `ensaio` (`idEnsaio`, `dataInicio`, `dataFim`, `descTratamento`, `grauSeveridade`, `Projeto_idProjeto`, `Lote_idLote`, `membroEquipa_idEquipa`, `isarchived`) VALUES
+(1, '2018-05-09 00:00:00', '2018-05-09 00:00:00', '23424', 234243, 1, 1, 23423, 0),
+(2, '2018-05-29 00:00:00', '2018-05-29 00:00:00', 'gfhfgh', 56, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -360,16 +362,17 @@ CREATE TABLE `projeto` (
   `AutorizacaoDGVA` varchar(45) DEFAULT NULL,
   `RefORBEA` int(11) DEFAULT NULL,
   `SubmisInsEurop` tinyint(1) DEFAULT NULL,
-  `nroAnimaisAutoriz` int(11) DEFAULT NULL
+  `nroAnimaisAutoriz` int(11) DEFAULT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `projeto`
 --
 
-INSERT INTO `projeto` (`idProjeto`, `Nome`, `dataInicio`, `dataFim`, `AutorizacaoDGVA`, `RefORBEA`, `SubmisInsEurop`, `nroAnimaisAutoriz`) VALUES
-(1, 'teste pa meter pessoas', '2018-05-09', '2018-05-09', '1', 3, 1, 2),
-(2, 'outro projeto', '2018-05-09', '2018-05-09', 'asdfghjk', 1234567, 1, 12345678);
+INSERT INTO `projeto` (`idProjeto`, `Nome`, `dataInicio`, `dataFim`, `AutorizacaoDGVA`, `RefORBEA`, `SubmisInsEurop`, `nroAnimaisAutoriz`, `isarchived`) VALUES
+(1, 'teste pa meter pessoas', '2018-05-09', '2018-05-09', '1', 3, 1, 2, 0),
+(2, 'outro projeto', '2018-05-09', '2018-05-09', 'asdfghjk', 1234567, 1, 12345678, 0);
 
 -- --------------------------------------------------------
 
@@ -384,17 +387,18 @@ CREATE TABLE `reg_alimentar` (
   `Peso` float NOT NULL,
   `Sobras` float DEFAULT NULL,
   `Plano_Alimentar_idPlanAlim` int(11) NOT NULL,
-  `Tanque_idTanque` int(11) NOT NULL
+  `Tanque_idTanque` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_alimentar`
 --
 
-INSERT INTO `reg_alimentar` (`idRegAlim`, `data`, `Peso`, `Sobras`, `Plano_Alimentar_idPlanAlim`, `Tanque_idTanque`) VALUES
-(1, '2018-05-22 00:00:00', 1234, 123, 1, 1),
-(2, '2018-05-22 00:00:00', 12314, 124123, 1, 1),
-(3, '2018-05-22 00:00:00', 123123, 123123, 1, 1);
+INSERT INTO `reg_alimentar` (`idRegAlim`, `data`, `Peso`, `Sobras`, `Plano_Alimentar_idPlanAlim`, `Tanque_idTanque`, `isarchived`) VALUES
+(1, '2018-05-22 00:00:00', 1234, 123, 1, 1, 1),
+(2, '2018-05-22 00:00:00', 12314, 124123, 1, 1, 1),
+(3, '2018-05-22 00:00:00', 123123, 123123, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -409,15 +413,16 @@ CREATE TABLE `reg_amostragens` (
   `pesoMedio` float NOT NULL,
   `nroIndividuos` int(11) NOT NULL,
   `pesoTotal` float NOT NULL,
-  `Tanque_idTanque` int(11) NOT NULL
+  `Tanque_idTanque` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_amostragens`
 --
 
-INSERT INTO `reg_amostragens` (`idRegAmo`, `data`, `pesoMedio`, `nroIndividuos`, `pesoTotal`, `Tanque_idTanque`) VALUES
-(1, '2018-05-22 00:00:00', 123, 123, 123, 1);
+INSERT INTO `reg_amostragens` (`idRegAmo`, `data`, `pesoMedio`, `nroIndividuos`, `pesoTotal`, `Tanque_idTanque`, `isarchived`) VALUES
+(1, '2018-05-22 00:00:00', 123, 123, 123, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -433,15 +438,17 @@ CREATE TABLE `reg_cond_amb` (
   `volAgua` float DEFAULT NULL,
   `salinidadeAgua` float DEFAULT NULL,
   `nivelO2` float DEFAULT NULL,
-  `Circuito_Tanque_idCircuito` int(11) NOT NULL
+  `Circuito_Tanque_idCircuito` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_cond_amb`
 --
 
-INSERT INTO `reg_cond_amb` (`idRegCondAmb`, `data`, `temperatura`, `volAgua`, `salinidadeAgua`, `nivelO2`, `Circuito_Tanque_idCircuito`) VALUES
-(1, '2018-05-29 00:00:00', 12341200, 1234230, 234234, 234234, 1);
+INSERT INTO `reg_cond_amb` (`idRegCondAmb`, `data`, `temperatura`, `volAgua`, `salinidadeAgua`, `nivelO2`, `Circuito_Tanque_idCircuito`, `isarchived`) VALUES
+(1, '2018-05-29 00:00:00', 12341200, 1234230, 234234, 234234, 1, 1),
+(2, '2018-06-13 00:00:00', 123, 123, 123, 123, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -454,15 +461,17 @@ CREATE TABLE `reg_manutencao` (
   `idRegMan` int(11) NOT NULL,
   `data` datetime NOT NULL,
   `Tipo_Manuntecao_idT_Manutencao` int(11) NOT NULL,
-  `Tanque_idTanque` int(11) NOT NULL
+  `Tanque_idTanque` int(11) NOT NULL,
+  `isarchived` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_manutencao`
 --
 
-INSERT INTO `reg_manutencao` (`idRegMan`, `data`, `Tipo_Manuntecao_idT_Manutencao`, `Tanque_idTanque`) VALUES
-(2, '2018-05-22 00:00:00', 1, 1);
+INSERT INTO `reg_manutencao` (`idRegMan`, `data`, `Tipo_Manuntecao_idT_Manutencao`, `Tanque_idTanque`, `isarchived`) VALUES
+(2, '2018-05-22 00:00:00', 1, 1, 1),
+(3, '2018-06-23 00:00:00', 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -529,15 +538,16 @@ CREATE TABLE `reg_remocoes` (
   `nroRemoções` int(11) DEFAULT NULL,
   `Motivo_idMotivo` int(11) NOT NULL,
   `causaMorte` varchar(255) DEFAULT NULL,
-  `Tanque_idTanque` int(11) NOT NULL
+  `Tanque_idTanque` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_remocoes`
 --
 
-INSERT INTO `reg_remocoes` (`idRegRemo`, `date`, `nroRemoções`, `Motivo_idMotivo`, `causaMorte`, `Tanque_idTanque`) VALUES
-(1, '2018-05-22 00:00:00', 7578, 1, 'b', 1);
+INSERT INTO `reg_remocoes` (`idRegRemo`, `date`, `nroRemoções`, `Motivo_idMotivo`, `causaMorte`, `Tanque_idTanque`, `isarchived`) VALUES
+(1, '2018-05-22 00:00:00', 7578, 1, 'b', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -554,27 +564,17 @@ CREATE TABLE `reg_tratamento` (
   `Finalidade_idFinalidade` int(11) NOT NULL,
   `agente_Trat_idAgenTra` int(11) NOT NULL,
   `concAgenTra` int(11) DEFAULT NULL,
-  `Tanque_idTanque` int(11) NOT NULL
+  `Tanque_idTanque` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reg_tratamento`
 --
 
-INSERT INTO `reg_tratamento` (`idRegTra`, `date`, `Tempo`, `Concentracao`, `Finalidade_idFinalidade`, `agente_Trat_idAgenTra`, `concAgenTra`, `Tanque_idTanque`) VALUES
-(1, '2018-05-21 00:00:00', 60, 100, 1, 1, NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `t_origem`
---
-
-DROP TABLE IF EXISTS `t_origem`;
-CREATE TABLE `t_origem` (
-  `idT_Origem` int(11) NOT NULL,
-  `Descrição` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `reg_tratamento` (`idRegTra`, `date`, `Tempo`, `Concentracao`, `Finalidade_idFinalidade`, `agente_Trat_idAgenTra`, `concAgenTra`, `Tanque_idTanque`, `isarchived`) VALUES
+(1, '2018-05-21 00:00:00', 60, 100, 1, 1, NULL, 1, 1),
+(2, '2018-06-23 00:00:00', 123, 123, 1, 1, NULL, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -590,17 +590,31 @@ CREATE TABLE `tanque` (
   `sala` varchar(15) NOT NULL,
   `observacoes` varchar(45) DEFAULT NULL,
   `Lote_idLote` int(11) NOT NULL,
-  `Circuito_Tanque_idCircuito` int(11) NOT NULL
+  `Circuito_Tanque_idCircuito` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tanque`
 --
 
-INSERT INTO `tanque` (`idTanque`, `codidenttanque`, `nroAnimais`, `sala`, `observacoes`, `Lote_idLote`, `Circuito_Tanque_idCircuito`) VALUES
-(1, 'C4', 234234, '234223', '4234', 1, 1),
-(2, 'teste identificador 2', 123123, '123123', '123123', 1, 1),
-(3, 'TQ1', 21, 'werwer', 'werwer', 1, 1);
+INSERT INTO `tanque` (`idTanque`, `codidenttanque`, `nroAnimais`, `sala`, `observacoes`, `Lote_idLote`, `Circuito_Tanque_idCircuito`, `isarchived`) VALUES
+(1, 'C4', 234234, '234223', '4234', 1, 1, 1),
+(2, 'teste identificador 2', 123123, '123123', '123123', 1, 1, 1),
+(3, 'TQ1', 21, 'werwer', 'werwer', 1, 1, 1),
+(4, 'teste tq 2', 123, '123', 'sfsfsf sdfgsdg s', 1, 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipoestatutogenetico`
+--
+
+DROP TABLE IF EXISTS `tipoestatutogenetico`;
+CREATE TABLE `tipoestatutogenetico` (
+  `idTipoEstatutoGenetico` int(11) NOT NULL,
+  `TipoEstatutoGeneticocol` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -624,13 +638,13 @@ INSERT INTO `tipo_manuntecao` (`idT_Manutencao`, `T_Manutencao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipoestatutogenetico`
+-- Table structure for table `t_origem`
 --
 
-DROP TABLE IF EXISTS `tipoestatutogenetico`;
-CREATE TABLE `tipoestatutogenetico` (
-  `idTipoEstatutoGenetico` int(11) NOT NULL,
-  `TipoEstatutoGeneticocol` varchar(45) DEFAULT NULL
+DROP TABLE IF EXISTS `t_origem`;
+CREATE TABLE `t_origem` (
+  `idT_Origem` int(11) NOT NULL,
+  `Descrição` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -824,12 +838,6 @@ ALTER TABLE `reg_tratamento`
   ADD KEY `fk_Reg_Tratamento_Tanque1` (`Tanque_idTanque`);
 
 --
--- Indexes for table `t_origem`
---
-ALTER TABLE `t_origem`
-  ADD PRIMARY KEY (`idT_Origem`);
-
---
 -- Indexes for table `tanque`
 --
 ALTER TABLE `tanque`
@@ -838,16 +846,22 @@ ALTER TABLE `tanque`
   ADD KEY `fk_Tanque_Circuito_Tanque1_idx` (`Circuito_Tanque_idCircuito`);
 
 --
+-- Indexes for table `tipoestatutogenetico`
+--
+ALTER TABLE `tipoestatutogenetico`
+  ADD PRIMARY KEY (`idTipoEstatutoGenetico`);
+
+--
 -- Indexes for table `tipo_manuntecao`
 --
 ALTER TABLE `tipo_manuntecao`
   ADD PRIMARY KEY (`idT_Manutencao`);
 
 --
--- Indexes for table `tipoestatutogenetico`
+-- Indexes for table `t_origem`
 --
-ALTER TABLE `tipoestatutogenetico`
-  ADD PRIMARY KEY (`idTipoEstatutoGenetico`);
+ALTER TABLE `t_origem`
+  ADD PRIMARY KEY (`idT_Origem`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -862,7 +876,7 @@ ALTER TABLE `agente_trat`
 -- AUTO_INCREMENT for table `circuito_tanque`
 --
 ALTER TABLE `circuito_tanque`
-  MODIFY `idCircuito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCircuito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `elementoequipa`
 --
@@ -937,12 +951,12 @@ ALTER TABLE `reg_amostragens`
 -- AUTO_INCREMENT for table `reg_cond_amb`
 --
 ALTER TABLE `reg_cond_amb`
-  MODIFY `idRegCondAmb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idRegCondAmb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `reg_manutencao`
 --
 ALTER TABLE `reg_manutencao`
-  MODIFY `idRegMan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idRegMan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `reg_novos_animais`
 --
@@ -957,22 +971,22 @@ ALTER TABLE `reg_remocoes`
 -- AUTO_INCREMENT for table `reg_tratamento`
 --
 ALTER TABLE `reg_tratamento`
-  MODIFY `idRegTra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `t_origem`
---
-ALTER TABLE `t_origem`
-  MODIFY `idT_Origem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRegTra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tanque`
 --
 ALTER TABLE `tanque`
-  MODIFY `idTanque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTanque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tipo_manuntecao`
 --
 ALTER TABLE `tipo_manuntecao`
   MODIFY `idT_Manutencao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `t_origem`
+--
+ALTER TABLE `t_origem`
+  MODIFY `idT_Origem` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

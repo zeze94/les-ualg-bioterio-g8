@@ -51,10 +51,11 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: RegTratamentoes/Create
         public IActionResult Create()
         {
-            
+
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra");
             ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade");
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
+
             return View();
         }
 
@@ -73,7 +74,8 @@ namespace LesGrupo8Bioterio.Controllers
             }
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra", regTratamento.AgenteTratIdAgenTra);
             ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade", regTratamento.FinalidadeIdFinalidade);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "codidenttanque", regTratamento.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
+
             return View(regTratamento);
         }
 
@@ -86,13 +88,14 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var regTratamento = await _context.RegTratamento.SingleOrDefaultAsync(m => m.IdRegTra == id);
-            if (regTratamento == null)
+            if (regTratamento == null || regTratamento.isarchived == 1)
             {
                 return NotFound();
             }
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra", regTratamento.AgenteTratIdAgenTra);
             ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "TFinalidade", regTratamento.FinalidadeIdFinalidade);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regTratamento.TanqueIdTanque);
+           
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regTratamento.TanqueIdTanque);
             return View(regTratamento);
         }
 
@@ -103,7 +106,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdRegTra,Date,Tempo,Concentracao,FinalidadeIdFinalidade,AgenteTratIdAgenTra,ConcAgenTra,TanqueIdTanque")] RegTratamento regTratamento)
         {
-            if (id != regTratamento.IdRegTra)
+            if (id != regTratamento.IdRegTra || regTratamento.isarchived == 1)
             {
                 return NotFound();
             }
@@ -130,7 +133,8 @@ namespace LesGrupo8Bioterio.Controllers
             }
             ViewData["AgenteTratIdAgenTra"] = new SelectList(_context.AgenteTrat, "IdAgenTra", "NomeAgenTra", regTratamento.AgenteTratIdAgenTra);
             ViewData["FinalidadeIdFinalidade"] = new SelectList(_context.Finalidade, "IdFinalidade", "IdFinalidade", regTratamento.FinalidadeIdFinalidade);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regTratamento.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regTratamento.TanqueIdTanque);
+
             return View(regTratamento);
         }
 
@@ -148,7 +152,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegTra == id);
             regTratamento.data = regTratamento.Date.Day + "/" + regTratamento.Date.Month + "/" + regTratamento.Date.Year;
-            if (regTratamento == null)
+            if (regTratamento == null || regTratamento.isarchived == 1)
             {
                 return NotFound();
             }

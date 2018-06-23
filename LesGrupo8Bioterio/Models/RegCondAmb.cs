@@ -23,5 +23,6 @@ namespace LesGrupo8Bioterio
         [Display(Name = "Circuito Tanque")]
         public CircuitoTanque CircuitoTanqueIdCircuitoNavigation { get; set; }
         public string data;
+        public int isarchived { get; set; }
     }
 }

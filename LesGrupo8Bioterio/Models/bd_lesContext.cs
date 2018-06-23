@@ -95,6 +95,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasColumnName("Projeto_idProjeto")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.isarchived)
+                    .HasColumnName("isarchived")
+                    .HasColumnType("int(1)");
+
                 entity.HasOne(d => d.ProjetoIdProjetoNavigation)
                     .WithMany(p => p.CircuitoTanque)
                     .HasForeignKey(d => d.ProjetoIdProjeto)
@@ -245,6 +249,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.ProjetoIdProjeto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Ensaio_Projeto1");
+
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<Especie>(entity =>
@@ -606,6 +614,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.SubmisInsEurop).HasColumnType("tinyint(1)");
+
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<RegAlimentar>(entity =>
@@ -647,6 +659,9 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.TanqueIdTanque)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Alimentar_Tanque1");
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<RegAmostragens>(entity =>
@@ -683,6 +698,9 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.TanqueIdTanque)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Amostragens_Tanque1");
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<RegCondAmb>(entity =>
@@ -719,6 +737,9 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.CircuitoTanqueIdCircuito)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Cond_Amb_Circuito_Tanque1");
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<RegManutencao>(entity =>
@@ -760,6 +781,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.TipoManuntecaoIdTManutencao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Manutencao_Tipo_Manuntecao1");
+
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<RegNovosAnimais>(entity =>
@@ -972,6 +997,12 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.TanqueIdTanque)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Remocoes_Tanque1");
+
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
+
+                
             });
 
             modelBuilder.Entity<RegTratamento>(entity =>
@@ -1032,6 +1063,9 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.TanqueIdTanque)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Reg_Tratamento_Tanque1");
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<Tanque>(entity =>
@@ -1086,6 +1120,9 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.LoteIdLote)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Tanque_Lote1");
+                entity.Property(e => e.isarchived)
+                   .HasColumnName("isarchived")
+                   .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<Tipoestatutogenetico>(entity =>

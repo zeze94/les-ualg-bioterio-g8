@@ -81,8 +81,8 @@ namespace LesGrupo8Bioterio.Controllers
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
 
             circuitoTanque = setRelations(circuitoTanque, id);
-            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
-            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
+            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Day + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
+            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Day + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
 
             if (circuitoTanque == null)
             {
@@ -110,7 +110,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 ModelState.AddModelError("DataCriacao", string.Format("Data inicial não pode ser posterior á data inicial", circuitoTanque.DataCriacao));
             }
-            var cTfindany = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == circuitoTanque.ProjetoIdProjeto);
+            var cTfindany = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == circuitoTanque.ProjetoIdProjeto).Where(b => EF.Property<int>(b, "isarchived") == 0);
             if (cTfindany.Any())
             {
                 ModelState.AddModelError("ProjetoIdProjeto", string.Format("Este Projecto ja possui um Circuito Tanque Associado", circuitoTanque.ProjetoIdProjeto));
@@ -140,7 +140,7 @@ namespace LesGrupo8Bioterio.Controllers
 
             var circuitoTanque = await _context.CircuitoTanque.SingleOrDefaultAsync(m => m.IdCircuito == id);
 
-            if (circuitoTanque == null)
+            if (circuitoTanque == null || circuitoTanque.isarchived == 1)
             {
                 return NotFound();
             }
@@ -155,9 +155,23 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdCircuito,ProjetoIdProjeto,CodigoCircuito,DataCriacao,DataFinal")] CircuitoTanque circuitoTanque)
         {
-            if (id != circuitoTanque.IdCircuito)
+            if (id != circuitoTanque.IdCircuito || circuitoTanque.isarchived == 1)
             {
                 return NotFound();
+            }
+            if (circuitoTanque.DataCriacao > circuitoTanque.DataFinal)
+            {
+                ModelState.AddModelError("DataCriacao", string.Format("Data inicial não pode ser posterior á data inicial", circuitoTanque.DataCriacao));
+            }
+            var cTfindany = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == circuitoTanque.ProjetoIdProjeto).Where(b => EF.Property<int>(b, "isarchived") == 0).Where(b => EF.Property<int>(b, "IdCircuito") != circuitoTanque.IdCircuito);
+            if (cTfindany.Any())
+            {
+                ModelState.AddModelError("ProjetoIdProjeto", string.Format("Este Projecto ja possui um Circuito Tanque Associado", circuitoTanque.ProjetoIdProjeto));
+            }
+            var cTCodefindany = _context.CircuitoTanque.Where(b => EF.Property<string>(b, "CodigoCircuito").Equals(circuitoTanque.CodigoCircuito)).Where(b => EF.Property<int>(b, "IdCircuito") != circuitoTanque.IdCircuito);
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("CodigoCircuito", string.Format("Já Existe um circuito com este Código", circuitoTanque.CodigoCircuito));
             }
 
             if (ModelState.IsValid)
@@ -195,8 +209,8 @@ namespace LesGrupo8Bioterio.Controllers
             var circuitoTanque = await _context.CircuitoTanque
                 .Include(c => c.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdCircuito == id);
-            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Year + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
-            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Year + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
+            circuitoTanque.dateFinal = circuitoTanque.DataFinal.Day + "/" + circuitoTanque.DataFinal.Month + "/" + circuitoTanque.DataFinal.Year;
+            circuitoTanque.dateCriacao = circuitoTanque.DataCriacao.Day + "/" + circuitoTanque.DataCriacao.Month + "/" + circuitoTanque.DataCriacao.Year;
             circuitoTanque = setRelations(circuitoTanque, circuitoTanque.IdCircuito);
            
             
@@ -225,32 +239,39 @@ namespace LesGrupo8Bioterio.Controllers
                 var regAli = _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
                 foreach (var regRemocao in regRemocoes)
                 {
-
-                    _context.RegRemocoes.Remove(regRemocao);
+                    regRemocao.isarchived = 1;
+                    _context.RegRemocoes.Update(regRemocao);
                 }
                 foreach (var regAmostragem in regAmostragens)
                 {
-                    _context.RegAmostragens.Remove(regAmostragem);
+                    regAmostragem.isarchived = 1;
+                    _context.RegAmostragens.Update(regAmostragem);
                 }
                 foreach (var regManutencao in regManu)
                 {
-                    _context.RegManutencao.Remove(regManutencao);
+                    regManutencao.isarchived = 1;
+                    _context.RegManutencao.Update(regManutencao);
                 }
                 foreach (var regTratamento in regTrat)
                 {
-                    _context.RegTratamento.Remove(regTratamento);
+                    regTratamento.isarchived = 1;
+                    _context.RegTratamento.Update(regTratamento);
                 }
                 foreach (var regAlimentacao in regAli)
                 {
-                    _context.RegAlimentar.Remove(regAlimentacao);
+                    regAlimentacao.isarchived = 1;
+                    _context.RegAlimentar.Update(regAlimentacao);
                 }
-                _context.Tanque.Remove(tanque);
+                tanque.isarchived = 1;
+                _context.Tanque.Update(tanque);
             }
             foreach (var condAmb in regCondAmb)
             {
-                _context.RegCondAmb.Remove(condAmb);
+                condAmb.isarchived = 1;
+                _context.RegCondAmb.Update(condAmb);
             }
-            _context.CircuitoTanque.Remove(circuitoTanque);
+            circuitoTanque.isarchived = 1;
+            _context.CircuitoTanque.Update(circuitoTanque);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

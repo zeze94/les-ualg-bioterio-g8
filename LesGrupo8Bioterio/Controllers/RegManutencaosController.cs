@@ -42,6 +42,8 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
+            regManutencao.data = regManutencao.Data.Day + "/" + regManutencao.Data.Month + "/" + regManutencao.Data.Year;
+
 
             return View(regManutencao);
         }
@@ -49,8 +51,9 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: RegManutencaos/Create
         public IActionResult Create()
         {
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
-            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "IdTManutencao");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
+
+            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "TManutencao");
             return View();
         }
 
@@ -67,8 +70,9 @@ namespace LesGrupo8Bioterio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regManutencao.TanqueIdTanque);
-            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "IdTManutencao", regManutencao.TipoManuntecaoIdTManutencao);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
+
+            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "TManutencao");
             return View(regManutencao);
         }
 
@@ -81,12 +85,13 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var regManutencao = await _context.RegManutencao.SingleOrDefaultAsync(m => m.IdRegMan == id);
-            if (regManutencao == null)
+            if (regManutencao == null || regManutencao.isarchived == 1)
             {
                 return NotFound();
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regManutencao.TanqueIdTanque);
-            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "IdTManutencao", regManutencao.TipoManuntecaoIdTManutencao);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regManutencao.TanqueIdTanque);
+
+            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "TManutencao", regManutencao.TipoManuntecaoIdTManutencao);
             return View(regManutencao);
         }
 
@@ -97,7 +102,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdRegMan,Data,TipoManuntecaoIdTManutencao,TanqueIdTanque")] RegManutencao regManutencao)
         {
-            if (id != regManutencao.IdRegMan)
+            if (id != regManutencao.IdRegMan || regManutencao.isarchived == 1)
             {
                 return NotFound();
             }
@@ -122,8 +127,9 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regManutencao.TanqueIdTanque);
-            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "IdTManutencao", regManutencao.TipoManuntecaoIdTManutencao);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regManutencao.TanqueIdTanque);
+
+            ViewData["TipoManuntecaoIdTManutencao"] = new SelectList(_context.TipoManuntecao, "IdTManutencao", "TManutencao", regManutencao.TipoManuntecaoIdTManutencao);
             return View(regManutencao);
         }
 
@@ -139,10 +145,11 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .Include(r => r.TipoManuntecaoIdTManutencaoNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegMan == id);
-            if (regManutencao == null)
+            if (regManutencao == null || regManutencao.isarchived == 1)
             {
                 return NotFound();
             }
+            regManutencao.data = regManutencao.Data.Day + "/" + regManutencao.Data.Month + "/" + regManutencao.Data.Year;
 
             return View(regManutencao);
         }

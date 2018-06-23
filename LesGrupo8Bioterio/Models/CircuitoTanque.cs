@@ -25,10 +25,13 @@ namespace LesGrupo8Bioterio
         [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Identificador")]
         public string CodigoCircuito { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Data de Criação")]
         public DateTime DataCriacao { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Data Final")]
         public DateTime DataFinal { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
         [Display(Name = "Condição Ambiental")]
@@ -44,6 +47,8 @@ namespace LesGrupo8Bioterio
         public RegCondAmb dummyCondAmb;
 
         public Boolean isDeletable;
+
+        public int isarchived { get; set; }
 
     }
 }

@@ -42,5 +42,6 @@ namespace LesGrupo8Bioterio
         public ICollection<CircuitoTanque> CircuitoTanque { get; set; }
         public ICollection<Elementoequipa> Elementoequipa { get; set; }
         public ICollection<Ensaio> Ensaio { get; set; }
+        public int isarchived { get; set; }
     }
 }

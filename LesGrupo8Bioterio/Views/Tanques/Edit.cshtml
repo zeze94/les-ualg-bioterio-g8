@@ -14,16 +14,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdTanque" />
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Codigo de Identificação" data-content="Codigo pelo qual o Tanque é Identificado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="codidenttanque" class="control-label"></label>
                 <input asp-for="codidenttanque" class="form-control" />
                 <span asp-validation-for="codidenttanque" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Numero de Animais" data-content="Quantidade de Animáis presentes no Tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="NroAnimais" class="control-label"></label>
                 <input asp-for="NroAnimais" class="form-control" />
                 <span asp-validation-for="NroAnimais" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Sala" data-content="Espaço fisico onde se situa o Tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Sala" class="control-label"></label>
                 <input asp-for="Sala" class="form-control" />
                 <span asp-validation-for="Sala" class="text-danger"></span>
@@ -39,7 +42,7 @@
                 <span asp-validation-for="LoteIdLote" class="text-danger"></span>
             </div>
             <div class="form-group">
-
+                <a href="#" data-toggle="popover" title="Circuito" data-content="Circuito de Tanques a qual pertence o Tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="CircuitoTanqueIdCircuito" class="control-label"></label>
                 <select asp-for="CircuitoTanqueIdCircuito" class="form-control" asp-items="ViewBag.CircuitoTanqueIdCircuito"></select>
                 <span asp-validation-for="CircuitoTanqueIdCircuito" class="text-danger"></span>
@@ -51,7 +54,11 @@
         </form>
     </div>
 </div>
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

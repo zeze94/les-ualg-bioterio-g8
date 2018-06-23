@@ -77,7 +77,8 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: Tanques/Create
         public IActionResult Create()
         {
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito");
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito");
+
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote");
             return View();
         }
@@ -101,8 +102,10 @@ namespace LesGrupo8Bioterio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
-            ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
+          
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito");
+ 
+             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
 
@@ -115,11 +118,12 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var tanque = await _context.Tanque.SingleOrDefaultAsync(m => m.IdTanque == id);
-            if (tanque == null)
+            if (tanque == null || tanque.isarchived == 1)
             {
                 return NotFound();
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
+
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
@@ -131,7 +135,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdTanque,codidenttanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
         {
-            if (id != tanque.IdTanque)
+            if (id != tanque.IdTanque || tanque.isarchived == 1)
             {
                 return NotFound();
             }
@@ -156,7 +160,8 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
+
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito", tanque.CircuitoTanqueIdCircuito);
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", tanque.LoteIdLote);
             return View(tanque);
         }
@@ -174,7 +179,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(t => t.LoteIdLoteNavigation)
                 .SingleOrDefaultAsync(m => m.IdTanque == id);
             tanque = setRelations(tanque, tanque.IdTanque);
-            if (tanque == null)
+            if (tanque == null || tanque.isarchived == 1)
             {
                 return NotFound();
             }
@@ -196,27 +201,31 @@ namespace LesGrupo8Bioterio.Controllers
             var regAli =  _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == id);
             foreach (var regRemocao in regRemocoes)
             {
-               
-                _context.RegRemocoes.Remove(regRemocao);
+                regRemocao.isarchived = 1;
+                _context.RegRemocoes.Update(regRemocao);
             }
             foreach (var regAmostragem in regAmostragens)
             {
-                _context.RegAmostragens.Remove(regAmostragem);
+                regAmostragem.isarchived = 1;
+                _context.RegAmostragens.Update(regAmostragem);
             }
             foreach (var regManutencao in regManu)
             {
-                _context.RegManutencao.Remove(regManutencao);
+                regManutencao.isarchived = 1;
+                _context.RegManutencao.Update(regManutencao);
             }
             foreach (var regTratamento in regTrat)
             {
-                _context.RegTratamento.Remove(regTratamento);
+                regTratamento.isarchived = 1;
+                _context.RegTratamento.Update(regTratamento);
             }
             foreach (var regAlimentacao in regAli)
             {
-                _context.RegAlimentar.Remove(regAlimentacao);
+                regAlimentacao.isarchived = 1;
+                _context.RegAlimentar.Update(regAlimentacao);
             }
-           
-            _context.Tanque.Remove(tanque);
+            tanque.isarchived = 1;
+            _context.Tanque.Update(tanque);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

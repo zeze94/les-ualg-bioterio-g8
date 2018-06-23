@@ -3,6 +3,15 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@if (Model.isarchived == 1)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Este Circuito encontra-se <b>Arquivado</b> </li>
+        </ul>
+    </h3>
+}
 <div class="col-md-12">
     <div class="col-md-4">
         <h2>Detalhes do Circuito</h2>
@@ -121,7 +130,7 @@
                         <tbody>
                             @foreach (var regCond in Model.regCondAmb)
                             {
-                                regCond.data = regCond.Data.Year + "/" + regCond.Data.Month + "/" + regCond.Data.Year;
+                                regCond.data = regCond.Data.Day + "/" + regCond.Data.Month + "/" + regCond.Data.Year;
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => regCond.data)
@@ -148,11 +157,11 @@
         </div>
     </div>
     <div class="form-group">
+        @if(Model.isarchived == 0){
         <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdCircuito">Editar</a>
-        @if (Model.isDeletable)
-        {
+       
             <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Eliminar</a>
-        }
+         }
         <a class="btn btn-info" asp-action="Index">Cancelar</a>
     </div>
 </div>

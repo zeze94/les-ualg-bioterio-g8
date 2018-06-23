@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>RegManutencao</h4>
-    <hr />
+<div class="col-md-12">
+    <h2>Detalhes da Manutenção</h2>
+</div>
+<div class="col-md-4">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Data)
@@ -27,11 +26,13 @@
             @Html.DisplayNameFor(model => model.TipoManuntecaoIdTManutencaoNavigation)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TipoManuntecaoIdTManutencaoNavigation.IdTManutencao)
+            @Html.DisplayFor(model => model.TipoManuntecaoIdTManutencaoNavigation.TManutencao)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdRegMan">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <div class="form-group">
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdRegMan">Editar</a>
+        <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdRegMan">Eliminar</a>
+        <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+    </div>
 </div>

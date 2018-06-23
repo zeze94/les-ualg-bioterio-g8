@@ -70,6 +70,7 @@ namespace LesGrupo8Bioterio
         public RegRemocoes dummyRemocoes;
 
         public Boolean isDeletable;
+        public int isarchived { get; set; }
 
     }
 }

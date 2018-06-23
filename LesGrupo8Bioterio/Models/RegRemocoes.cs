@@ -23,5 +23,6 @@ namespace LesGrupo8Bioterio
         [Display(Name = "Tanque")]
         public Tanque TanqueIdTanqueNavigation { get; set; }
         public string data;
+        public int isarchived { get; set; }
     }
 }

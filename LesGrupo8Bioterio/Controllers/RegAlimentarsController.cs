@@ -42,7 +42,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            regAlimentar.data = regAlimentar.Data.Year + "/" + regAlimentar.Data.Month + "/" + regAlimentar.Data.Year;
+            regAlimentar.data = regAlimentar.Data.Day + "/" + regAlimentar.Data.Month + "/" + regAlimentar.Data.Year;
             return View(regAlimentar);
         }
 
@@ -143,7 +143,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            regAlimentar.data = regAlimentar.Data.Year + "/" + regAlimentar.Data.Month + "/" + regAlimentar.Data.Year;
+            regAlimentar.data = regAlimentar.Data.Day + "/" + regAlimentar.Data.Month + "/" + regAlimentar.Data.Year;
             return View(regAlimentar);
         }
 

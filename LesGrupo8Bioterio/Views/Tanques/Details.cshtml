@@ -6,6 +6,15 @@
 
 }
 
+@if (Model.isarchived == 1)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Este Tanque encontra-se <b>Arquivado</b> </li>
+        </ul>
+    </h3>
+}
+
 <div class="col-md-12">
     <div class="col-md-4">
         <h2>Detalhes do Tanque</h2>
@@ -137,7 +146,7 @@
                         <tbody>
                             @foreach (var aliment in Model.regAlimentar)
                             {
-                                aliment.data = aliment.Data.Year + "/" + aliment.Data.Month + "/" + aliment.Data.Year;
+                                aliment.data = aliment.Data.Day + "/" + aliment.Data.Month + "/" + aliment.Data.Year;
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => aliment.data)
@@ -171,7 +180,7 @@
                         <tbody>
                             @foreach (var manutencao in Model.regManutencao)
                             {
-                                manutencao.data = manutencao.Data.Year + "/" + manutencao.Data.Month + "/" + manutencao.Data.Year;
+                                manutencao.data = manutencao.Data.Day + "/" + manutencao.Data.Month + "/" + manutencao.Data.Year;
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => manutencao.data)
@@ -205,7 +214,7 @@
                         <tbody>
                             @foreach (var remocao in Model.regRemocoes)
                             {
-                                remocao.data = remocao.Date.Year + "/" + remocao.Date.Month + "/" + remocao.Date.Year;
+                                remocao.data = remocao.Date.Day + "/" + remocao.Date.Month + "/" + remocao.Date.Year;
 
                                 <tr>
                                     <td>
@@ -246,7 +255,7 @@
                         <tbody>
                             @foreach (var amostragem in Model.regAmostragem)
                             {
-                                amostragem.data = amostragem.Data.Year + "/" + amostragem.Data.Month + "/" + amostragem.Data.Year;
+                                amostragem.data = amostragem.Data.Day + "/" + amostragem.Data.Month + "/" + amostragem.Data.Year;
 
                                 <tr>
                                     <td>
@@ -270,9 +279,9 @@
         </div>
     </div>
     <div class="col-md-12 form-group">
+      @if(Model.isarchived==0){
         <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdTanque">Editar</a>
-        @if (Model.isDeletable)
-        {
+          
             <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdTanque">Eliminar</a>
         }
         <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
