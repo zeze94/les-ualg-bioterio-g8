@@ -3,7 +3,15 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Details</h2>
+
+@if (Model.isarchived == 1)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Este Projeto encontra-se <b>Arquivado</b> </li>
+        </ul>
+    </h3>
+}
 <div class="col-lg-12">
     <h4>Projeto</h4>
     <hr />
@@ -19,13 +27,13 @@
                 @Html.DisplayNameFor(model => model.DataInicio)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.DataInicio)
+                @Html.DisplayFor(model => model.data)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.DataFim)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.DataFim)
+                @Html.DisplayFor(model => model.data2)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.AutorizacaoDgva)
@@ -43,7 +51,7 @@
                 @Html.DisplayNameFor(model => model.SubmisInsEurop)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.SubmisInsEurop)
+                @Html.DisplayFor(model => model.auto_Euro)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
@@ -51,26 +59,19 @@
             <dd>
                 @Html.DisplayFor(model => model.NroAnimaisAutoriz)
             </dd>
-
         </dl>
 
-
     </div>
-
-
 
     <div class="col-md-6">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#ensaios" id="ensaios_tab">Ensaios</a></li>
             <li><a data-toggle="tab" href="#membros" id="membros_tab">Membros</a></li>
-            <li><a data-toggle="tab" href="#circuito" id="circuito_tab">Circuito</a></li>
+            <li><a data-toggle="tab" href="#Circuitos" id="circuito_tab">Circuito</a></li>
         </ul>
-
         <div class="tab-content">
             <div id="ensaios" class="tab-pane fade in active">
-
-              @* <a type="button" class="btn btn-success" asp-controller="Ensaios" asp-action="Create" asp-route-id="@Model.IdProjeto">Registar Ensaio </a>*@
-
+                @* <a type="button" class="btn btn-success" asp-controller="Ensaios" asp-action="Create" asp-route-id="@Model.IdProjeto">Registar Ensaio </a>*@
                 @if (Model.objetoEN != null)
                 {
                     <table class="table">
@@ -88,25 +89,23 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.dummyEnsaio.GrauSeveridade)
                                 </th>
-
                                 <th>
                                     @Html.DisplayNameFor(model => model.dummyEnsaio.LoteIdLoteNavigation)
                                 </th>
-
                                 <th></th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach (var item in Model.objetoEN)
                             {
+                                item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
+                                item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
                                 <tr>
-
                                     <td>
-                                        @Html.DisplayFor(modell => item.DataInicio)
+                                        @Html.DisplayFor(modell => item.data)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modell => item.DataFim)
+                                        @Html.DisplayFor(modell => item.data2)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modell => item.DescTratamento)
@@ -118,16 +117,13 @@
                                         @Html.DisplayFor(modell => item.LoteIdLoteNavigation.CodigoLote)
                                     </td>
 
-
                                 </tr>
                             }
                         </tbody>
                     </table>
                 }
             </div>
-
             <div id="membros" class="tab-pane fade">
-
                 @if (Model.objetoEE != null)
                 {
 
@@ -140,7 +136,6 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.dummyEE.Função)
                                 </th>
-
                                 <th></th>
                             </tr>
                         </thead>
@@ -155,45 +150,53 @@
                                         @Html.DisplayFor(modelItem => item.Função)
                                     </td>
 
-
                                 </tr>
                             }
                         </tbody>
                     </table>
                 }
             </div>
-
-            <div id="circuito" class="tab-pane fade">
-                <h3>Circuito</h3>
-                @if (Model.objetoCT != null)
+            <div id="Circuitos" class="tab-pane fade">
+               
+                @if (Model.CircuitoQuery != null)
                 {
-                    <h4>Circuito Associado:</h4>
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.objetoCT.CodigoCircuito)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.objetoCT.CodigoCircuito)
-                            <a asp-controller="CircuitoTanques" asp-action="Details" asp-route-id="@Model.objetoCT.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a>
-                        </dd>
-
-                    </dl>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Codigo Circuito
+                                </th>
+                            </tr>
+                           
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CircuitoQuery)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => item.CodigoCircuito)
+                                        @*<a asp-controller="CircuitoTanques" asp-action="Details" asp-route-id="@Model.CircuitoQuery.IdCircuito"><span class="glyphicon glyphicon-eye-open"></span></a>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 }
                 else
                 {
                     <h4>Nenhum Circuito Associado</h4>
                 }
             </div>
-
         </div>
     </div>
 
-
-
 </div>
 <div>
-    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdProjeto">Editar</a>
+    @if (Model.isarchived == 0)
+    {
+    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdProjeto">Editar</a>}
     <a type="button" class="btn btn-primary" asp-action="Index">Back to List</a>
-    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdProjeto">Apagar Projeto</a>
+    @if(Model.isarchived == 0){
+    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdProjeto">Arquivar Projeto</a>}
 </div>
 </div>

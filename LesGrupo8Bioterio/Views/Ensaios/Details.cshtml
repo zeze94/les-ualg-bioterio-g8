@@ -1,12 +1,16 @@
 ﻿@model LesGrupo8Bioterio.Ensaio
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+@if (Model.isarchived == 1)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Este Ensaio encontra-se <b>Arquivado</b> </li>
+        </ul>
+    </h3>
+}
 <div>
     <h4>Ensaio</h4>
     <hr />
@@ -15,16 +19,16 @@
             @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataInicio)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DataFim)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataFim)
+            @Html.DisplayFor(model => model.data2)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DescTratamento)
+            @*@Html.DisplayNameFor(model => model.DescTratamento)*@Descrição do Ensaio
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DescTratamento)
@@ -35,8 +39,8 @@
         <dd>
             @Html.DisplayFor(model => model.GrauSeveridade)
         </dd>
-       
-        
+
+
         <dt>
             @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
         </dt>
@@ -52,7 +56,11 @@
     </dl>
 </div>
 <div>
-    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdEnsaio">Edit</a>
+    @if (Model.isarchived == 0)
+    {
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdEnsaio">Edit</a>}
     <a type="button" class="btn btn-primary" asp-action="Index">Back to List</a>
-    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdEnsaio">Apagar Ensaio</a>
-</div>
+    @if (Model.isarchived == 0)
+    {
+        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdEnsaio">Apagar Ensaio</a>}
+    </div>

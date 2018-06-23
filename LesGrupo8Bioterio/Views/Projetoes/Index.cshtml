@@ -1,87 +1,182 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.Projeto>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>Projetos</h2>
+<div class="form-group">
+    <a class="btn btn-info" asp-action="Create">Criar novo</a>
+</div>
+<div class="col-md-10">
+    <ul class="nav nav-tabs" style="text-align: left;">
+        <li class="active"><a href="#projeto" data-toggle="tab" id="first_tab"><b>Projetos em Curso</b></a></li>
+        <li><a href="#arquivo" data-toggle="tab" id="second_tab"><b>Projetos arquivados</b></a></li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <div class="tab-content">
+        <div id="projeto" class="tab-pane fade in active">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AutorizacaoDgva)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RefOrbea)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SubmisInsEurop)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
+                        item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
+                        if (item.SubmisInsEurop.Equals(true))
+                        {
+                            item.auto_Euro = "Sim";
 
-<h2>Index</h2>
+                        }
+                        else
+                        {
+                            item.auto_Euro = "Não";
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div class="col-md-10" >
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataFim)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AutorizacaoDgva)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RefOrbea)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SubmisInsEurop)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataInicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataFim)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RefOrbea)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SubmisInsEurop)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-pencil"></span></a> 
-                        <a asp-action="Details" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-eye-open"></span></a> 
-                        <a asp-action="Delete" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-trash"></span></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        }
+                        if (item.isarchived == 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RefOrbea)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.auto_Euro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a asp-action="Details" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="arquivo" class="tab-pane fade in active">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AutorizacaoDgva)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RefOrbea)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SubmisInsEurop)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
+                        item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
+                        if (item.SubmisInsEurop.Equals(true))
+                        {
+                            item.auto_Euro = "Sim";
+
+                        }
+                        else
+                        {
+                            item.auto_Euro = "Não";
+
+                        }
+                        if (item.isarchived == 1)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AutorizacaoDgva)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RefOrbea)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.auto_Euro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NroAnimaisAutoriz)
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.IdProjeto"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-md-2">
+</div>
+<div class="col-md-2">
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Navegador</b></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Circuitos" asp-action="Index">CircuitosTanque</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Ensaios" asp-action="Index">Ensaios</a></li>
+    </ul>
+</div>
 
-        <ul class="list-group">
-            <li class="list-group-item active"><b>Navegador</b></li>
-            <li class="list-group-item"><a asp-area="" asp-controller="Circuitos" asp-action="Index">CircuitosTanque</a></li>
-            <li class="list-group-item"><a asp-area="" asp-controller="Ensaios" asp-action="Index">Ensaios</a></li>
-
-        </ul>
-    </div>
-
-    

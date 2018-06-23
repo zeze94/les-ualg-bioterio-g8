@@ -34,14 +34,24 @@ namespace LesGrupo8Bioterio
         public Boolean? SubmisInsEurop { get; set; }
         [Display(Name = "Nº de Animais Autorizados")]
         public int? NroAnimaisAutoriz { get; set; }
+
         public CircuitoTanque objetoCT;
+
         public IQueryable<Ensaio> objetoEN;
         public IQueryable<Elementoequipa> objetoEE;
+        public IQueryable<CircuitoTanque> CircuitoQuery;
+        
         public Elementoequipa dummyEE;
         public Ensaio dummyEnsaio;
+
         public ICollection<CircuitoTanque> CircuitoTanque { get; set; }
         public ICollection<Elementoequipa> Elementoequipa { get; set; }
         public ICollection<Ensaio> Ensaio { get; set; }
+
         public int isarchived { get; set; }
+        public string data;
+        public string data2;
+        public string auto_Euro;
+        public Boolean deletable;
     }
 }

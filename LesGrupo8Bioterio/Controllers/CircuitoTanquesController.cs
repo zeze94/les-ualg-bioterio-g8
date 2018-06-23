@@ -95,7 +95,7 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: CircuitoTanques/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome");
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome");
             return View();
         }
 
@@ -126,7 +126,7 @@ namespace LesGrupo8Bioterio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(c => c.isarchived == 0), "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
             return View(circuitoTanque);
         }
 
@@ -144,7 +144,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(c => c.isarchived == 0), "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
             return View(circuitoTanque);
         }
 
@@ -194,7 +194,7 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p=> p.isarchived == 0), "IdProjeto", "Nome", circuitoTanque.ProjetoIdProjeto);
             return View(circuitoTanque);
         }
 

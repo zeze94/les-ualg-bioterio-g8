@@ -31,7 +31,6 @@ namespace LesGrupo8Bioterio
         [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Data Final")]
         public DateTime DataFinal { get; set; }
-        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
         [Display(Name = "Condição Ambiental")]

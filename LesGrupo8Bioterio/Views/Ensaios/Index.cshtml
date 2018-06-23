@@ -1,68 +1,149 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.Ensaio>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Index</h2>
+<div class="form-group">
+    <a class="btn btn-info" asp-action="Create">Criar Ensaio</a>
+</div>
+<div class="col-md-9">
+    <ul class="nav nav-tabs" style="text-align: left;">
+        <li class="active"><a href="#ensaios" data-toggle="tab" id="first_tab"><b>Ensaios Ativos</b></a></li>
+        <li><a href="#arquivo" data-toggle="tab" id="second_tab"><b>Ensaios arquivados</b></a></li>
+    </ul>
+</div>
+<div class="col-md-9">
+    <div class="tab-content">
+        <div id="ensaios" class="tab-pane fade in active">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.DescTratamento)*@Descrição do Ensaio
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GrauSeveridade)
+                        </th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataFim)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescTratamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GrauSeveridade)
-                </th>
-                
-            <th>
-                @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescTratamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrauSeveridade)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.isarchived == 0)
+                        {
+                            item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
+                            item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DescTratamento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GrauSeveridade)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-pencil"></span></a> |
+                                    <a asp-action="Details" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="arquivo" class="tab-pane fade in active">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataFim)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.DescTratamento)*@Descrição do Ensaio
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GrauSeveridade)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.isarchived == 1)
+                        {
+                            item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
+                            item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.data2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DescTratamento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GrauSeveridade)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                                </td>
+                                <td>
+                                    
+                                    <a asp-action="Details" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-eye-open"></span></a> 
+                                  
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

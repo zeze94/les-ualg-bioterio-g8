@@ -43,6 +43,8 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+            ensaio.data = ensaio.DataInicio.Day + "/" + ensaio.DataInicio.Month + "/" + ensaio.DataInicio.Year;
+            ensaio.data2 = ensaio.DataFim.Day + "/" + ensaio.DataFim.Month + "/" + ensaio.DataFim.Year;
             return View(ensaio);
         }
 
@@ -51,7 +53,7 @@ namespace LesGrupo8Bioterio.Controllers
         {
            
                 ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote");
-                ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome");
+                ViewData["ProjetoIdProjeto"] = new SelectList( _context.Projeto.Where( p => p.isarchived == 0), "IdProjeto", "Nome");
             
             return View();
         }
@@ -157,6 +159,8 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+            ensaio.data = ensaio.DataInicio.Day + "/" + ensaio.DataInicio.Month + "/" + ensaio.DataInicio.Year;
+            ensaio.data2 = ensaio.DataFim.Day + "/" + ensaio.DataFim.Month + "/" + ensaio.DataFim.Year;
             return View(ensaio);
         }
 

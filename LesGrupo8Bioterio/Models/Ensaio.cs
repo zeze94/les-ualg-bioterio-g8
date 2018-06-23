@@ -24,6 +24,9 @@ namespace LesGrupo8Bioterio
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
         public Projeto Selected;
+        public string data;
+        public string data2;
+       
         public int isarchived { get; set; }
     }
 }

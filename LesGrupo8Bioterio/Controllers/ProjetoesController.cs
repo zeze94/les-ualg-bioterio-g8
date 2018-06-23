@@ -19,10 +19,34 @@ namespace LesGrupo8Bioterio.Controllers
             _context = context;
         }
 
+
+
         // GET: Projetoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Projeto.ToListAsync());
+        }
+
+        private Projeto SetRelations(Projeto projeto, int? id)
+        {
+
+            var ensaios = _context.Ensaio.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+            var elementoequipa = _context.Elementoequipa.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+            var circuitotanque = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
+
+            projeto.objetoEN = ensaios;
+            projeto.CircuitoQuery = circuitotanque;
+            projeto.objetoEE = elementoequipa;
+
+            if (projeto.objetoEN.Any() || projeto.objetoEE.Any() || circuitotanque.Any())
+            {
+                projeto.deletable = false;
+            }
+            else
+            {
+                projeto.deletable = true;
+            }
+            return projeto;
         }
 
         // GET: Projetoes/Details/5
@@ -36,8 +60,8 @@ namespace LesGrupo8Bioterio.Controllers
             var projeto = await _context.Projeto
                 .SingleOrDefaultAsync(m => m.IdProjeto == id);
             
-            var circuito = await _context.CircuitoTanque
-                .SingleOrDefaultAsync(m => m.ProjetoIdProjeto == id);
+            var circuito =  _context.CircuitoTanque
+                .Include(e => e.ProjetoIdProjetoNavigation).Where(m => m.ProjetoIdProjeto == id);
 
             var ensaio = _context.Ensaio.Include(e => e.LoteIdLoteNavigation).Where(m => m.ProjetoIdProjeto == id);
 
@@ -52,11 +76,23 @@ namespace LesGrupo8Bioterio.Controllers
             }
             if (circuito != null)
             {
-                projeto.objetoCT = circuito;
+                projeto.CircuitoQuery = circuito;
             }
             if (projeto == null)
             {
                 return NotFound();
+            }
+
+            projeto.data = projeto.DataInicio.Day + "/" + projeto.DataInicio.Month + "/" + projeto.DataInicio.Year;
+            projeto.data2 = projeto.DataFim.Day + "/" + projeto.DataFim.Month + "/" + projeto.DataFim.Year;
+            if (projeto.SubmisInsEurop.Equals(true))
+            {
+                projeto.auto_Euro = "Sim";
+
+            }
+            else
+            {
+                projeto.auto_Euro = "Não";
             }
 
             return View(projeto);
@@ -100,10 +136,12 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var projeto = await _context.Projeto.SingleOrDefaultAsync(m => m.IdProjeto == id);
-            if (projeto == null)
+
+            if (projeto == null || projeto.isarchived == 1)
             {
                 return NotFound();
             }
+
             return View(projeto);
         }
 
@@ -114,7 +152,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdProjeto,Nome,DataInicio,DataFim,AutorizacaoDgva,RefOrbea,SubmisInsEurop,NroAnimaisAutoriz")] Projeto projeto)
         {
-            if (id != projeto.IdProjeto)
+            if (id != projeto.IdProjeto || projeto.isarchived == 1)
             {
                 return NotFound();
             }
@@ -161,6 +199,19 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+            projeto = SetRelations(projeto, projeto.IdProjeto);
+            projeto.data = projeto.DataInicio.Day + "/" + projeto.DataInicio.Month + "/" + projeto.DataInicio.Year;
+            projeto.data2 = projeto.DataFim.Day + "/" + projeto.DataFim.Month + "/" + projeto.DataFim.Year;
+            if (projeto.SubmisInsEurop.Equals(true))
+            {
+                projeto.auto_Euro = "Sim";
+
+            }
+            else
+            {
+                projeto.auto_Euro = "Não";
+            }
+
             return View(projeto);
         }
 
@@ -173,22 +224,72 @@ namespace LesGrupo8Bioterio.Controllers
             var ensaios = _context.Ensaio.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
             var elementoequipa = _context.Elementoequipa.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
             var circuitotanque = _context.CircuitoTanque.Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == id);
-           
 
-            foreach(var ensaio in ensaios)
+            
+            foreach (var ensaio in ensaios)
             {
-                _context.Ensaio.Remove(ensaio);
+                ensaio.isarchived = 1;
+                _context.Ensaio.Update(ensaio);
             }
             foreach(var elementos in elementoequipa)
             {
-                _context.Elementoequipa.Remove(elementos);
+                elementos.isarchived = 1;
+                _context.Elementoequipa.Update(elementos);
             }
-            foreach(var circuito in circuitotanque)
+            foreach (var circuito in circuitotanque)
             {
-                _context.CircuitoTanque.Remove(circuito);
+                var tanques = _context.Tanque.Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == circuito.IdCircuito);
+                var regCondAmb = _context.RegCondAmb.Where(b => EF.Property<int>(b, "CircuitoTanqueIdCircuito") == id);
 
+                foreach (var tanque in tanques) { 
+                var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regAmostragens = _context.RegAmostragens.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regManu = _context.RegManutencao.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regTrat = _context.RegTratamento.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+                var regAli = _context.RegAlimentar.Where(b => EF.Property<int>(b, "TanqueIdTanque") == tanque.IdTanque);
+
+                    foreach (var regRemocao in regRemocoes)
+                    {
+                        regRemocao.isarchived = 1;
+                        _context.RegRemocoes.Update(regRemocao);
+                    }
+                    foreach (var regAmostragem in regAmostragens)
+                    {
+                        regAmostragem.isarchived = 1;
+                        _context.RegAmostragens.Update(regAmostragem);
+                    }
+                    foreach (var regManutencao in regManu)
+                    {
+                        regManutencao.isarchived = 1;
+                        _context.RegManutencao.Update(regManutencao);
+                    }
+                    foreach (var regTratamento in regTrat)
+                    {
+                        regTratamento.isarchived = 1;
+                        _context.RegTratamento.Update(regTratamento);
+                    }
+                    foreach (var regAlimentacao in regAli)
+                    {
+                        regAlimentacao.isarchived = 1;
+                        _context.RegAlimentar.Update(regAlimentacao);
+                    }
+                    tanque.isarchived = 1;
+                    _context.Tanque.Update(tanque);
+                }
+
+                foreach (var condAmb in regCondAmb)
+                {
+                    condAmb.isarchived = 1;
+                    _context.RegCondAmb.Update(condAmb);
+                }
+            
+
+                circuito.isarchived = 1;
+                _context.CircuitoTanque.Update(circuito);
             }
-            _context.Projeto.Remove(projeto);
+
+            projeto.isarchived = 1;
+            _context.Projeto.Update(projeto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
