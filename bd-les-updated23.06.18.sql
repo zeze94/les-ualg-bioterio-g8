@@ -103,7 +103,8 @@ CREATE TABLE `elementoequipa` (
   `Nome` varchar(50) NOT NULL,
   `função` varchar(40) NOT NULL,
   `Projeto_idProjeto` int(11) NOT NULL,
-  `Funcionario_idFuncionario` int(11) NOT NULL
+  `Funcionario_idFuncionario` int(11) NOT NULL,
+  `isarchived` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

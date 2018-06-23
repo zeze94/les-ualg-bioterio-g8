@@ -193,6 +193,10 @@ namespace LesGrupo8Bioterio.Models
                     .HasForeignKey(d => d.ProjetoIdProjeto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_equipaProjeto_Projeto1");
+
+                entity.Property(e => e.isarchived)
+                    .HasColumnName("isarchived")
+                    .HasColumnType("int(1)");
             });
 
             modelBuilder.Entity<Ensaio>(entity =>

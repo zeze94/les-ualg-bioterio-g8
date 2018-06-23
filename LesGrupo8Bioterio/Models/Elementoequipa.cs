@@ -20,5 +20,7 @@ namespace LesGrupo8Bioterio
         public Funcionario FuncionarioIdFuncionarioNavigation { get; set; }
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
+
+        public int isarchived { get; set; }
     }
 }
