@@ -58,8 +58,8 @@
 <div>
     @if (Model.isarchived == 0)
     {
-        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdEnsaio">Edit</a>}
-    <a type="button" class="btn btn-primary" asp-action="Index">Back to List</a>
+        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdEnsaio">Editar</a>}
+    <a type="button" class="btn btn-primary" asp-action="Index">Retornar</a>
     @if (Model.isarchived == 0)
     {
         <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdEnsaio">Apagar Ensaio</a>}

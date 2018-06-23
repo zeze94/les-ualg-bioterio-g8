@@ -1,12 +1,9 @@
 ﻿@model LesGrupo8Bioterio.Ensaio
-
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Editar</h2>
-
 <h4>Ensaio</h4>
 <hr />
 <div class="row">
@@ -15,46 +12,55 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdEnsaio" />
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Data de Inicio" data-content="Data na qual se pretende iniciar o Ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="DataInicio" class="control-label"></label>
                 <input type="date" asp-for="DataInicio" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Data Final" data-content="Data na qual se prevê o término do Ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="DataFim" class="control-label"></label>
                 <input type="date" asp-for="DataFim" class="form-control" />
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Descrição do Tratamento" data-content="Tratamento que irá ser realizado sobre os espécimes durante o Ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="DescTratamento" class="control-label"></label>
                 <input asp-for="DescTratamento" class="form-control" />
                 <span asp-validation-for="DescTratamento" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Grau de Severidade" data-content="Grau de Severidade do Tratamento realizado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="GrauSeveridade" class="control-label"></label>
                 <input asp-for="GrauSeveridade" class="form-control" />
                 <span asp-validation-for="GrauSeveridade" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Projeto" data-content="Projeto onde o Ensaio irá ser realziado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="ProjetoIdProjeto" class="control-label"></label>
                 <select asp-for="ProjetoIdProjeto" class="form-control" asp-items="ViewBag.ProjetoIdProjeto"></select>
-                <span asp-validation-for="ProjetoIdProjeto" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Lote" data-content="Lote que contêm os espécimes que irão fazer parte do ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="LoteIdLote" class="control-label"></label>
                 <select asp-for="LoteIdLote" class="form-control" asp-items="ViewBag.LoteIdLote"></select>
-                <span asp-validation-for="LoteIdLote" class="text-danger"></span>
             </div>
-           
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
-    <a type="button" class="btn btn-primary" asp-action="Index">Back to List</a>
+    <a type="button" class="btn btn-primary" asp-action="Index">Retornar</a>
 </div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

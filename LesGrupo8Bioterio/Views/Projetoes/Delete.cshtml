@@ -16,7 +16,7 @@
     </ul>
 </h3>
 <div>
-    <h4>Projeto</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -29,13 +29,13 @@
             @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataInicio)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DataFim)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataFim)
+            @Html.DisplayFor(model => model.data2)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.AutorizacaoDgva)
@@ -53,7 +53,7 @@
             @Html.DisplayNameFor(model => model.SubmisInsEurop)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SubmisInsEurop)
+            @Html.DisplayFor(model => model.auto_Euro)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.NroAnimaisAutoriz)
@@ -65,7 +65,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdProjeto" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a type="button" class="btn btn-primary" asp-action="Index">Back to List</a>
+        <input type="submit" value="Arquivar" class="btn btn-danger" /> 
+        <a type="button" class="btn btn-primary" asp-action="Index">Cancelar</a>
     </form>
 </div>
