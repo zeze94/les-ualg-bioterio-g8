@@ -12,6 +12,7 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdFinalidade { get; set; }
+        [Required(ErrorMessage = "É necessário preencher este campo para prosseguir.")]
         [Display(Name = "Finalidade")]
         public string TFinalidade { get; set; }
 

@@ -8,8 +8,10 @@ namespace LesGrupo8Bioterio
     public partial class Elementoequipa
     {
         public int IdElementoEquipa { get; set; }
+        [Required(ErrorMessage = "É necessário preencher este campo para prosseguir.")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
+        [Required(ErrorMessage = "É necessário preencher este campo para prosseguir.")]
         [Display(Name = "Função")]
         public string Função { get; set; }
         [Display(Name = "Projeto")]
@@ -20,7 +22,6 @@ namespace LesGrupo8Bioterio
         public Funcionario FuncionarioIdFuncionarioNavigation { get; set; }
         [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
-
         public int isarchived { get; set; }
     }
 }

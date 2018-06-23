@@ -12,6 +12,7 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdTManutencao { get; set; }
+        [Required(ErrorMessage = "É necessário preencher este campo para prosseguir.")]
         [Display(Name = "Nome da Manutenção")]
         public string TManutencao { get; set; }
         [Display(Name = "Registo de Manutenção")]

@@ -61,6 +61,11 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdElementoEquipa,Nome,Função,ProjetoIdProjeto,FuncionarioIdFuncionario")] Elementoequipa elementoequipa)
         {
+            var cTCodefindany = _context.Elementoequipa.Where(b => EF.Property<string>(b, "Nome").Equals(elementoequipa.Nome)).Where(b => EF.Property<int>(b, "ProjetoIdProjeto")==elementoequipa.ProjetoIdProjeto);
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("Nome", string.Format("Este Elemento de Equipa já se encontra associado a este Projeto!", elementoequipa.ProjetoIdProjeto));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(elementoequipa);
@@ -101,7 +106,11 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-
+            var cTCodefindany = _context.Elementoequipa.Where(b => EF.Property<string>(b, "Nome").Equals(elementoequipa.Nome)).Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == elementoequipa.ProjetoIdProjeto);
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("Nome", string.Format("Este Elemento de Equipa já se encontra associado a este Projeto!", elementoequipa.ProjetoIdProjeto));
+            }
             if (ModelState.IsValid)
             {
                 try

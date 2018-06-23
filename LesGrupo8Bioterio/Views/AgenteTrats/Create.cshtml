@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Create</h2>
+<h2>Criar Novo</h2>
 <h4>Agente de Tratamento</h4>
 <hr />
 <div class="row">
@@ -11,12 +11,13 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Nome" data-content="Agente de Tratamento que irá utilizar no tratamento"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="NomeAgenTra" class="control-label"></label>
                 <input asp-for="NomeAgenTra" class="form-control" />
                 <span asp-validation-for="NomeAgenTra" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Criar" class="btn btn-success" />
                 <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
             </div>
         </form>
@@ -26,6 +27,11 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>-->
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

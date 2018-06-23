@@ -56,6 +56,11 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdAgenTra,NomeAgenTra")] AgenteTrat agenteTrat)
         {
+            var cTCodefindany = _context.AgenteTrat.Where(b => EF.Property<string>(b, "NomeAgenTra").Equals(agenteTrat.NomeAgenTra));
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("NomeAgenTra", string.Format("Este Agente de Tratamento já existe.", agenteTrat.NomeAgenTra));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(agenteTrat);
@@ -92,7 +97,11 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-
+            var cTCodefindany = _context.AgenteTrat.Where(b => EF.Property<string>(b, "NomeAgenTra").Equals(agenteTrat.NomeAgenTra));
+            if (cTCodefindany.Any())
+            {
+                ModelState.AddModelError("NomeAgenTra", string.Format("Este Agente de Tratamento já existe.", agenteTrat.NomeAgenTra));
+            }
             if (ModelState.IsValid)
             {
                 try

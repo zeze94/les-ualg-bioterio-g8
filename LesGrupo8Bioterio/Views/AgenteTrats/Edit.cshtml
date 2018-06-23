@@ -1,12 +1,9 @@
 ﻿@model LesGrupo8Bioterio.AgenteTrat
-
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
+<h2>Editar</h2>
 <h4>Agente de Tratamento</h4>
 <hr />
 <div class="row">
@@ -15,6 +12,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdAgenTra" />
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Nome" data-content="Agente de Tratamento que irá utilizar no tratamento"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="NomeAgenTra" class="control-label"></label>
                 <input asp-for="NomeAgenTra" class="form-control" />
                 <span asp-validation-for="NomeAgenTra" class="text-danger"></span>
@@ -26,6 +24,12 @@
         </form>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

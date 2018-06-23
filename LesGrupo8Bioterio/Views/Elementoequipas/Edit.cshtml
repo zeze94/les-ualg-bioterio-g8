@@ -1,13 +1,10 @@
 ﻿@model LesGrupo8Bioterio.Elementoequipa
-
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
-<h4>Elementoequipa</h4>
+<h2>Editar</h2>
+<h4>Elemento de Equipa</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,16 +12,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdElementoEquipa" />
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Nome" data-content="Nome do Elemento de Equipa"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Função" data-content="Função que o elemento de equipa ira executar no Projeto"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Função" class="control-label"></label>
                 <input asp-for="Função" class="form-control" />
                 <span asp-validation-for="Função" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Projeto" data-content="Projeto onde o elemento de equipa ira trabalhar"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="ProjetoIdProjeto" class="control-label"></label>
                 <select asp-for="ProjetoIdProjeto" class="form-control" asp-items="ViewBag.ProjetoIdProjeto"></select>
                 <span asp-validation-for="ProjetoIdProjeto" class="text-danger"></span>
@@ -35,15 +35,18 @@
                 <span asp-validation-for="FuncionarioIdFuncionario" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Confirmar" class="btn btn-success" />
+                <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

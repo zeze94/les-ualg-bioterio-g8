@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
-    <h4>Elementoequipa</h4>
+    <h4>Elemento de Equipa</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,6 +38,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdElementoEquipa">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@Model.IdElementoEquipa">Editar</a>
+    <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
+    <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdElementoEquipa">Eliminar</a>
 </div>

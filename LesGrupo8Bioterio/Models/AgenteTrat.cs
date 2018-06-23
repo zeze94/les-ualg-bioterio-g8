@@ -12,6 +12,7 @@ namespace LesGrupo8Bioterio
         }
 
         public int IdAgenTra { get; set; }
+        [Required(ErrorMessage = "É necessário preencher este campo para prosseguir.")]
         [Display(Name = "Nome")]
         public string NomeAgenTra { get; set; }
 
