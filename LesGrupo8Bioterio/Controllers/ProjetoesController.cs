@@ -194,7 +194,7 @@ namespace LesGrupo8Bioterio.Controllers
 
             var projeto = await _context.Projeto
                 .SingleOrDefaultAsync(m => m.IdProjeto == id);
-            if (projeto == null)
+            if (projeto == null || projeto.isarchived == 1)
             {
                 return NotFound();
             }

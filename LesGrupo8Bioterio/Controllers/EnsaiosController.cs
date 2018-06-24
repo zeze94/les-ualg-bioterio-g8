@@ -38,7 +38,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(e => e.LoteIdLoteNavigation)
                 .Include(e => e.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdEnsaio == id);
-            if (ensaio == null)
+            if (ensaio == null )
             {
                 return NotFound();
             }
@@ -90,7 +90,7 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var ensaio = await _context.Ensaio.SingleOrDefaultAsync(m => m.IdEnsaio == id);
-            if (ensaio == null)
+            if (ensaio == null || ensaio.isarchived == 1)
             {
                 return NotFound();
             }
@@ -145,7 +145,7 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: Ensaios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null )
             {
                 return NotFound();
             }
@@ -154,7 +154,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(e => e.LoteIdLoteNavigation)
                 .Include(e => e.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdEnsaio == id);
-            if (ensaio == null)
+            if (ensaio == null || ensaio.isarchived == 1)
             {
                 return NotFound();
             }

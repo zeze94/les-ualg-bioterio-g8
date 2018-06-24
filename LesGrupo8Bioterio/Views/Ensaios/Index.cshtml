@@ -10,7 +10,7 @@
 <div class="col-md-9">
     <ul class="nav nav-tabs" style="text-align: left;">
         <li class="active"><a href="#ensaios" data-toggle="tab" id="first_tab"><b>Ensaios Ativos</b></a></li>
-        <li><a href="#arquivo" data-toggle="tab" id="second_tab"><b>Ensaios arquivados</b></a></li>
+
     </ul>
 </div>
 <div class="col-md-9">
@@ -80,70 +80,9 @@
                 </tbody>
             </table>
         </div>
-        <div id="arquivo" class="tab-pane fade in ">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DataInicio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DataFim)
-                        </th>
-                        <th>
-                            @*@Html.DisplayNameFor(model => model.DescTratamento)*@Descrição do Ensaio
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.GrauSeveridade)
-                        </th>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.LoteIdLoteNavigation)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        if (item.isarchived == 1)
-                        {
-                            item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
-                            item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
-
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.data)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.data2)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DescTratamento)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.GrauSeveridade)
-                                </td>
-
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LoteIdLoteNavigation.CodigoLote)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
-                                </td>
-                                <td>
-                                    
-                                    <a asp-action="Details" asp-route-id="@item.IdEnsaio"><span class="glyphicon glyphicon-eye-open"></span></a> 
-                                  
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
     </div>
+ 
+</div>
+<div class="col-md-12">
+    <a class="btn btn-info pull-right" asp-controller="Projetoes" asp-action="Index" style="float:right">Voltar para Projetos</a>
 </div>
