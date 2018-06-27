@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace LesGrupo8Bioterio
 {
@@ -18,7 +19,10 @@ namespace LesGrupo8Bioterio
         [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Designação do Motivo")]
         public string NomeMotivo { get; set; }
+        public Boolean isDeletable;
 
+        public IQueryable<RegRemocoes> regRemocoes;
+        public RegRemocoes dummyRemocoes;
         public ICollection<RegRemocoes> RegRemocoes { get; set; }
     }
 }

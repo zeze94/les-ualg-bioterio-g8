@@ -6,6 +6,9 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
         <li class="breadcrumb-item active" aria-current="page">Registo de Remoções</li>
     </ol>
 </nav>
@@ -13,60 +16,68 @@
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar registo de Remoção</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NroRemoções)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CausaMorte)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MotivoIdMotivoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            item.data = item.Date.Year + "/" + item.Date.Month + "/" + item.Date.Year;
-            if (item.isarchived == 0)
+<div class="col-md-10">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NroRemoções)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CausaMorte)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MotivoIdMotivoNavigation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NroRemoções)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CausaMorte)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MotivoIdMotivoNavigation.NomeMotivo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-pencil"></span></a> |
-                        <a asp-action="Details" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-trash"></span></a>
-                    </td>
-                </tr>
+                item.data = item.Date.Year + "/" + item.Date.Month + "/" + item.Date.Year;
+                if (item.isarchived == 0)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NroRemoções)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CausaMorte)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MotivoIdMotivoNavigation.NomeMotivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.Sala)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-pencil"></span></a> |
+                            <a asp-action="Details" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdRegRemo"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
-<br />
-<div style="align-right">
-    <a class="btn btn-info pull-right" asp-area="" asp-controller="Tanques" asp-action="Index">Volta a Tanques</a>
-</div>
+        </tbody>
+    </table>
+    </div>   
+    <div class="col-md-2">
+        <ul class="list-group">
+            <li class="list-group-item active"><b>Opções:</b></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Motivoes" asp-action="Index">Motivos de Remoção</a></li>
+        </ul>
+    </div>
+    <br />
+    <div style="align-right">
+        <a class="btn btn-info pull-right" asp-area="" asp-controller="Tanques" asp-action="Index">Volta a Tanques</a>
+    </div>

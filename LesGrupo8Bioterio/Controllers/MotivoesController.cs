@@ -18,7 +18,24 @@ namespace LesGrupo8Bioterio.Controllers
         {
             _context = context;
         }
+        private Motivo setRelations(Motivo motivo, int? id)
+        {
 
+
+
+            var regRemocoes = _context.RegRemocoes.Where(b => EF.Property<int>(b, "MotivoIdMotivo") == id);
+            motivo.regRemocoes = regRemocoes;
+
+            if (motivo.regRemocoes.Any())
+            {
+                motivo.isDeletable = false;
+            }
+            else
+            {
+                motivo.isDeletable = true;
+            }
+            return motivo;
+        }
         // GET: Motivoes
         public async Task<IActionResult> Index()
         {
@@ -119,13 +136,15 @@ namespace LesGrupo8Bioterio.Controllers
         // GET: Motivoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
             }
-
+            
             var motivo = await _context.Motivo
                 .SingleOrDefaultAsync(m => m.IdMotivo == id);
+            motivo = setRelations(motivo, motivo.IdMotivo);
             if (motivo == null)
             {
                 return NotFound();
@@ -140,10 +159,12 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var motivo = await _context.Motivo.SingleOrDefaultAsync(m => m.IdMotivo == id);
-            _context.Motivo.Remove(motivo);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+         
+                _context.Motivo.Remove(motivo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            
+            }
 
         private bool MotivoExists(int id)
         {
