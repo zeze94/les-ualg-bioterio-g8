@@ -50,7 +50,7 @@ namespace LesGrupo8Bioterio.Controllers
         public IActionResult Create()
         {
             ViewData["MotivoIdMotivo"] = new SelectList(_context.Motivo, "IdMotivo", "NomeMotivo");
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MotivoIdMotivo"] = new SelectList(_context.Motivo, "IdMotivo", "NomeMotivo", regRemocoes.MotivoIdMotivo);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regRemocoes.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
             return View(regRemocoes);
         }
 
@@ -81,12 +81,12 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var regRemocoes = await _context.RegRemocoes.SingleOrDefaultAsync(m => m.IdRegRemo == id);
-            if (regRemocoes == null)
+            if (regRemocoes == null || regRemocoes.isarchived==1)
             {
                 return NotFound();
             }
             ViewData["MotivoIdMotivo"] = new SelectList(_context.Motivo, "IdMotivo", "NomeMotivo", regRemocoes.MotivoIdMotivo);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regRemocoes.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regRemocoes.TanqueIdTanque);
             return View(regRemocoes);
         }
 

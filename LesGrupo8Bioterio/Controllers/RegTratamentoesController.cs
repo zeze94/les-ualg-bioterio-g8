@@ -66,6 +66,15 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdRegTra,Date,Tempo,Concentracao,FinalidadeIdFinalidade,AgenteTratIdAgenTra,ConcAgenTra,TanqueIdTanque")] RegTratamento regTratamento)
         {
+            if (regTratamento.Tempo < 0)
+            {
+                ModelState.AddModelError("Tempo", string.Format("Este valor tem que ser positivo", regTratamento.Tempo));
+            }
+            if (regTratamento.Concentracao < 0)
+            {
+                ModelState.AddModelError("Concentracao", string.Format("Este valor tem que ser positivo", regTratamento.Concentracao));
+            }
+           
             if (ModelState.IsValid)
             {
                 _context.Add(regTratamento);
@@ -109,6 +118,14 @@ namespace LesGrupo8Bioterio.Controllers
             if (id != regTratamento.IdRegTra || regTratamento.isarchived == 1)
             {
                 return NotFound();
+            }
+            if (regTratamento.Tempo < 0)
+            {
+                ModelState.AddModelError("Tempo", string.Format("Este valor tem que ser positivo", regTratamento.Tempo));
+            }
+            if (regTratamento.Concentracao < 0)
+            {
+                ModelState.AddModelError("Concentracao", string.Format("Este valor tem que ser positivo", regTratamento.Concentracao));
             }
 
             if (ModelState.IsValid)

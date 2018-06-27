@@ -14,9 +14,9 @@ C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\bin\D
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.runtimeconfig.dev.json
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.dll
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\bin\Debug\netcoreapp2.0\LesGrupo8Bioterio.pdb
-C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.csprojResolveAssemblyReference.cache
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.csproj.CoreCompileInputs.cache
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.AssemblyInfoInputs.cache
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.AssemblyInfo.cs
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.dll
 C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.pdb
+C:\Users\José Ribeiro\source\repos\les-ualg-bioterio-g8\LesGrupo8Bioterio\obj\Debug\netcoreapp2.0\LesGrupo8Bioterio.csprojResolveAssemblyReference.cache

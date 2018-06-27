@@ -3,7 +3,13 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Detalhes</li>
+    </ol>
+</nav>
 @if (Model.isarchived == 1)
 {
     <h3 class="alert alert-danger">

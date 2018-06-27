@@ -1,13 +1,18 @@
 ﻿@model LesGrupo8Bioterio.Motivo
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Motivo" asp-action="Index">Motivos de Remoções</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Apagar Motivo de Remoção</li>
+    </ol>
+</nav>
 <h3 class="alert alert-danger">
     <ul>
-        <li> Tem a certeza que pretende Eliminar este registo de amostragem?</li>
+        <li> Tem a certeza que pretende Eliminar este motivo?</li>
     </ul>
 </h3>
 <div class="table-bordered">
@@ -26,7 +31,7 @@
             @Html.DisplayFor(model => model.NomeMotivo)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdMotivo" />
         <input type="submit" value="Eliminar" class="btn btn-danger" />

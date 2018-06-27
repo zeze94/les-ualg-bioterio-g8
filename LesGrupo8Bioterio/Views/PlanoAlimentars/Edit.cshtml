@@ -3,39 +3,55 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Plano Alimentar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
+    </ol>
+</nav>
 <h2>Editar Plano Alimentar</h2>
 <hr />
-<div class="row table-bordered">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdPlanAlim" />
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Nome de Identificação" data-content="Nome pelo qual o Plano Alimentar é Identificado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Produto Alimentar" data-content="Nome pelo qual o Produto Alimentar é identificado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="MarcaAlim" class="control-label"></label>
                 <input asp-for="MarcaAlim" class="form-control" />
                 <span asp-validation-for="MarcaAlim" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Tipo" data-content="Tipo de Plano Alimentar"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Tipo" class="control-label"></label>
                 <input asp-for="Tipo" class="form-control" />
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Temperatura" data-content="Medida numérica que determina o quão quente ou frio está determinado corpo, sistema ou ambiente"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Temperatura" class="control-label"></label>
                 <input asp-for="Temperatura" class="form-control" />
                 <span asp-validation-for="Temperatura" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Ração" data-content="Quantidade de Ração em gramas"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Racao" class="control-label"></label>
                 <input asp-for="Racao" class="form-control" />
                 <span asp-validation-for="Racao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="RaçãoDia" data-content="Numéro de vezes que o animal é alimentado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="RacaoDia" class="control-label"></label>
                 <input asp-for="RacaoDia" class="form-control" />
                 <span asp-validation-for="RacaoDia" class="text-danger"></span>
@@ -47,7 +63,9 @@
         </form>
     </div>
 </div>
-
+<script>$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

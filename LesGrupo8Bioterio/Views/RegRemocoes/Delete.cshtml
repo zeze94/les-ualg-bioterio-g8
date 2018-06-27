@@ -1,15 +1,22 @@
 ﻿@model LesGrupo8Bioterio.RegRemocoes
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegRemocoes" asp-action="Index">Registo de Remoções</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Apagar Registo de Remoções</li>
+    </ol>
+</nav>
+<<h3 class="alert alert-danger">
+    <ul>
+        <li> Tem a certeza que pretende Eliminar este registo de remoção?</li>
+    </ul>
+</h3>
 <div>
-    <h4>RegRemocoes</h4>
+    <h4>Registo de Remoções</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,10 +50,10 @@
             @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.Sala)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdRegRemo" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
     </form>
 </div>

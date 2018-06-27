@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.Elementoequipa>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Equipa(ElementoEquipa)</h2>
-
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar Novo</a>
 </p>
@@ -29,26 +26,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Função)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioIdFuncionarioNavigation.NomeCompleto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            if (item.isarchived == 0)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Função)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FuncionarioIdFuncionarioNavigation.NomeCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdElementoEquipa"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

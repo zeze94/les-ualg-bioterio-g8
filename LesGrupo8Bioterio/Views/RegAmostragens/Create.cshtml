@@ -4,46 +4,60 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegAmostragens" asp-action="Index">Registo de Amostragem</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar Registo de Amostragem</li>
+    </ol>
+</nav>
+<h2>Criar</h2>
 
-<h2>Create</h2>
-
-<h4>RegAmostragens</h4>
+<h4>Registo de Amostragens</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Data de Registo" data-content="Data em que o Registo é feito"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Data" class="control-label"></label>
                 <input type="date" asp-for="Data" class="form-control" />
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Peso Médio" data-content="Peso Médio dos peixes presentes no tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="PesoMedio" class="control-label"></label>
                 <input asp-for="PesoMedio" class="form-control" />
                 <span asp-validation-for="PesoMedio" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Numero de Individuos" data-content="Número de Individuos presentes no tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="NroIndividuos" class="control-label"></label>
                 <input asp-for="NroIndividuos" class="form-control" />
                 <span asp-validation-for="NroIndividuos" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Peso Total" data-content="Peso Total dos peixes presentes no tanque"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="PesoTotal" class="control-label"></label>
                 <input asp-for="PesoTotal" class="form-control" />
                 <span asp-validation-for="PesoTotal" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Codigo de Identificação do tanque" data-content="Codigo de Identificação do Tanque ao qual este registo vai ficar associado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="TanqueIdTanque" class="control-label"></label>
-                <select asp-for="TanqueIdTanque" class ="form-control" asp-items="ViewBag.TanqueIdTanque"></select>
+                <select asp-for="TanqueIdTanque" class="form-control" asp-items="ViewBag.TanqueIdTanque"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Criar" class="btn btn-success" />
                 <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
+<script>$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

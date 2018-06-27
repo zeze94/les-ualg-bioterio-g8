@@ -4,48 +4,60 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegRemocoes" asp-action="Index">Registo de Remoções</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Criar Registo de Remoções</li>
+    </ol>
+</nav>
+<h2>Criar</h2>
 
-<h2>Create</h2>
-
-<h4>RegRemocoes</h4>
+<h4>Registo de Remoções</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Data de Registo" data-content="Data em que o Registo é feito"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Date" class="control-label"></label>
                 <input type="date" asp-for="Date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Numero de Remoções" data-content="Numero de remoções feitas a registar"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="NroRemoções" class="control-label"></label>
                 <input asp-for="NroRemoções" class="form-control" />
                 <span asp-validation-for="NroRemoções" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Motivo" data-content="Motivo que levou à remoção dos Individuos"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="MotivoIdMotivo" class="control-label"></label>
-                <select asp-for="MotivoIdMotivo" class ="form-control" asp-items="ViewBag.MotivoIdMotivo"></select>
+                <select asp-for="MotivoIdMotivo" class="form-control" asp-items="ViewBag.MotivoIdMotivo"></select>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Causa da Morte" data-content="Causa de Morte dos Individuos Removidos"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="CausaMorte" class="control-label"></label>
                 <input asp-for="CausaMorte" class="form-control" />
                 <span asp-validation-for="CausaMorte" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Codigo de Identificação do tanque" data-content="Codigo de Identificação do Tanque ao qual este registo vai ficar associado"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="TanqueIdTanque" class="control-label"></label>
-                <select asp-for="TanqueIdTanque" class ="form-control" asp-items="ViewBag.TanqueIdTanque"></select>
+                <select asp-for="TanqueIdTanque" class="form-control" asp-items="ViewBag.TanqueIdTanque"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-success" />
+                <a type="button" class="btn btn-info" asp-action="Index">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

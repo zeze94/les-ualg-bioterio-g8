@@ -1,8 +1,19 @@
-﻿@model LesGrupo8Bioterio.PlanoAlimentar
+﻿@using LesGrupo8Bioterio.Models;
+@model LesGrupo8Bioterio.PlanoAlimentar
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Plano Alimentar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhes</li>
+    </ol>
+</nav>
 <h2>Detalhes do Plano Alimentar</h2>
 <div class="table-bordered">
     <dl class="dl-horizontal">

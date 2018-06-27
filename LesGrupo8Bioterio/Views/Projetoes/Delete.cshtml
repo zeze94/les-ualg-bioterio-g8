@@ -4,7 +4,13 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Arquivar</li>
+    </ol>
+</nav>
 <h2>Arquivar</h2>
 
 <h3 class="alert alert-danger">

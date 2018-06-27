@@ -50,7 +50,7 @@ namespace LesGrupo8Bioterio.Controllers
         public IActionResult Create()
         {
             ViewData["FuncionarioIdFuncionario"] = new SelectList(_context.Funcionario, "IdFuncionario", "NomeCompleto");
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome");
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome");
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FuncionarioIdFuncionario"] = new SelectList(_context.Funcionario, "IdFuncionario", "NomeCompleto", elementoequipa.FuncionarioIdFuncionario);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
             return View(elementoequipa);
         }
 
@@ -91,7 +91,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
             ViewData["FuncionarioIdFuncionario"] = new SelectList(_context.Funcionario, "IdFuncionario", "NomeCompleto", elementoequipa.FuncionarioIdFuncionario);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
             return View(elementoequipa);
         }
 
@@ -132,7 +132,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FuncionarioIdFuncionario"] = new SelectList(_context.Funcionario, "IdFuncionario", "NomeCompleto", elementoequipa.FuncionarioIdFuncionario);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", elementoequipa.ProjetoIdProjeto);
             return View(elementoequipa);
         }
 

@@ -38,7 +38,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.PlanoAlimentarIdPlanAlimNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegAlim == id);
-            if (regAlimentar == null)
+            if (regAlimentar == null || regAlimentar.isarchived == 1)
             {
                 return NotFound();
             }
@@ -50,7 +50,7 @@ namespace LesGrupo8Bioterio.Controllers
         public IActionResult Create()
         {
             ViewData["PlanoAlimentarIdPlanAlim"] = new SelectList(_context.PlanoAlimentar, "IdPlanAlim", "Nome");
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala");
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque");
             return View();
         }
 
@@ -61,6 +61,14 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdRegAlim,Data,Peso,Sobras,PlanoAlimentarIdPlanAlim,TanqueIdTanque")] RegAlimentar regAlimentar)
         {
+            if (regAlimentar.Peso < 0)
+            {
+                ModelState.AddModelError("Peso", string.Format("Este valor tem de ser positivo", regAlimentar.Peso));
+            }
+            if (regAlimentar.Sobras < 0)
+            {
+                ModelState.AddModelError("Sobras", string.Format("Este valor tem de ser positivo", regAlimentar.Sobras));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(regAlimentar);
@@ -68,7 +76,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PlanoAlimentarIdPlanAlim"] = new SelectList(_context.PlanoAlimentar, "IdPlanAlim", "Nome", regAlimentar.PlanoAlimentarIdPlanAlim);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAlimentar.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regAlimentar.TanqueIdTanque);
             return View(regAlimentar);
         }
 
@@ -80,13 +88,14 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+         
             var regAlimentar = await _context.RegAlimentar.SingleOrDefaultAsync(m => m.IdRegAlim == id);
-            if (regAlimentar == null)
+            if (regAlimentar == null || regAlimentar.isarchived == 1)
             {
                 return NotFound();
             }
             ViewData["PlanoAlimentarIdPlanAlim"] = new SelectList(_context.PlanoAlimentar, "IdPlanAlim", "Nome", regAlimentar.PlanoAlimentarIdPlanAlim);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAlimentar.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regAlimentar.TanqueIdTanque);
             return View(regAlimentar);
         }
 
@@ -100,6 +109,15 @@ namespace LesGrupo8Bioterio.Controllers
             if (id != regAlimentar.IdRegAlim)
             {
                 return NotFound();
+            }
+
+            if (regAlimentar.Peso < 0)
+            {
+                ModelState.AddModelError("Peso", string.Format("Este valor tem de ser positivo", regAlimentar.Peso));
+            }
+            if (regAlimentar.Sobras < 0)
+            {
+                ModelState.AddModelError("Sobras", string.Format("Este valor tem de ser positivo", regAlimentar.Sobras));
             }
 
             if (ModelState.IsValid)
@@ -123,7 +141,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PlanoAlimentarIdPlanAlim"] = new SelectList(_context.PlanoAlimentar, "IdPlanAlim", "Nome", regAlimentar.PlanoAlimentarIdPlanAlim);
-            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque, "IdTanque", "Sala", regAlimentar.TanqueIdTanque);
+            ViewData["TanqueIdTanque"] = new SelectList(_context.Tanque.Where(p => p.isarchived == 0), "IdTanque", "codidenttanque", regAlimentar.TanqueIdTanque);
             return View(regAlimentar);
         }
 
@@ -139,7 +157,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(r => r.PlanoAlimentarIdPlanAlimNavigation)
                 .Include(r => r.TanqueIdTanqueNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegAlim == id);
-            if (regAlimentar == null)
+            if (regAlimentar == null || regAlimentar.isarchived == 1)
             {
                 return NotFound();
             }

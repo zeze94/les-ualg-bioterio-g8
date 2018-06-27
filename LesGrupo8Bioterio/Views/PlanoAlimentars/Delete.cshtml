@@ -3,13 +3,36 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3 class="alert alert-danger">
-    <ul>
-        <li> Tem a certeza que pretende Eliminar este Plano Alimentar?</li>
-        <li>Ao Eliminar este Plano Alimentar estará a Eliminar todos os Registos Alimentares associados ao mesmo!</li>
-    </ul>
-</h3>
-<div class="table-bordered">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Plano Alimentar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+    </ol>
+</nav>
+@if (Model.isDeletable)
+{
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Tem a certeza que pretende Eliminar este Plano Alimentar?</li>
+            <li>Ao Eliminar este Plano Alimentar estará a Eliminar todos os Registos Alimentares associados ao mesmo!</li>
+        </ul>
+    </h3>
+}
+else
+{
+
+    <h3 class="alert alert-danger">
+        <ul>
+            <li> Não é possível Eliminar este Plano Alimentar</li>
+            <li>Devido a existir Registos Alimentares que dependem deste Plano Alimentar</li>
+        </ul>
+    </h3>
+}
+<div class="col-md-4">
 
 
     <hr />
@@ -51,10 +74,15 @@
             @Html.DisplayFor(model => model.RacaoDia)
         </dd>
     </dl>
-
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdPlanAlim" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+        @if (Model.isDeletable)
+        {
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+
+        }
+
+
         <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
     </form>
 </div>

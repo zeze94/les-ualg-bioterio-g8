@@ -3,17 +3,24 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Projetos</li>
+        
+    </ol>
+</nav>
 <h2>Projetos</h2>
 <div class="form-group">
     <a class="btn btn-info" asp-action="Create">Criar novo</a>
 </div>
-<div class="col-md-12">
+<div class="col-md-9">
     <ul class="nav nav-tabs" style="text-align: left;">
         <li class="active"><a href="#projeto" data-toggle="tab" id="first_tab"><b>Projetos em Curso</b></a></li>
         <li><a href="#arquivo" data-toggle="tab" id="second_tab"><b>Projetos arquivados</b></a></li>
     </ul>
 </div>
-<div class="col-md-12">
+<div class="col-md-9">
     <div class="tab-content">
         <div id="projeto" class="tab-pane fade in active">
             <table class="table">
@@ -171,13 +178,13 @@
             </table>
         </div>
     </div>
-
-</div>
-<div class="col-md-12">
-    <div class="form-group">
-    <a class="btn btn-info pull-right" asp-controller="CircuitoTanques" asp-action="Index">Circuitos</a>
-    
-    <a class="btn btn-info pull-right" asp-controller="Ensaios" asp-action="Index">Ensaios</a>
     </div>
-</div>
+    <div class="col-md-3 col-md-push-1">
+        <ul class="list-group">
+            <li class="list-group-item active"><b>Opções</b></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="CircuitoTanques" asp-action="Index">Circuitos</a></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Ensaios" asp-action="Index">Ensaios</a></li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Elementoequipas" asp-action="Index">Equipas</a></li>
+        </ul>
+    </div>
 

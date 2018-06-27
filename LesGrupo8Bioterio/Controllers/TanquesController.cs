@@ -90,7 +90,7 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdTanque,codidenttanque,NroAnimais,Sala,Observacoes,LoteIdLote,CircuitoTanqueIdCircuito")] Tanque tanque)
         {
-            var tanqueCodefindany = _context.Tanque.Where(b => EF.Property<string>(b, "codidenttanque").Equals(tanque.codidenttanque));
+            var tanqueCodefindany = _context.Tanque.Where(b => EF.Property<string>(b, "codidenttanque").Equals(tanque.codidenttanque)).Where(b => EF.Property<int>(b, "isarchived") == 0);
             if (tanqueCodefindany.Any())
             {
                 ModelState.AddModelError("codidenttanque", string.Format("Já Existe um Tanque com este Identificador", tanque.codidenttanque));
@@ -139,7 +139,11 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-
+            var tanqueCodefindany = _context.Tanque.Where(b => EF.Property<string>(b, "codidenttanque").Equals(tanque.codidenttanque)).Where(b => EF.Property<int>(b, "IdTanque") != id).Where(b => EF.Property<int>(b, "isarchived") == 0);
+            if (tanqueCodefindany.Any())
+            {
+                ModelState.AddModelError("codidenttanque", string.Format("Já Existe um Tanque com este Identificador", tanque.codidenttanque));
+            }
             if (ModelState.IsValid)
             {
                 try

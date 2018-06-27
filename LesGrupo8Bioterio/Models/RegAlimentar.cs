@@ -7,12 +7,16 @@ namespace LesGrupo8Bioterio
     public partial class RegAlimentar
     {
         public int IdRegAlim { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Data")]
         public DateTime Data { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Peso")]
         public float Peso { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Sobras")]
         public float? Sobras { get; set; }
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         [Display(Name = "Plano Alimentar")]
         public int PlanoAlimentarIdPlanAlim { get; set; }
         [Display(Name = "Tanque")]

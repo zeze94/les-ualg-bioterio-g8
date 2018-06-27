@@ -3,9 +3,20 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Registo Alimentar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
+    </ol>
+</nav>
+
 <h2>Editar Registo Alimentar</h2>
 <hr />
-<div class="row table-bordered">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -16,11 +27,13 @@
                 <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Peso Total" data-content="Quantidade em gramas"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Peso" class="control-label"></label>
                 <input asp-for="Peso" class="form-control" />
                 <span asp-validation-for="Peso" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Sobras" data-content="Quantidade restante em gramas"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="Sobras" class="control-label"></label>
                 <input asp-for="Sobras" class="form-control" />
                 <span asp-validation-for="Sobras" class="text-danger"></span>
@@ -42,7 +55,9 @@
         </form>
     </div>
 </div>
-
+<script>$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    });</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -37,18 +37,18 @@ namespace LesGrupo8Bioterio.Controllers
             var regCondAmb = await _context.RegCondAmb
                 .Include(r => r.CircuitoTanqueIdCircuitoNavigation)
                 .SingleOrDefaultAsync(m => m.IdRegCondAmb == id);
-            if (regCondAmb == null)
+            if (regCondAmb == null || regCondAmb.isarchived == 1)
             {
                 return NotFound();
             }
-
+            regCondAmb = setdisplaydate(regCondAmb);
             return View(regCondAmb);
         }
 
         // GET: RegCondAmbs/Create
         public IActionResult Create()
         {
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito");
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito");
             return View();
         }
 
@@ -59,16 +59,33 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdRegCondAmb,Data,Temperatura,VolAgua,SalinidadeAgua,NivelO2,CircuitoTanqueIdCircuito")] RegCondAmb regCondAmb)
         {
+            if (regCondAmb.VolAgua < 0)
+            {
+                ModelState.AddModelError("VolAgua", string.Format("Este valor tem de ser positivo", regCondAmb.VolAgua));
+            }
+            if (regCondAmb.SalinidadeAgua < 0)
+            {
+                ModelState.AddModelError("SalinidadeAgua", string.Format("Este valor tem de ser positivo", regCondAmb.SalinidadeAgua));
+            }
+            if (regCondAmb.NivelO2 < 0)
+            {
+                ModelState.AddModelError("NivelO2", string.Format("Este valor tem de ser positivo", regCondAmb.NivelO2));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(regCondAmb);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", regCondAmb.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito", regCondAmb.CircuitoTanqueIdCircuito);
             return View(regCondAmb);
         }
 
+        public RegCondAmb setdisplaydate(RegCondAmb t)
+        {
+            t.data = t.Data.Day + "/" + t.Data.Month + "/" + t.Data.Year;
+            return t;
+        }
         // GET: RegCondAmbs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -78,11 +95,11 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var regCondAmb = await _context.RegCondAmb.SingleOrDefaultAsync(m => m.IdRegCondAmb == id);
-            if (regCondAmb == null)
+            if (regCondAmb == null || regCondAmb.isarchived == 1)
             {
                 return NotFound();
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", regCondAmb.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito", regCondAmb.CircuitoTanqueIdCircuito);
             return View(regCondAmb);
         }
 
@@ -96,6 +113,18 @@ namespace LesGrupo8Bioterio.Controllers
             if (id != regCondAmb.IdRegCondAmb)
             {
                 return NotFound();
+            }
+            if (regCondAmb.VolAgua < 0)
+            {
+                ModelState.AddModelError("VolAgua", string.Format("Este valor tem de ser positivo", regCondAmb.VolAgua));
+            }
+            if (regCondAmb.SalinidadeAgua < 0)
+            {
+                ModelState.AddModelError("SalinidadeAgua", string.Format("Este valor tem de ser positivo", regCondAmb.SalinidadeAgua));
+            }
+            if (regCondAmb.NivelO2 < 0)
+            {
+                ModelState.AddModelError("NivelO2", string.Format("Este valor tem de ser positivo", regCondAmb.NivelO2));
             }
 
             if (ModelState.IsValid)
@@ -118,7 +147,7 @@ namespace LesGrupo8Bioterio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque, "IdCircuito", "IdCircuito", regCondAmb.CircuitoTanqueIdCircuito);
+            ViewData["CircuitoTanqueIdCircuito"] = new SelectList(_context.CircuitoTanque.Where(p => p.isarchived == 0), "IdCircuito", "CodigoCircuito", regCondAmb.CircuitoTanqueIdCircuito);
             return View(regCondAmb);
         }
 
@@ -137,6 +166,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
+            regCondAmb = setdisplaydate(regCondAmb);
 
             return View(regCondAmb);
         }

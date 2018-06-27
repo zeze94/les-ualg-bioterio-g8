@@ -1,18 +1,27 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.RegAlimentar>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Registo Alimentar</li>
+    </ol>
+</nav>
 
-<h2>Index</h2>
-
+<h2>Listagem de Registos Alimentares</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Create">Criar Registo Alimentar</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="col-md-10">
+
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Data)
                 </th>
@@ -22,40 +31,59 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Sobras)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlanoAlimentarIdPlanAlimNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-    item.data = item.Data.Day + "/" + item.Data.Month + "/" + item.Data.Year;
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Peso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sobras)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlanoAlimentarIdPlanAlimNavigation.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlanoAlimentarIdPlanAlimNavigation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                if (item.isarchived == 0)
+                {
+                    item.data = item.Data.Day + "/" + item.Data.Month + "/" + item.Data.Year;
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Peso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sobras)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlanoAlimentarIdPlanAlimNavigation.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-pencil"></span></a> |
+                            <a asp-action="Details" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdRegAlim"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-md-2">
+
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Opções:</b></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="PlanoAlimentars" asp-action="Index">Plano Alimentar</a></li>
+
+    </ul>
+</div>
+<div class="col-md-12">
+    <a type="button" class="btn btn-info pull-right" asp-controller="Tanques" asp-action="Index">Voltar a Tanques</a>
+</div>

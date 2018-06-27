@@ -3,20 +3,29 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Registo Condição Ambiental</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+    </ol>
+</nav>
 <h3 class="alert alert-danger">
     <ul>
         <li> Tem a certeza que pretende Eliminar este Registo Condição Ambiental?</li>
         <li>Ao Eliminar este Registo Alimentar Eliminará todos os dados associados ao mesmo!</li>
     </ul>
 </h3>
-<div class="table-bordered">
+<div class="col-md-4">
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Data)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Data)
+            @Html.DisplayFor(model => model.data)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Temperatura)
@@ -49,10 +58,9 @@
             @Html.DisplayFor(model => model.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
         </dd>
     </dl>
-
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdRegCondAmb" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
         <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
     </form>
 </div>

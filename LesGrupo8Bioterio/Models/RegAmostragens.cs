@@ -10,12 +10,19 @@ namespace LesGrupo8Bioterio
     {
         public int IdRegAmo { get; set; }
         [Display(Name = "Data")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public DateTime Data { get; set; }
         [Display(Name = "Peso Médio")]
+        [Range(0,99999999999999, ErrorMessage ="Este Número deve ser positivo")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public float PesoMedio { get; set; }
-        [Display(Name = "Numero de Individuos")]
+        [Display(Name = "Número de Individuos")]
+        [Range(0, 99999999999999, ErrorMessage = "Este Número deve ser positivo")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public int NroIndividuos { get; set; }
         [Display(Name = "Peso Total")]
+        [Range(0, 99999999999999, ErrorMessage = "Este Número deve ser positivo")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public float PesoTotal { get; set; }
         [Display(Name = "Tanque")]
         public int TanqueIdTanque { get; set; }

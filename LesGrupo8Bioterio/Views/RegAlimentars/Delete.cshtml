@@ -1,54 +1,60 @@
 ﻿@model LesGrupo8Bioterio.RegAlimentar
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h3 class="alert alert-danger">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Registo Alimentar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+    </ol>
+</nav>ss="alert alert-danger">
     <ul>
         <li> Tem a certeza que pretende Eliminar este Registo Alimentar?</li>
         <li>Ao Eliminar este Registo Alimentar Eliminará todos os dados associados ao mesmo!</li>
     </ul>
-    </h3>
-    <div class="table-bordered">
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Data)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.data)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Peso)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Peso)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Sobras)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Sobras)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.PlanoAlimentarIdPlanAlimNavigation)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PlanoAlimentarIdPlanAlimNavigation.Nome)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.codidenttanque)
-            </dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="IdRegAlim" />
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> 
-            <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
-        </form>
-    </div>
+</h3>
+<div class="col-md-4">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Peso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Peso)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sobras)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sobras)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanoAlimentarIdPlanAlimNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlanoAlimentarIdPlanAlimNavigation.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TanqueIdTanqueNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TanqueIdTanqueNavigation.codidenttanque)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdRegAlim" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
+    </form>
+</div>

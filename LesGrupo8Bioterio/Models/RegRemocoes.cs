@@ -9,12 +9,16 @@ namespace LesGrupo8Bioterio
     {
         public int IdRegRemo { get; set; }
         [Display(Name = "Data")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public DateTime Date { get; set; }
         [Display(Name = "Nº de Removidos")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
+        [Range(0, 99999999999999, ErrorMessage = "Este Número deve ser positivo")]
         public int? NroRemoções { get; set; }
         [Display(Name = "Motivo")]
         public int MotivoIdMotivo { get; set; }
         [Display(Name = "Causa da Morte")]
+        [Required(ErrorMessage = "É necessario preencher este campo para Prosseguir")]
         public string CausaMorte { get; set; }
         [Display(Name = "Tanque")]
         public int TanqueIdTanque { get; set; }

@@ -1,33 +1,38 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.RegCondAmb>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Registo Condição Ambiental</li>
+    </ol>
+</nav>
+<h2>Listagem de Registos Condição Ambiental</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a type="button" class="btn btn-info" asp-action="Create">Criar Registo Condição Ambiental</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Data)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Temperatura)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VolAgua)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SalinidadeAgua)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NivelO2)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolAgua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalinidadeAgua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NivelO2)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CircuitoTanqueIdCircuitoNavigation)
             </th>
@@ -35,32 +40,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperatura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolAgua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SalinidadeAgua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NivelO2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CircuitoTanqueIdCircuitoNavigation.IdCircuito)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+
+            if (item.isarchived == 0)
+            {
+
+                item.data = item.Data.Day + "/" + item.Data.Month + "/" + item.Data.Year;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperatura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VolAgua)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalinidadeAgua)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NivelO2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CircuitoTanqueIdCircuitoNavigation.CodigoCircuito)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdRegCondAmb"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
+<br />
+<div style="align-right">
+    <a class="btn btn-info pull-right" asp-area="" asp-controller="CircuitoTanques" asp-action="Index">Volta a CircuitoTanques </a>
+</div>
+

@@ -1,12 +1,16 @@
 ﻿@model LesGrupo8Bioterio.Motivo
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Motivo" asp-action="Index">Motivos de Remoções</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhes de um Motivo de Remoção</li>
+    </ol>
+</nav>
+<h2>Detalhes</h2>
 <div>
     <h4>Motivo</h4>
     <hr />
@@ -27,6 +31,6 @@
 </div>
 <div class="form-group">
     <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdMotivo">Editar</a>
-    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdMotivo">Eliminar</a>
+    <a type="button" class="btn btn-danger pull-right" asp-action="Delete" asp-route-id="@Model.IdMotivo">Eliminar</a>
     <a type="button" class="btn btn-info" asp-action="Index">Voltar à lista</a>
 </div>

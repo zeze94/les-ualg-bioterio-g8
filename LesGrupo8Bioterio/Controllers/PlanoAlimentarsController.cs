@@ -56,6 +56,14 @@ namespace LesGrupo8Bioterio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPlanAlim,Nome,MarcaAlim,Tipo,Temperatura,Racao,RacaoDia")] PlanoAlimentar planoAlimentar)
         {
+            if (planoAlimentar.RacaoDia < 0)
+            {
+                ModelState.AddModelError("RacaoDia", string.Format("Este valor tem de ser positivo", planoAlimentar.RacaoDia));
+            }
+            if (planoAlimentar.Racao < 0)
+            {
+                ModelState.AddModelError("Racao", string.Format("Este valor tem de ser positivo", planoAlimentar.Racao));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(planoAlimentar);
@@ -93,6 +101,14 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+            if (planoAlimentar.RacaoDia < 0)
+            {
+                ModelState.AddModelError("RacaoDia", string.Format("Este valor tem de ser positivo", planoAlimentar.RacaoDia));
+            }
+            if (planoAlimentar.Racao < 0)
+            {
+                ModelState.AddModelError("Racao", string.Format("Este valor tem de ser positivo", planoAlimentar.Racao));
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -116,6 +132,19 @@ namespace LesGrupo8Bioterio.Controllers
             return View(planoAlimentar);
         }
 
+        private PlanoAlimentar setRelations(PlanoAlimentar t, int? id){
+            var regAlimentar = _context.RegAlimentar.Where(b => EF.Property<int>(b, "PlanoAlimentarIdPlanAlim") == id);
+            t.regAli = regAlimentar;
+            if (t.regAli.Any() )
+            {
+                t.isDeletable = false;
+            }
+            else
+            {
+                t.isDeletable = true;
+            }
+            return t;
+        }
         // GET: PlanoAlimentars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -124,8 +153,11 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
 
+            
+
             var planoAlimentar = await _context.PlanoAlimentar
                 .SingleOrDefaultAsync(m => m.IdPlanAlim == id);
+            planoAlimentar = setRelations(planoAlimentar, id);
             if (planoAlimentar == null)
             {
                 return NotFound();

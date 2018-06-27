@@ -3,6 +3,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Registo de Amostragem</li>
+    </ol>
+</nav>
 <h2>Registos de Amostragens</h2>
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar registo de amostragem</a>
@@ -31,30 +37,32 @@
     <tbody>
         @foreach (var item in Model)
         {
-            item.data = item.Data.Day + "/" + item.Data.Month + "/" + item.Data.Year;
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PesoMedio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NroIndividuos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PesoTotal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-pencil"></span></a> |
-                    <a asp-action="Details" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-
+            item.data = item.Data.Year + "/" + item.Data.Month + "/" + item.Data.Year;
+            if (item.isarchived == 0)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PesoMedio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NroIndividuos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PesoTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TanqueIdTanqueNavigation.codidenttanque)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-pencil"></span></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdRegAmo"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
 
         }
     </tbody>
