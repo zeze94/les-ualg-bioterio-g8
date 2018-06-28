@@ -3,7 +3,16 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Equipa(ElementoEquipa)</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Elementos de Equipa</li>
+    </ol>
+</nav>
+
+<h2>Equipa (Elemento de Equipa)</h2>
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar Novo</a>
 </p>
@@ -53,3 +62,6 @@
         }
     </tbody>
 </table>
+<div class="col-md-12">
+    <a type="button" class="btn btn-info pull-right" asp-controller="Projetoes" asp-action="Index">Voltar Para Projetos</a>
+</div>

@@ -1,36 +1,47 @@
 ﻿@model IEnumerable<LesGrupo8Bioterio.Finalidade>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Finalidade</h2>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegTratamentoes" asp-action="Index">Registo de Tratamentos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Finalidades</li>
+    </ol>
+</nav>
+<h2>Finalidades</h2>
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar Novo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TFinalidade)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TFinalidade)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TFinalidade)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-pencil"></span></a> |
-                <a asp-action="Details" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TFinalidade)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-pencil"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdFinalidade"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div class="col-md-12 col-md-push-1">
+    <a type="button" class="btn btn-info pull-right" asp-controller="RegTratamentoes" asp-action="Index">Voltar Para Tratamentos</a>
+</div>

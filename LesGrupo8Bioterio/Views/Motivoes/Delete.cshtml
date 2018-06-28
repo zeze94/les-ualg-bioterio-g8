@@ -3,13 +3,19 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Motivo" asp-action="Index">Motivos de Remoções</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Apagar Motivo de Remoção</li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegRemocoes" asp-action="Index">Registo de Remoções</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Motivoes" asp-action="Index">Motivos de Remoção</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
     </ol>
 </nav>
+
 <h3 class="alert alert-danger">
     @if (Model.isDeletable) { 
         <ul>

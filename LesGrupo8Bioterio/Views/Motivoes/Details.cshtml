@@ -3,13 +3,19 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Motivo" asp-action="Index">Motivos de Remoções</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Detalhes de um Motivo de Remoção</li>
+        <li class="breadcrumb-item"><a asp-controller="Projetoes" asp-action="Index">Projetos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="CircuitoTanques" asp-action="Index">Circuito de Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Tanques" asp-action="Index">Tanques</a></li>
+        <li class="breadcrumb-item"><a asp-controller="RegRemocoes" asp-action="Index">Registo de Remoções</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Motivoes" asp-action="Index">Motivos de Remoção</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhes</li>
     </ol>
 </nav>
+
 <h2>Detalhes</h2>
 <div>
     <h4>Motivo</h4>
