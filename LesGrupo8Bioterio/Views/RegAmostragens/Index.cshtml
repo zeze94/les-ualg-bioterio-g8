@@ -40,7 +40,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            item.data = item.Data.Year + "/" + item.Data.Month + "/" + item.Data.Year;
+            item.data = item.Data.Day + "/" + item.Data.Month + "/" + item.Data.Year;
             if (item.isarchived == 0)
             {
                 <tr>
