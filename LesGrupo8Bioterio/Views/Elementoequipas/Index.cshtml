@@ -12,7 +12,7 @@
     </ol>
 </nav>
 
-<h2>Equipa (Elemento de Equipa)</h2>
+<h2>Equipas</h2>
 <p>
     <a type="button" class="btn btn-info" asp-action="Create">Criar Novo</a>
 </p>
@@ -24,9 +24,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Função)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuncionarioIdFuncionarioNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProjetoIdProjetoNavigation)
@@ -45,9 +42,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Função)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FuncionarioIdFuncionarioNavigation.NomeCompleto)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProjetoIdProjetoNavigation.Nome)

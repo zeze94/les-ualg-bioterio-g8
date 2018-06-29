@@ -167,7 +167,7 @@
         @if(Model.isarchived == 0){
         <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.IdCircuito">Editar</a>
        
-            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Eliminar</a>
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.IdCircuito">Arquivar</a>
          }
         <a class="btn btn-info" asp-action="Index">Cancelar</a>
     </div>

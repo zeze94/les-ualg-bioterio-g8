@@ -149,9 +149,13 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agenteTrat = await _context.AgenteTrat.SingleOrDefaultAsync(m => m.IdAgenTra == id);
-            _context.AgenteTrat.Remove(agenteTrat);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                _context.AgenteTrat.Remove(agenteTrat);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch { return RedirectToAction(nameof(Index)); }
         }
 
         private bool AgenteTratExists(int id)

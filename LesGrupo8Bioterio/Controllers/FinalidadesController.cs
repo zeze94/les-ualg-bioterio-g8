@@ -149,9 +149,15 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var finalidade = await _context.Finalidade.SingleOrDefaultAsync(m => m.IdFinalidade == id);
+            try { 
             _context.Finalidade.Remove(finalidade);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool FinalidadeExists(int id)

@@ -66,6 +66,7 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 ModelState.AddModelError("Nome", string.Format("Este Elemento de Equipa já se encontra associado a este Projeto!", elementoequipa.ProjetoIdProjeto));
             }
+            elementoequipa.FuncionarioIdFuncionario = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(elementoequipa);
@@ -106,11 +107,13 @@ namespace LesGrupo8Bioterio.Controllers
             {
                 return NotFound();
             }
-            var cTCodefindany = _context.Elementoequipa.Where(b => EF.Property<string>(b, "Nome").Equals(elementoequipa.Nome)).Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == elementoequipa.ProjetoIdProjeto);
+            var cTCodefindany = _context.Elementoequipa.Where(b => EF.Property<string>(b, "Nome").Equals(elementoequipa.Nome)).Where(b => EF.Property<int>(b, "ProjetoIdProjeto") == elementoequipa.ProjetoIdProjeto).Where(b => EF.Property<int>(b, "IdElementoEquipa") != b.IdElementoEquipa);
             if (cTCodefindany.Any())
             {
                 ModelState.AddModelError("Nome", string.Format("Este Elemento de Equipa já se encontra associado a este Projeto!", elementoequipa.ProjetoIdProjeto));
             }
+            elementoequipa.FuncionarioIdFuncionario = 1;
+
             if (ModelState.IsValid)
             {
                 try
