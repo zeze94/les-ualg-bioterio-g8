@@ -1,10 +1,8 @@
 ﻿@model LesGrupo8Bioterio.Finalidade
-
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Página Inicial</a></li>
@@ -16,13 +14,28 @@
         <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
     </ol>
 </nav>
-
 <h2>Eliminar</h2>
 
 <h3 class="alert alert-danger">
-    Tem a certeza que pretende apagar este campo?
+    @if (Model.isDeletable)
+    {
+        <ul>
+            <li> Tem a certeza que pretende Eliminar esta Finalidade?</li>
+        </ul>
+        <ul>
+            <li id="kk" hidden="hidden">Impossivel eliminar este Finalidade!</li>
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li> Esta Finalidade não pode ser apagada devido à existencia de Registos associados.</li>
+        </ul>
+        <ul>
+            <li id="kk" hidden="hidden">Impossivel eliminar este Finalidade!</li>
+        </ul>
+    }
 </h3>
-
 <div>
     <h4>Finalidade</h4>
     <hr />
@@ -34,10 +47,13 @@
             @Html.DisplayFor(model => model.TFinalidade)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdFinalidade" />
-        <input type="submit" value="Apagar" class="btn btn-danger" />
-        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
-    </form>
+
+    @if (Model.isDeletable)
+    {
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdFinalidade" />
+            <input type="submit" value="Apagar" class="btn btn-danger" />
+            <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
+        </form>
+    }
 </div>

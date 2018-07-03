@@ -19,6 +19,22 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <a href="#" data-toggle="popover" title="Projeto" data-content="Projeto onde o Ensaio irá ser realziado"><span class="glyphicon glyphicon-question-sign"></span></a>
+                <label asp-for="ProjetoIdProjeto" class="control-label"></label>
+                <select asp-for="ProjetoIdProjeto" class="form-control" asp-items="ViewBag.ProjetoIdProjeto"></select>
+            </div>
+            <div class="form-group">
+                <a href="#" data-toggle="popover" title="Lote" data-content="Lote que contêm os espécimes que irão fazer parte do ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
+                <label asp-for="LoteIdLote" class="control-label"></label>
+                <select asp-for="LoteIdLote" class="form-control" asp-items="ViewBag.LoteIdLote"></select>
+            </div>
+            <div class="form-group">
+                <a href="#" data-toggle="popover" title="Animais autorizados" data-content="Número de animais autorizados para o Ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
+                <label asp-for="NroAnimaisAutoriz" class="control-label"></label>
+                <input asp-for="NroAnimaisAutoriz" class="form-control" required />
+                <span asp-validation-for="NroAnimaisAutoriz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <a href="#" data-toggle="popover" title="Data de Inicio" data-content="Data na qual se pretende iniciar o Ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
                 <label asp-for="DataInicio" class="control-label"></label>
                 <input type="date" asp-for="DataInicio" class="form-control" />
@@ -41,16 +57,6 @@
                 <label asp-for="GrauSeveridade" class="control-label"></label>
                 <input asp-for="GrauSeveridade" class="form-control" />
                 <span asp-validation-for="GrauSeveridade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <a href="#" data-toggle="popover" title="Projeto" data-content="Projeto onde o Ensaio irá ser realziado"><span class="glyphicon glyphicon-question-sign"></span></a>
-                <label asp-for="ProjetoIdProjeto" class="control-label"></label>
-                <select asp-for="ProjetoIdProjeto" class="form-control" asp-items="ViewBag.ProjetoIdProjeto"></select>
-            </div>
-            <div class="form-group">
-                <a href="#" data-toggle="popover" title="Lote" data-content="Lote que contêm os espécimes que irão fazer parte do ensaio"><span class="glyphicon glyphicon-question-sign"></span></a>
-                <label asp-for="LoteIdLote" class="control-label"></label>
-                <select asp-for="LoteIdLote" class="form-control" asp-items="ViewBag.LoteIdLote"></select>
             </div>
 
             <div class="form-group">

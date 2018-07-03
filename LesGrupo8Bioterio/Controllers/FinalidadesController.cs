@@ -19,6 +19,22 @@ namespace LesGrupo8Bioterio.Controllers
             _context = context;
         }
 
+        private Finalidade setRelations(Finalidade finalidade, int? id)
+        {
+            var regTratamento = _context.RegTratamento.Where(b => EF.Property<int>(b, "FinalidadeIdFinalidade") == id);
+            finalidade.regFinalidade = regTratamento;
+
+            if (finalidade.regFinalidade.Any())
+            {
+                finalidade.isDeletable = false;
+            }
+            else
+            {
+                finalidade.isDeletable = true;
+            }
+            return finalidade;
+        }
+
         // GET: Finalidades
         public async Task<IActionResult> Index()
         {
@@ -135,6 +151,7 @@ namespace LesGrupo8Bioterio.Controllers
 
             var finalidade = await _context.Finalidade
                 .SingleOrDefaultAsync(m => m.IdFinalidade == id);
+            finalidade = setRelations(finalidade, finalidade.IdFinalidade);
             if (finalidade == null)
             {
                 return NotFound();
@@ -149,15 +166,9 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var finalidade = await _context.Finalidade.SingleOrDefaultAsync(m => m.IdFinalidade == id);
-            try { 
             _context.Finalidade.Remove(finalidade);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
         }
 
         private bool FinalidadeExists(int id)

@@ -20,7 +20,24 @@
 <h2>Eliminar</h2>
 
 <h3 class="alert alert-danger">
-    Tem a certeza que pretende apagar este campo?
+    @if (Model.isDeletable)
+    {
+        <ul>
+            <li> Tem a certeza que pretende Eliminar este agente?</li>
+        </ul>
+        <ul>
+            <li id="kk" hidden="hidden">Impossivel eliminar este Agente de Tratamento!</li>
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li> Este Agente de Tratamento não pode ser apagado devido à existencia de Registos associados.</li>
+        </ul>
+        <ul>
+            <li id="kk" hidden="hidden">Impossivel eliminar este Agente de Tratamento!</li>
+        </ul>
+    }
 </h3>
 
 <div>
@@ -34,10 +51,13 @@
             @Html.DisplayFor(model => model.NomeAgenTra)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdAgenTra" />
-        <input type="submit" value="Apagar" class="btn btn-danger" />
-        <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
-    </form>
-</div>
+
+    @if (Model.isDeletable)
+    {
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdAgenTra" />
+            <input type="submit" value="Apagar" class="btn btn-danger" />
+            <a type="button" class="btn btn-info pull-right" asp-action="Index">Cancelar</a>
+        </form>
+    }
+    </div>

@@ -19,6 +19,22 @@ namespace LesGrupo8Bioterio.Controllers
             _context = context;
         }
 
+        private TipoManuntecao setRelations(TipoManuntecao tipomanutencao, int? id)
+        {
+            var regTratamento = _context.RegTratamento.Where(b => EF.Property<int>(b, "AgenteTratIdAgenTra") == id);
+            tipomanutencao.regManutecao = regTratamento;
+
+            if (tipomanutencao.regManutecao.Any())
+            {
+                tipomanutencao.isDeletable = false;
+            }
+            else
+            {
+                tipomanutencao.isDeletable = true;
+            }
+            return tipomanutencao;
+        }
+
         // GET: TipoManuntecaos
         public async Task<IActionResult> Index()
         {
@@ -135,6 +151,7 @@ namespace LesGrupo8Bioterio.Controllers
 
             var tipoManuntecao = await _context.TipoManuntecao
                 .SingleOrDefaultAsync(m => m.IdTManutencao == id);
+            tipoManuntecao = setRelations(tipoManuntecao, tipoManuntecao.IdTManutencao);
             if (tipoManuntecao == null)
             {
                 return NotFound();

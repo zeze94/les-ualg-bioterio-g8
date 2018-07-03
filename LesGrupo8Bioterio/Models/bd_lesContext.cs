@@ -257,6 +257,10 @@ namespace LesGrupo8Bioterio.Models
                 entity.Property(e => e.isarchived)
                    .HasColumnName("isarchived")
                    .HasColumnType("int(1)");
+
+                entity.Property(e => e.NroAnimaisAutoriz)
+                    .HasColumnName("nroAnimaisAutoriz")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Especie>(entity =>

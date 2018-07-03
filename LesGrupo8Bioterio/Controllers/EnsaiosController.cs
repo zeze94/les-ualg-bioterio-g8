@@ -63,12 +63,20 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
+        public async Task<IActionResult> Create([Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,NroAnimaisAutoriz,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
         {
+
             if (ensaio.DataFim < ensaio.DataInicio)
             {
                 ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
                 ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
+            }
+            var projetos = _context.Projeto.Where(b => EF.Property<int>(b, "IdProjeto") == ensaio.ProjetoIdProjeto);
+            foreach (var projeto in projetos) { 
+                if (ensaio.NroAnimaisAutoriz > projeto.NroAnimaisAutoriz)
+                {
+                    ModelState.AddModelError("NroAnimaisAutoriz", "Nº de Animais excede o permitido para o Projeto selecionado" + "(" + projeto.NroAnimaisAutoriz + ")");
+                }
             }
             if (ModelState.IsValid)
             {
@@ -77,7 +85,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", ensaio.LoteIdLote);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
             return View(ensaio);
         }
 
@@ -95,7 +103,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return NotFound();
             }
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", ensaio.LoteIdLote);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
             return View(ensaio);
         }
 
@@ -104,7 +112,7 @@ namespace LesGrupo8Bioterio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEnsaio,DataInicio,DataFim,DescTratamento,GrauSeveridade,NroAnimaisAutoriz,ProjetoIdProjeto,LoteIdLote")] Ensaio ensaio)
         {
             if (id != ensaio.IdEnsaio)
             {
@@ -116,7 +124,14 @@ namespace LesGrupo8Bioterio.Controllers
                 ModelState.AddModelError("DataFim", "A Data de Fim é menor que a Data de Inicio");
                 ModelState.AddModelError("DataInicio", "A Data de Fim é menor que a Data de Inicio");
             }
-
+            var projetos = _context.Projeto.Where(b => EF.Property<int>(b, "IdProjeto") == ensaio.ProjetoIdProjeto);
+            foreach (var projeto in projetos)
+            {
+                if (ensaio.NroAnimaisAutoriz > projeto.NroAnimaisAutoriz)
+                {
+                    ModelState.AddModelError("NroAnimaisAutoriz", "Nº de Animais excede o permitido para o Projeto selecionado" + "(" + projeto.NroAnimaisAutoriz + ")");
+                }
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -138,7 +153,7 @@ namespace LesGrupo8Bioterio.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["LoteIdLote"] = new SelectList(_context.Lote, "IdLote", "CodigoLote", ensaio.LoteIdLote);
-            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto.Where(p => p.isarchived == 0), "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
+            ViewData["ProjetoIdProjeto"] = new SelectList(_context.Projeto, "IdProjeto", "Nome", ensaio.ProjetoIdProjeto);
             return View(ensaio);
         }
 

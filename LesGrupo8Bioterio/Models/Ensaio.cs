@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace LesGrupo8Bioterio
 {
@@ -19,18 +20,18 @@ namespace LesGrupo8Bioterio
         [Required(ErrorMessage = "É necessário preecnher este campo para Prosseguir")]
         [Display(Name = "Grau de Severidade")]
         public int GrauSeveridade { get; set; }
+        [Required(ErrorMessage = "É necessário preecnher este campo para Prosseguir")]
+        [Display(Name = "Nº de Animais Autorizados")]
+        public int? NroAnimaisAutoriz { get; set; }
         [Display(Name = "Projeto")]
         public int ProjetoIdProjeto { get; set; }
-        [Display(Name = "Lote")]
         public int LoteIdLote { get; set; }
-        [Display(Name = "Lote")]
         public Lote LoteIdLoteNavigation { get; set; }
-        [Display(Name = "Projeto")]
         public Projeto ProjetoIdProjetoNavigation { get; set; }
         public Projeto Selected;
         public string data;
         public string data2;
-       
+        public IQueryable<Projeto> objetoP;
         public int isarchived { get; set; }
     }
 }

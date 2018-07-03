@@ -87,7 +87,7 @@ namespace LesGrupo8Bioterio.Controllers
             }
 
             var elementoequipa = await _context.Elementoequipa.SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
-            if (elementoequipa == null)
+            if (elementoequipa == null || elementoequipa.isarchived == 1)
             {
                 return NotFound();
             }
@@ -151,7 +151,7 @@ namespace LesGrupo8Bioterio.Controllers
                 .Include(e => e.FuncionarioIdFuncionarioNavigation)
                 .Include(e => e.ProjetoIdProjetoNavigation)
                 .SingleOrDefaultAsync(m => m.IdElementoEquipa == id);
-            if (elementoequipa == null)
+            if (elementoequipa == null || elementoequipa.isarchived == 1)
             {
                 return NotFound();
             }

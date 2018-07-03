@@ -19,6 +19,22 @@ namespace LesGrupo8Bioterio.Controllers
             _context = context;
         }
 
+        private AgenteTrat setRelations(AgenteTrat agente, int? id)
+        {
+            var regTratamento = _context.RegTratamento.Where(b => EF.Property<int>(b, "AgenteTratIdAgenTra") == id);
+            agente.regAgente = regTratamento;
+
+            if (agente.regAgente.Any())
+            {
+                agente.isDeletable = false;
+            }
+            else
+            {
+                agente.isDeletable = true;
+            }
+            return agente;
+        }
+
         // GET: AgenteTrats
         public async Task<IActionResult> Index()
         {
@@ -135,6 +151,7 @@ namespace LesGrupo8Bioterio.Controllers
 
             var agenteTrat = await _context.AgenteTrat
                 .SingleOrDefaultAsync(m => m.IdAgenTra == id);
+            agenteTrat = setRelations(agenteTrat, agenteTrat.IdAgenTra);
             if (agenteTrat == null)
             {
                 return NotFound();
@@ -149,13 +166,9 @@ namespace LesGrupo8Bioterio.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agenteTrat = await _context.AgenteTrat.SingleOrDefaultAsync(m => m.IdAgenTra == id);
-            try
-            {
-                _context.AgenteTrat.Remove(agenteTrat);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch { return RedirectToAction(nameof(Index)); }
+            _context.AgenteTrat.Remove(agenteTrat);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool AgenteTratExists(int id)

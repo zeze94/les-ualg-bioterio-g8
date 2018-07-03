@@ -84,6 +84,12 @@
                         <thead>
                             <tr>
                                 <th>
+                                    @* @Html.DisplayNameFor(model => model.dummyEnsaio.LoteIdLoteNavigation)*@Lote
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dummyEnsaio.NroAnimaisAutoriz)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.dummyEnsaio.DataInicio)
                                 </th>
                                 <th>
@@ -95,9 +101,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.dummyEnsaio.GrauSeveridade)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.dummyEnsaio.LoteIdLoteNavigation)
-                                </th>
+
                                 <th></th>
                             </tr>
                         </thead>
@@ -106,24 +110,27 @@
                             {
                                 item.data = item.DataInicio.Day + "/" + item.DataInicio.Month + "/" + item.DataInicio.Year;
                                 item.data2 = item.DataFim.Day + "/" + item.DataFim.Month + "/" + item.DataFim.Year;
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modell => item.data)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modell => item.data2)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modell => item.DescTratamento)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modell => item.GrauSeveridade)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modell => item.LoteIdLoteNavigation.CodigoLote)
-                                    </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modell => item.LoteIdLoteNavigation.CodigoLote)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modell => item.NroAnimaisAutoriz)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modell => item.data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modell => item.data2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modell => item.DescTratamento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modell => item.GrauSeveridade)
+                                </td>
 
-                                </tr>
+                            </tr>
                             }
                         </tbody>
                     </table>

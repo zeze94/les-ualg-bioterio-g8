@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace LesGrupo8Bioterio
 {
@@ -17,5 +18,7 @@ namespace LesGrupo8Bioterio
         public string TFinalidade { get; set; }
 
         public ICollection<RegTratamento> RegTratamento { get; set; }
+        public Boolean isDeletable;
+        internal IQueryable<RegTratamento> regFinalidade;
     }
 }
